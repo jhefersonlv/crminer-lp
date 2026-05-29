@@ -28,8 +28,11 @@
     </a>
     <nav>
       <ul class="nav-menu">
-        <li><a href="#modulos">Funcionalidades</a></li>
+        <li><a href="#problema">O Problema</a></li>
+        <li><a href="#jornada">Como Funciona</a></li>
+        <li><a href="#modulos">Módulos</a></li>
         <li><a href="#precos">Preços</a></li>
+        <li><a href="#faq">FAQ</a></li>
       </ul>
     </nav>
     <div class="nav-actions">
@@ -166,7 +169,7 @@
 <!-- ============================================================
      5. PAIN — Espelho doloroso
      ============================================================ -->
-<section class="pain" data-screen-label="05 Pain">
+<section class="pain" id="problema" data-screen-label="05 Pain">
 
   <!-- Black hole video background -->
   <div class="pain-vbg" aria-hidden="true">
@@ -433,10 +436,10 @@
         <div class="mod-panel-card">
           <div class="mod-panel-content">
             <span class="stack-tag">Financeiro</span>
-            <h3 class="mod-panel-title">Controle total das suas finanças</h3>
+            <h3 class="mod-panel-title">Financeiro organizado sem planilha</h3>
             <ul class="stack-feats mod-feats">
-              <li>Receitas e despesas organizadas</li>
-              <li>Emissão de orçamentos e NFe</li>
+              <li>Contas a pagar e a receber separadas</li>
+              <li>Pagos e recebidos com histórico completo</li>
               <li>Fluxo de caixa em tempo real</li>
               <li>Relatórios por período</li>
             </ul>
@@ -496,12 +499,12 @@
         <div class="mod-panel-card">
           <div class="mod-panel-content">
             <span class="stack-tag">Cadastros</span>
-            <h3 class="mod-panel-title">Base de clientes centralizada</h3>
+            <h3 class="mod-panel-title">Tudo cadastrado em um só lugar</h3>
             <ul class="stack-feats mod-feats">
-              <li>Ficha completa de cada cliente</li>
-              <li>Segmentação por perfil e histórico</li>
-              <li>Importação de contatos</li>
-              <li>Tags e categorias personalizadas</li>
+              <li>Cadastro de clientes e histórico completo</li>
+              <li>Cadastro de produtos e serviços</li>
+              <li>Cadastro de funcionários e equipe</li>
+              <li>Busca e filtros rápidos</li>
             </ul>
             <span class="stack-exclusive">Tudo em um só lugar</span>
             <a href="#" class="btn btn-primary mod-cta">Começar grátis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -517,12 +520,12 @@
         <div class="mod-panel-card">
           <div class="mod-panel-content">
             <span class="stack-tag">Canais</span>
-            <h3 class="mod-panel-title">Captura de leads em todo lugar</h3>
+            <h3 class="mod-panel-title">Seus canais de venda configurados</h3>
             <ul class="stack-feats mod-feats">
-              <li>Landing page personalizada</li>
-              <li>QR Code dinâmico rastreado</li>
-              <li>Widget para seu site</li>
-              <li>WhatsApp com cupom automático</li>
+              <li>Links e QR Codes rastreáveis por canal</li>
+              <li>WhatsApp com API oficial integrada</li>
+              <li>Widget de captura para seu site</li>
+              <li>Landing page básica de conversão</li>
             </ul>
             <span class="stack-exclusive">Gera leads 24h por dia</span>
             <a href="#" class="btn btn-primary mod-cta">Começar grátis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
@@ -935,5 +938,46 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 <script src="app.js"></script>
+
+<!-- ============================================================
+     Widget Conversacional
+     ============================================================ -->
+<div class="wdg-wrap" id="wdg">
+
+  <button class="wdg-btn" id="wdg-btn" aria-label="Falar com especialista">
+    <span class="wdg-btn-ring"></span>
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span class="wdg-btn-badge">1</span>
+  </button>
+
+  <div class="wdg-panel" id="wdg-panel">
+    <div class="wdg-header">
+      <div class="wdg-header-info">
+        <div class="wdg-avatar">
+          <img src="assets/icons/favicon_blue.svg" width="22" height="22" alt="CRMiner" />
+        </div>
+        <div>
+          <div class="wdg-name">CRMiner</div>
+          <div class="wdg-status"><span class="wdg-online-dot"></span>Online agora</div>
+        </div>
+      </div>
+      <button class="wdg-close" id="wdg-close" aria-label="Fechar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="wdg-messages" id="wdg-messages"></div>
+
+    <div class="wdg-footer" id="wdg-footer">
+      <div class="wdg-input-row">
+        <input class="wdg-input" id="wdg-input" type="text" placeholder="Digite aqui..." autocomplete="off" />
+        <button class="wdg-send" id="wdg-send" aria-label="Enviar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2" fill="currentColor" stroke="none"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
 </body>
 </html>

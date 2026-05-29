@@ -1498,3 +1498,120 @@ function initIntegrationDraw() {
     );
   });
 }
+
+/* ─── Widget Conversacional ─── */
+(function initWidget() {
+  const btn    = document.getElementById('wdg-btn');
+  const panel  = document.getElementById('wdg-panel');
+  const closeEl = document.getElementById('wdg-close');
+  const msgs   = document.getElementById('wdg-messages');
+  const input  = document.getElementById('wdg-input');
+  const send   = document.getElementById('wdg-send');
+  const footer = document.getElementById('wdg-footer');
+  const badge  = btn?.querySelector('.wdg-btn-badge');
+
+  if (!btn || !panel) return;
+
+  let step = 0;
+  let isOpen = false;
+  const data = { nome: '', whatsapp: '', email: '' };
+
+  const steps = [
+    { key: 'nome',     placeholder: 'Seu nome completo...', type: 'text',  validate: v => v.trim().length >= 2 },
+    { key: 'whatsapp', placeholder: '(11) 99999-9999',      type: 'tel',   validate: v => v.replace(/\D/g,'').length >= 10 },
+    { key: 'email',    placeholder: 'seu@email.com',        type: 'email', validate: v => /\S+@\S+\.\S+/.test(v) },
+  ];
+
+  const botLines = [
+    'Olá! 👋 Para conectar você com um especialista do CRMiner, preciso de algumas informações. Qual é o seu nome?',
+    nome => `Prazer, ${nome}! Qual é o seu WhatsApp com DDD?`,
+    'Ótimo! E qual é o seu e-mail?',
+  ];
+
+  function open() {
+    isOpen = true;
+    panel.classList.add('is-open');
+    if (badge) badge.style.display = 'none';
+    if (msgs.children.length === 0) {
+      setTimeout(() => showTyping(() => addBot(botLines[0])), 450);
+    }
+    setTimeout(() => input.focus(), 380);
+  }
+
+  function close() {
+    isOpen = false;
+    panel.classList.remove('is-open');
+  }
+
+  btn.addEventListener('click', () => isOpen ? close() : open());
+  closeEl?.addEventListener('click', close);
+
+  function addBot(text) {
+    const d = document.createElement('div');
+    d.className = 'wdg-msg wdg-msg-bot';
+    d.innerHTML = `<div class="wdg-bubble">${text}</div>`;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function addUser(text) {
+    const d = document.createElement('div');
+    d.className = 'wdg-msg wdg-msg-user';
+    d.innerHTML = `<div class="wdg-bubble">${text}</div>`;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function showTyping(cb) {
+    const d = document.createElement('div');
+    d.className = 'wdg-msg wdg-typing';
+    d.innerHTML = `<div class="wdg-bubble"><div class="wdg-typing-dots"><span></span><span></span><span></span></div></div>`;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+    setTimeout(() => { d.remove(); cb(); msgs.scrollTop = msgs.scrollHeight; }, 1300);
+  }
+
+  function showDone() {
+    footer.style.display = 'none';
+    msgs.innerHTML = '';
+    const d = document.createElement('div');
+    d.className = 'wdg-done';
+    d.innerHTML = `
+      <div class="wdg-done-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="wdg-done-title">Recebemos tudo! ✨</div>
+      <div class="wdg-done-sub">Em breve um especialista do CRMiner vai entrar em contato com você pelo WhatsApp. Fique de olho!</div>
+    `;
+    msgs.appendChild(d);
+  }
+
+  function handleSend() {
+    if (step >= 3) return;
+    const val = input.value.trim();
+    const cur = steps[step];
+    if (!val || !cur.validate(val)) {
+      input.classList.add('error');
+      setTimeout(() => input.classList.remove('error'), 600);
+      return;
+    }
+    data[cur.key] = val;
+    addUser(val);
+    input.value = '';
+    step++;
+
+    if (step < 3) {
+      const next = typeof botLines[step] === 'function' ? botLines[step](data.nome) : botLines[step];
+      input.type = steps[step].type;
+      input.placeholder = steps[step].placeholder;
+      showTyping(() => addBot(next));
+    } else {
+      showTyping(showDone);
+    }
+  }
+
+  send.addEventListener('click', handleSend);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') handleSend(); });
+  input.type = steps[0].type;
+  input.placeholder = steps[0].placeholder;
+})();
