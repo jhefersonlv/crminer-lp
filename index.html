@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CRMiner — Capture leads. Feche vendas. Antes da concorrência.</title>
+<meta name="description" content="Cada pessoa que passa na sua vitrine, escaneia um QR Code ou clica no seu Instagram é um lead. O CRMiner captura, qualifica e entrega no seu WhatsApp — sem você levantar do balcão." />
+<meta property="og:title" content="CRMiner — O CRM que começa antes da venda" />
+<meta property="og:description" content="QR Code, WhatsApp automático, landing page e pipeline em um único sistema. Do lead ao fechamento." />
+<meta property="og:type" content="website" />
+<link rel="icon" type="image/svg+xml" href="assets/icons/favicon_blue.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+
+<!-- ============================================================
+     2. NAVBAR
+     ============================================================ -->
+<header class="nav" data-screen-label="02 Navbar">
+  <div class="nav-inner container">
+    <a href="#" class="logo" aria-label="CRMiner">
+      <img src="assets/logo-light.png" alt="CRMiner" />
+    </a>
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="#modulos">Funcionalidades</a></li>
+        <li><a href="#precos">Preços</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a href="#" class="nav-login">Entrar</a>
+      <a href="#" class="btn btn-primary btn-sm">Começar grátis</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============================================================
+     3. HERO
+     ============================================================ -->
+<section class="hero" data-screen-label="03 Hero">
+
+  <!-- Background photo + overlay -->
+  <div class="hero-bg" aria-hidden="true">
+    <img src="assets/hero.png" class="hero-bg-img" alt="" fetchpriority="high">
+    <div class="hero-bg-blur"></div>
+    <div class="hero-bg-overlay"></div>
+  </div>
+
+  <div class="container hero-container">
+    <div class="hero-content">
+      <div class="hero-badge reveal">
+        <span class="hero-badge-dot"></span>
+        O CRM para <span id="hero-segment" class="hero-segment-word">Óticas</span>
+      </div>
+      <h1 class="hero-h1 reveal" data-delay="1">
+        o CRM que começa onde os outros desistem: 
+        <em class="hero-accent">ANTES da venda.</em>
+      </h1>
+      <p class="hero-sub reveal" data-delay="2">
+        O CRMiner transforma cada pessoa que vê sua vitrine, escaneia um QR Code ou clica no seu Instagram em um contato no seu WhatsApp. Automaticamente.
+      </p>
+      <div class="hero-ctas reveal" data-delay="3">
+        <a href="#" class="btn btn-primary btn-lg">
+          Começar grátis — 14 dias, sem cartão
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#jornada" class="btn btn-ghost btn-lg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+          Ver como funciona
+        </a>
+      </div>
+      <p class="hero-note reveal" data-delay="4">Setup em 60 segundos. Se você usa WhatsApp, você consegue.</p>
+    </div>
+
+  </div>
+
+  </div>
+
+</section>
+
+<!-- ============================================================
+     04. TRUST STRIP — Ratings + Logo bar
+     ============================================================ -->
+<div class="trust-strip" data-screen-label="04 Trust Strip">
+  <div class="container">
+    <div class="ratings-row">
+      <div class="rating-item">
+        <span class="rating-platform">Capterra</span>
+        <span class="rating-stars">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </span>
+        <strong class="rating-num">4.9</strong><span class="rating-out">/5</span>
+      </div>
+      <div class="ratings-sep"></div>
+      <div class="rating-item">
+        <span class="rating-platform">G2</span>
+        <span class="rating-stars">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </span>
+        <strong class="rating-num">4.8</strong><span class="rating-out">/5</span>
+      </div>
+      <div class="ratings-sep"></div>
+      <div class="rating-item">
+        <span class="rating-platform">B2B Stack</span>
+        <span class="rating-stars">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </span>
+        <strong class="rating-num">4.9</strong><span class="rating-out">/5</span>
+      </div>
+    </div>
+    <div class="ts-logos-row">
+      <span class="ts-logos-count"><strong>+2.300 negócios</strong> já dentro</span>
+      <div class="ts-logos-marquee-wrap" aria-hidden="true">
+        <div class="ts-logos-marquee">
+          <span>CAFÉ SEREIA</span><span class="ts-dot"></span>
+          <span>PET HAPPY</span><span class="ts-dot"></span>
+          <span>BOUTIQUE LUA</span><span class="ts-dot"></span>
+          <span>CASA DO PÃO</span><span class="ts-dot"></span>
+          <span>FIT STUDIO</span><span class="ts-dot"></span>
+          <span>SALÃO BEM</span><span class="ts-dot"></span>
+          <span>ÓTICA VISÃO</span><span class="ts-dot"></span>
+          <span>CAFÉ CENTRAL</span><span class="ts-dot"></span>
+          <span>CLÍNICA BEM ESTAR</span><span class="ts-dot"></span>
+          <span>FOTO ARTE</span><span class="ts-dot"></span>
+          <span>DOCE ENCANTO</span><span class="ts-dot"></span>
+          <span>STUDIO FLEX</span><span class="ts-dot"></span>
+          <!-- duplicate for seamless loop -->
+          <span>CAFÉ SEREIA</span><span class="ts-dot"></span>
+          <span>PET HAPPY</span><span class="ts-dot"></span>
+          <span>BOUTIQUE LUA</span><span class="ts-dot"></span>
+          <span>CASA DO PÃO</span><span class="ts-dot"></span>
+          <span>FIT STUDIO</span><span class="ts-dot"></span>
+          <span>SALÃO BEM</span><span class="ts-dot"></span>
+          <span>ÓTICA VISÃO</span><span class="ts-dot"></span>
+          <span>CAFÉ CENTRAL</span><span class="ts-dot"></span>
+          <span>CLÍNICA BEM ESTAR</span><span class="ts-dot"></span>
+          <span>FOTO ARTE</span><span class="ts-dot"></span>
+          <span>DOCE ENCANTO</span><span class="ts-dot"></span>
+          <span>STUDIO FLEX</span><span class="ts-dot"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     5. PAIN — Espelho doloroso
+     ============================================================ -->
+<section class="pain" data-screen-label="05 Pain">
+
+  <!-- Black hole video background -->
+  <div class="pain-vbg" aria-hidden="true">
+    <video id="pain-vbg-video" autoplay muted loop playsinline></video>
+    <div class="pain-vbg-overlay"></div>
+  </div>
+
+  <div class="container">
+
+    <div class="pain-anchor reveal" data-delay="3">
+      <span class="pain-anchor-num">89<span class="pain-anchor-pct">%</span></span>
+      <p class="pain-anchor-text">dos leads de pequenos negócios são perdidos nos primeiros 5 minutos por falta de resposta automática</p>
+    </div>
+
+    <div class="pain-grid" data-stagger="80">
+
+      <!-- Card 1 -->
+      <div class="pain-card-wrap reveal">
+        <div class="pain-card-inner">
+          <div class="pain-card pain-card-front">
+            <div class="pain-num" data-target="47">0</div>
+            <h3 class="pain-title">Pessoas passaram pela sua vitrine ontem</h3>
+            <p class="pain-desc">Nenhuma virou contato. Nenhuma vai voltar. Você nem sabe quem foram.</p>
+            <span class="pain-flip-hint">passe o mouse para ver a solução</span>
+          </div>
+          <div class="pain-card pain-card-back">
+            <p class="pain-back-eyebrow">O CRMiner resolve</p>
+            <div class="pain-back-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            </div>
+            <h3 class="pain-back-title">QR Code na vitrine captura o lead na hora</h3>
+            <p class="pain-back-text">Cada pessoa que passa escaneia, ganha um cupom e entra no seu WhatsApp automaticamente. Você vê quem foi, quando foi e retoma o contato.</p>
+            <a href="#modulos" class="pain-back-cta">Ver como funciona <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="pain-card-wrap reveal">
+        <div class="pain-card-inner">
+          <div class="pain-card pain-card-front">
+            <div class="pain-num" data-target="200">0</div>
+            <h3 class="pain-title">Cliques no link da sua bio</h3>
+            <p class="pain-desc">Você não sabe quem clicou, de onde veio, nem o que procurava.</p>
+            <span class="pain-flip-hint">passe o mouse para ver a solução</span>
+          </div>
+          <div class="pain-card pain-card-back">
+            <p class="pain-back-eyebrow">O CRMiner resolve</p>
+            <div class="pain-back-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </div>
+            <h3 class="pain-back-title">Link rastreável identifica cada visitante</h3>
+            <p class="pain-back-text">Você descobre quem clicou, de onde veio e o que buscava. O CRMiner dispara uma mensagem automática no WhatsApp em menos de 8 segundos.</p>
+            <a href="#modulos" class="pain-back-cta">Ver como funciona <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="pain-card-wrap reveal">
+        <div class="pain-card-inner">
+          <div class="pain-card pain-card-front">
+            <div class="pain-num" data-target="1">0</div>
+            <h3 class="pain-title">QR Code do cardápio</h3>
+            <p class="pain-desc">Levou ao menu. Não levou ao CRM. Não levou ao WhatsApp. Não voltou pra você.</p>
+            <span class="pain-flip-hint">passe o mouse para ver a solução</span>
+          </div>
+          <div class="pain-card pain-card-back">
+            <p class="pain-back-eyebrow">O CRMiner resolve</p>
+            <div class="pain-back-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3 class="pain-back-title">QR Code que captura contato e vende</h3>
+            <p class="pain-back-text">O mesmo QR leva ao menu E captura o contato. Ele entra direto no CRM e recebe uma mensagem automática — tudo sem você levantar do balcão.</p>
+            <a href="#modulos" class="pain-back-cta">Ver como funciona <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <blockquote class="pain-quote reveal" data-delay="3">
+      <p>Não é falta de movimento. É falta de captura. O CRM tradicional só entra em cena quando a venda já está acontecendo. O CRMiner começa antes — no momento exato em que o interesse aparece.</p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ============================================================
+     05b. JORNADA — Onboarding 3 Mundos
+     ============================================================ -->
+<section class="ob-journey" id="jornada" data-screen-label="05b Jornada">
+
+
+  <div class="container">
+
+    <!-- Header -->
+    <div class="ob-jrn-header">
+      <p class="eyebrow reveal">Como funciona</p>
+      <h2 class="section-h2 reveal" data-delay="1">
+        Como funciona.<br><em>Em 3 passos.</em>
+      </h2>
+      <p class="section-sub ob-jrn-sub reveal" data-delay="2">
+        Do QR Code na vitrine ao contato no WhatsApp — sem você precisar fazer nada manual.
+      </p>
+    </div>
+
+    <!-- Stage "Como Funciona" — conceito TOONHUB -->
+    <div class="ob-stage-wrap" id="ob-stage">
+
+      <!-- Ghost step number (gigante, atrás) -->
+      <div class="ob-stage-ghost" id="ob-stage-ghost">01</div>
+
+      <!-- Card 0 — Você Espalha -->
+      <div class="ob-stage-card" data-idx="0" style="--wc-accent:#FFC800;--wc-rgb:255,200,0">
+        <div class="ob-wc-head">
+          <div class="ob-wc-icon">
+            <img src="assets/icons/megaphone-icon.png" width="48" height="48" alt="Megafone" />
+          </div>
+          <div>
+            <span class="ob-wc-type">Passo 1</span>
+            <div class="ob-wc-name">Ativa presença, captura leads</div>
+          </div>
+        </div>
+        <h3 class="ob-wc-headline">Você espalha.</h3>
+        <p class="ob-wc-body">Um QR Code na vitrine, na embalagem, no balcão. Um link na bio do Instagram. Onde seu cliente já está olhando — você planta o ponto de captura.</p>
+        <ul class="ob-wc-list">
+          <li>QR Code pronto em 60 segundos</li>
+          <li>Link rastreável para redes sociais</li>
+          <li>Widget para seu site ou cardápio</li>
+          <li>Cada canal, uma origem rastreada</li>
+        </ul>
+        <div class="ob-wc-reward"><span class="ob-reward-pulse"></span>"Cole o QR na vitrine e pronto."</div>
+      </div>
+
+      <!-- Card 1 — Ele Escaneia -->
+      <div class="ob-stage-card" data-idx="1" style="--wc-accent:#00E5FF;--wc-rgb:0,229,255">
+        <div class="ob-wc-head">
+          <div class="ob-wc-icon">
+            <img src="assets/icons/phone-icon.png" width="48" height="48" alt="Celular" />
+          </div>
+          <div>
+            <span class="ob-wc-type">Passo 2</span>
+            <div class="ob-wc-name">Descobre, ganha, retorna</div>
+          </div>
+        </div>
+        <h3 class="ob-wc-headline">Ele escaneia e deixa o contato.</h3>
+        <p class="ob-wc-body">Cai numa página com a sua marca, ganha um cupom ou benefício, e preenche nome e WhatsApp em 10 segundos. Sem app. Sem senha. Sem complicação.</p>
+        <ul class="ob-wc-list">
+          <li>Página com sua marca e oferta</li>
+          <li>Só nome + WhatsApp — 10 segundos</li>
+          <li>Consentimento LGPD automático</li>
+          <li>Benefício visível antes do preenchimento</li>
+        </ul>
+        <div class="ob-wc-reward"><span class="ob-reward-pulse"></span>"Ninguém recusa um benefício que chega em 10 segundos."</div>
+      </div>
+
+      <!-- Card 2 — Cai no WhatsApp -->
+      <div class="ob-stage-card ob-card-comunidade" data-idx="2">
+        <div class="ob-wc-head">
+          <div class="ob-wc-icon ob-comm-icon">
+            <img src="assets/icons/computer-icon.png" width="48" height="48" alt="Computador" />
+          </div>
+          <div>
+            <span class="ob-wc-type ob-comm-type">Passo 3</span>
+            <div class="ob-wc-name">O resultado da conexão</div>
+          </div>
+        </div>
+        <h3 class="ob-wc-headline ob-comm-headline">Cai direto no seu CRM.</h3>
+        <p class="ob-wc-body">Ele aperta enviar, a conversa começa e o cupom chega na hora — mesmo que você esteja ocupado atrás do balcão. Você só entra quando o cliente responde.</p>
+        <ul class="ob-wc-list">
+          <li>Mensagem de boas-vindas em 8 segundos</li>
+          <li>Cupom ou benefício entregue na hora</li>
+          <li>Lead criado no CRM com origem rastreada</li>
+          <li>Follow-up automático se não responder</li>
+        </ul>
+        <div class="ob-wc-reward"><span class="ob-reward-pulse"></span>"Você dorme, e o CRMiner continua capturando."</div>
+      </div>
+
+      <!-- Navegação (setas, estilo TOONHUB) -->
+      <div class="ob-stage-nav">
+        <button class="ob-stage-btn ob-stage-prev" aria-label="Anterior">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="ob-stage-btn ob-stage-next" aria-label="Próximo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <!-- Hint de navegação -->
+      <div class="ob-stage-hint">use as setas para navegar</div>
+
+      <!-- Contador de passo -->
+      <div class="ob-stage-counter" id="ob-stage-counter">01 / 03</div>
+
+    </div><!-- /ob-stage-wrap -->
+
+
+  </div><!-- /container -->
+</section>
+
+<!-- ============================================================
+     06. MÓDULOS — Tab switcher
+     ============================================================ -->
+<section class="modules-section" id="modulos" data-screen-label="06 Módulos">
+  <div class="container">
+    <div class="mod-head">
+      <p class="eyebrow reveal">Tudo em um só lugar</p>
+      <h2 class="section-h2 reveal" data-delay="1">Um sistema completo.<br><em>Uma assinatura.</em></h2>
+      <p class="section-sub reveal" data-delay="2">Do primeiro contato ao pagamento, do lead ao cliente fiel — sem abrir outra aba.</p>
+    </div>
+
+    <div class="mod-tabs reveal" data-delay="3" role="tablist" aria-label="Módulos do CRMiner">
+      <button class="mod-tab is-active" data-tab="0" role="tab" aria-selected="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="5" height="18"/><rect x="10" y="8" width="5" height="13"/><rect x="17" y="5" width="5" height="16"/></svg>
+        CRM
+      </button>
+      <button class="mod-tab" data-tab="1" role="tab">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Financeiro
+      </button>
+      <button class="mod-tab" data-tab="2" role="tab">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Agenda
+      </button>
+      <button class="mod-tab" data-tab="3" role="tab">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+        Vendas
+      </button>
+      <button class="mod-tab" data-tab="4" role="tab">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        Cadastros
+      </button>
+      <button class="mod-tab" data-tab="5" role="tab">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+        Canais
+      </button>
+    </div>
+
+    <div class="mod-panels">
+
+      <!-- Panel 0 — CRM -->
+      <div class="mod-panel is-active" data-panel="0" data-accent="crm">
+        <div class="mod-panel-card">
+          <div class="mod-panel-content">
+            <span class="stack-tag">CRM</span>
+            <h3 class="mod-panel-title">Pipeline de vendas visual</h3>
+            <ul class="stack-feats mod-feats">
+              <li>Kanban arrastar e soltar</li>
+              <li>Valor em cada etapa do funil</li>
+              <li>Follow-up automático por WhatsApp</li>
+              <li>Histórico completo do lead</li>
+            </ul>
+            <span class="stack-exclusive">Incluso em todos os planos</span>
+            <a href="#" class="btn btn-primary mod-cta">Começar grátis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+          <div class="mod-panel-visual">
+            <svg class="mod-visual-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="5" height="18"/><rect x="10" y="8" width="5" height="13"/><rect x="17" y="5" width="5" height="16"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 1 — Financeiro -->
+      <div class="mod-panel" data-panel="1" data-accent="fin">
+        <div class="mod-panel-card">
+          <div class="mod-panel-content">
+            <span class="stack-tag">Financeiro</span>
+            <h3 class="mod-panel-title">Controle total das suas finanças</h3>
+            <ul class="stack-feats mod-feats">
+              <li>Receitas e despesas organizadas</li>
+              <li>Emissão de orçamentos e NFe</li>
+              <li>Fluxo de caixa em tempo real</li>
+              <li>Relatórios por período</li>
+            </ul>
+            <span class="stack-exclusive">Do orçamento ao pagamento</span>
+            <a href="#" class="btn btn-primary mod-cta">Começar grátis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+          <div class="mod-panel-visual">
+            <svg class="mod-visual-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2 — Agenda -->
+      <div class="mod-panel" data-panel="2" data-accent="agenda">
+        <div class="mod-panel-card">
+          <div class="mod-panel-content">
+            <span class="stack-tag">Agenda</span>
+            <h3 class="mod-panel-title">Agendamentos e tarefas integrados</h3>
+            <ul class="stack-feats mod-feats">
+              <li>Calendário de serviços e reuniões</li>
+              <li>Lembretes automáticos por WhatsApp</li>
+              <li>Link de agendamento para clientes</li>
+              <li>Gestão de equipe e funcionários</li>
+            </ul>
+            <span class="stack-exclusive">Sem double-booking, nunca</span>
+            <a href="#" class="btn btn-primary mod-cta">Começar grátis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+          <div class="mod-panel-visual">
+            <svg class="mod-visual-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 3 — Vendas -->
+      <div class="mod-panel" data-panel="3" data-accent="vendas">
+        <div class="mod-panel-card">
+          <div class="mod-panel-content">
+            <span class="stack-tag">Vendas</span>
+            <h3 class="mod-panel-title">Gestão completa de vendas</h3>
+            <ul class="stack-feats mod-feats">
+              <li>Propostas e orçamentos digitais</li>
+              <li>Controle de metas por vendedor</li>
+              <li>Histórico de negociações</li>
+              <li>Relatório de conversão</li>
+            </ul>
+            <span class="stack-exclusive">Do lead ao fechamento</span>
+            <a href="#" class="btn btn-primary mod-cta">Começar grátis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+          <div class="mod-panel-visual">
+            <svg class="mod-visual-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 4 — Cadastros -->
+      <div class="mod-panel" data-panel="4" data-accent="cadastros">
+        <div class="mod-panel-card">
+          <div class="mod-panel-content">
+            <span class="stack-tag">Cadastros</span>
+            <h3 class="mod-panel-title">Base de clientes centralizada</h3>
+            <ul class="stack-feats mod-feats">
+              <li>Ficha completa de cada cliente</li>
+              <li>Segmentação por perfil e histórico</li>
+              <li>Importação de contatos</li>
+              <li>Tags e categorias personalizadas</li>
+            </ul>
+            <span class="stack-exclusive">Tudo em um só lugar</span>
+            <a href="#" class="btn btn-primary mod-cta">Começar grátis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+          <div class="mod-panel-visual">
+            <svg class="mod-visual-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 5 — Canais -->
+      <div class="mod-panel" data-panel="5" data-accent="canais">
+        <div class="mod-panel-card">
+          <div class="mod-panel-content">
+            <span class="stack-tag">Canais</span>
+            <h3 class="mod-panel-title">Captura de leads em todo lugar</h3>
+            <ul class="stack-feats mod-feats">
+              <li>Landing page personalizada</li>
+              <li>QR Code dinâmico rastreado</li>
+              <li>Widget para seu site</li>
+              <li>WhatsApp com cupom automático</li>
+            </ul>
+            <span class="stack-exclusive">Gera leads 24h por dia</span>
+            <a href="#" class="btn btn-primary mod-cta">Começar grátis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+          <div class="mod-panel-visual">
+            <svg class="mod-visual-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /mod-panels -->
+  </div>
+</section>
+
+<section class="cj-section" id="como-seu-cliente-ve" data-screen-label="07b Customer Journey" style="display:none">
+  <div class="container">
+
+    <div class="cj-header">
+      <p class="eyebrow reveal">Do lado do seu cliente</p>
+      <h2 class="section-h2 reveal" data-delay="1">
+        Do lado do seu cliente.<br><em>Simples pros dois lados.</em>
+      </h2>
+      <p class="section-sub reveal" data-delay="2">
+        Sem app pra baixar. Sem cadastro chato. Seu cliente escaneia, ganha algo na hora e já está conversando com você. É por isso que funciona: ninguém recusa um benefício que chega em 10 segundos.
+      </p>
+    </div>
+
+    <div class="cj-steps" data-stagger="120">
+
+      <!-- Passo 1 — Escaneou -->
+      <div class="cj-step reveal" data-delay="1">
+        <div class="cj-step-num">01</div>
+        <div class="cj-phone-wrap">
+          <div class="phone-body cj-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen cj-screen-scan">
+              <div class="cj-camera-ui">
+                <div class="cj-cam-corners">
+                  <span class="cj-corner cj-tl"></span>
+                  <span class="cj-corner cj-tr"></span>
+                  <span class="cj-corner cj-bl"></span>
+                  <span class="cj-corner cj-br"></span>
+                </div>
+                <div class="cj-scan-line"></div>
+                <div class="cj-qr-inside">
+                  <svg viewBox="0 0 33 33" width="64" height="64" fill="rgba(255,255,255,0.75)">
+                    <rect x="1" y="1" width="9" height="9" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="1.5"/>
+                    <rect x="3.5" y="3.5" width="4" height="4"/>
+                    <rect x="23" y="1" width="9" height="9" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="1.5"/>
+                    <rect x="25.5" y="3.5" width="4" height="4"/>
+                    <rect x="1" y="23" width="9" height="9" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="1.5"/>
+                    <rect x="3.5" y="25.5" width="4" height="4"/>
+                    <rect x="12" y="1" width="1.5" height="1.5"/><rect x="15" y="1" width="1.5" height="1.5"/>
+                    <rect x="18" y="1" width="1.5" height="1.5"/><rect x="12" y="12" width="1.5" height="1.5"/>
+                    <rect x="15" y="15" width="1.5" height="1.5"/><rect x="18" y="12" width="1.5" height="1.5"/>
+                    <rect x="12" y="18" width="1.5" height="1.5"/><rect x="18" y="18" width="1.5" height="1.5"/>
+                  </svg>
+                </div>
+                <div class="cj-scan-detected">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#FFC800" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  QR detectado
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cj-step-tag">Sem app. Sem cadastro prévio.</div>
+        </div>
+        <div class="cj-step-text">
+          <h3 class="cj-step-title">Escaneia</h3>
+          <p class="cj-step-desc">Seu cliente vê o QR Code na vitrine ou balcão. Aponta a câmera. Em 2 segundos está na sua página de oferta — sem instalar nada, sem criar conta.</p>
+        </div>
+      </div>
+
+      <!-- Passo 2 — Preencheu -->
+      <div class="cj-step reveal" data-delay="2">
+        <div class="cj-step-num">02</div>
+        <div class="cj-phone-wrap">
+          <div class="phone-body cj-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen cj-screen-form">
+              <div class="cj-lp-topbar">
+                <div class="cj-lp-dot"></div>
+                <span class="cj-lp-biz-name">Café Central</span>
+              </div>
+              <div class="cj-lp-offer-block">
+                <div class="cj-offer-eyebrow">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="#FFC800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  Oferta exclusiva
+                </div>
+                <div class="cj-offer-big">15%<span>off</span></div>
+                <div class="cj-offer-sub">na sua próxima visita</div>
+              </div>
+              <div class="cj-form-block">
+                <div class="cj-field cj-field-filled">Ana Paula</div>
+                <div class="cj-field cj-field-filled">(11) 99821-4567</div>
+                <button class="cj-wa-submit">
+                  <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  Quero meu desconto
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="cj-step-tag">Leva menos de 10 segundos.</div>
+        </div>
+        <div class="cj-step-text">
+          <h3 class="cj-step-title">Preenche</h3>
+          <p class="cj-step-desc">Ele digita nome e WhatsApp para resgatar o benefício. Rápido porque o incentivo é real. Nenhum campo desnecessário, nenhum obstáculo.</p>
+        </div>
+      </div>
+
+      <!-- Passo 3 — Recebeu no WhatsApp -->
+      <div class="cj-step reveal" data-delay="3">
+        <div class="cj-step-num">03</div>
+        <div class="cj-phone-wrap">
+          <div class="phone-body cj-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen cj-screen-wa">
+              <div class="cj-wa-head">
+                <div class="cj-wa-av">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <div>
+                  <div class="cj-wa-biz">Café Central</div>
+                  <div class="cj-wa-online">online agora</div>
+                </div>
+              </div>
+              <div class="cj-wa-chat">
+                <div class="cj-msg cj-msg-out">
+                  Quero meu cupom! 😊
+                  <span class="cj-msg-time">14:32</span>
+                </div>
+                <div class="cj-msg cj-msg-in">
+                  Oi Ana! 👋 Aqui está seu cupom:<br>
+                  <strong class="cj-coupon">CAFE-ANA15</strong><br>
+                  Válido até 30/06. Mostre na visita!
+                  <span class="cj-msg-time">14:32 <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#FFC800" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+                </div>
+                <div class="cj-auto-badge">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  resposta automática · 8s
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cj-step-tag">Você nem precisou estar lá.</div>
+        </div>
+        <div class="cj-step-text">
+          <h3 class="cj-step-title">Recebe no WhatsApp</h3>
+          <p class="cj-step-desc">Em 8 segundos, o cupom chega no WhatsApp dele. Você já tem o contato no CRM. Ele já tem o benefício. Tudo automático, tudo rastreado.</p>
+        </div>
+      </div>
+
+    </div><!-- /cj-steps -->
+
+    <div class="cj-kicker reveal" data-delay="4">
+      <p class="cj-kicker-trail">📲 escaneou &nbsp;→&nbsp; ✍️ preencheu &nbsp;→&nbsp; 💬 caiu no seu CRM</p>
+      <a href="#" class="btn btn-primary">
+        Começar grátis — 14 dias, sem cartão
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<!-- ============================================================
+     13. PRICING
+     ============================================================ -->
+<section id="precos" class="pricing-section" data-screen-label="13 Pricing">
+  <div class="container">
+    <p class="eyebrow reveal">Planos</p>
+    <h2 class="section-h2 reveal" data-delay="1">Comece grátis. <em>Cresça quando fizer sentido.</em></h2>
+    <p class="section-sub reveal" data-delay="2">O plano Pro sai por R$ 97/mês — menos que o lucro de um único cliente que você não vai mais perder.</p>
+
+    <div class="pricing-grid" data-stagger="80">
+      <div class="price-card reveal">
+        <div class="price-name">Free</div>
+        <div class="price-value">R$ 0</div>
+        <div class="price-period">para sempre</div>
+        <ul class="price-list">
+          <li class="on">50 leads / mês</li>
+          <li class="on">1 QR Code dinâmico</li>
+          <li class="on">Landing page básica</li>
+          <li class="off">WhatsApp automático</li>
+          <li class="off">Segmentação inteligente</li>
+          <li class="off">Analytics completo</li>
+        </ul>
+        <a href="#" class="btn btn-outline btn-full">Começar grátis</a>
+      </div>
+
+      <div class="price-card price-card-featured reveal">
+        <div class="price-badge">Escolhido por 8 em cada 10</div>
+        <div class="price-name">Pro</div>
+        <div class="price-value">R$ 97<span class="price-mo">/mês</span></div>
+        <div class="price-period">14 dias grátis · sem cartão</div>
+        <ul class="price-list">
+          <li class="on"><strong>Leads ilimitados</strong></li>
+          <li class="on">QR Codes ilimitados</li>
+          <li class="on">WhatsApp automático em 8s</li>
+          <li class="on">Segmentação por origem</li>
+          <li class="on">Analytics e A/B teste</li>
+          <li class="on">Suporte prioritário</li>
+        </ul>
+        <a href="#" class="btn btn-primary btn-full">Começar teste grátis</a>
+        <p class="price-social">+1.812 negócios usam este plano</p>
+      </div>
+
+      <div class="price-card reveal">
+        <div class="price-name">Business</div>
+        <div class="price-value">R$ 297<span class="price-mo">/mês</span></div>
+        <div class="price-period">para equipes e redes</div>
+        <ul class="price-list">
+          <li class="on">Tudo do Pro</li>
+          <li class="on">Multi-loja (até 10 unidades)</li>
+          <li class="on">API e Webhooks</li>
+          <li class="on">Gerente de sucesso dedicado</li>
+          <li class="on">Treinamento da equipe</li>
+          <li class="on">SLA garantido</li>
+        </ul>
+        <a href="#" class="btn btn-outline btn-full">Falar com vendas</a>
+      </div>
+    </div>
+
+    <div class="price-guarantee reveal" data-delay="4">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <p><strong>Garantia anti-arrependimento.</strong> Se você não capturar pelo menos 30 contatos no primeiro mês, devolvemos seu dinheiro. Sem perguntas. Cancela com um clique.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     14. FAQ
+     ============================================================ -->
+<section id="faq" class="faq-section" data-screen-label="14 FAQ">
+  <div class="container">
+    <p class="eyebrow reveal">Antes de você perguntar</p>
+    <h2 class="section-h2 reveal" data-delay="1">Dúvidas? <em>Pensamos em tudo.</em></h2>
+
+    <div class="faq-list reveal" data-delay="2">
+      <div class="faq-item">
+        <button class="faq-q">Preciso saber de tecnologia?<span class="faq-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Se você usa WhatsApp, você consegue. O sistema foi feito para quem não tem TI. Em 60 segundos você já tem o primeiro QR Code gerado.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Meu cliente vai achar invasivo?<span class="faq-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Não. Ele só preenche se quiser o cupom ou benefício. É completamente voluntário, com benefício imediato antes de qualquer dado.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">E a LGPD?<span class="faq-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Conformidade total. Consentimento explícito em cada landing page. Você está protegido — e seus clientes também.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">E se eu cancelar?<span class="faq-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Exporta tudo em CSV num clique. Seu dado é seu, ponto. Sem letras miúdas, sem período de carência.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Funciona pra negócio pequeno?<span class="faq-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">95% dos nossos clientes têm menos de 5 funcionários. O CRMiner foi construído exatamente para isso: negócio pequeino, resultado grande.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Quanto demora pra ver resultado?<span class="faq-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Primeiro lead costuma chegar em 24h após colocar o primeiro QR Code. Sem exagero.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Meu cliente vai querer usar isso?<span class="faq-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sim — porque ele ganha algo real antes de dar qualquer dado. É só apontar a câmera pro QR Code, digitar nome e WhatsApp, e o cupom chega no WhatsApp em segundos. Não tem formulário longo, não tem app pra baixar, não tem cadastro de senha. O benefício aparece antes de qualquer esforço — e é isso que faz as pessoas preencherem.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Posso testar sem cartão?<span class="faq-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sim. 14 dias do plano Pro grátis, sem cartão. Cancela com um clique se não gostar — mas você vai gostar.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     15. CTA FINAL
+     ============================================================ -->
+<section class="cta-final" data-screen-label="15 CTA Final">
+  <div class="container cta-inner">
+    <p class="cta-urgency reveal">Enquanto você lê isso, mais um cliente passou e foi embora.</p>
+    <h2 class="cta-h2 reveal" data-delay="1">
+      Você pode continuar perdendo —
+      <em>ou capturar o próximo.</em>
+    </h2>
+    <p class="cta-sub reveal" data-delay="1">Sem cartão. Sem instalação. Sem risco.</p>
+    <a href="#" class="btn btn-primary btn-xl reveal" data-delay="2">
+      Quero capturar meus clientes — 14 dias grátis
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <div class="cta-signals reveal" data-delay="3">
+      <span class="cta-signal">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        Sem cartão
+      </span>
+      <span class="cta-signal">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        Sem instalação
+      </span>
+      <span class="cta-signal">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Sem risco
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     16. FOOTER
+     ============================================================ -->
+<!-- ============================================================
+     FOOTER MARQUEE
+     ============================================================ -->
+<div class="footer-marquee-wrap" aria-hidden="true">
+  <div class="footer-marquee">
+    <span>Captura de Leads</span>
+    <span class="fmq-dot"></span>
+    <span>QR Code Dinâmico</span>
+    <span class="fmq-dot"></span>
+    <span>WhatsApp Automático</span>
+    <span class="fmq-dot"></span>
+    <span>Pipeline CRM</span>
+    <span class="fmq-dot"></span>
+    <span>IA Copiloto</span>
+    <span class="fmq-dot"></span>
+    <span>Agendamentos</span>
+    <span class="fmq-dot"></span>
+    <span>Financeiro</span>
+    <span class="fmq-dot"></span>
+    <span>Programa VIP</span>
+    <span class="fmq-dot"></span>
+    <span>Captura de Leads</span>
+    <span class="fmq-dot"></span>
+    <span>QR Code Dinâmico</span>
+    <span class="fmq-dot"></span>
+    <span>WhatsApp Automático</span>
+    <span class="fmq-dot"></span>
+    <span>Pipeline CRM</span>
+    <span class="fmq-dot"></span>
+    <span>IA Copiloto</span>
+    <span class="fmq-dot"></span>
+    <span>Agendamentos</span>
+    <span class="fmq-dot"></span>
+    <span>Financeiro</span>
+    <span class="fmq-dot"></span>
+    <span>Programa VIP</span>
+    <span class="fmq-dot"></span>
+  </div>
+</div>
+
+<footer class="footer" data-screen-label="16 Footer">
+  <div class="footer-top container">
+    <div class="footer-brand">
+      <a href="#" class="logo" aria-label="CRMiner">
+        <img src="assets/logo-light.png" alt="CRMiner" style="height: 28px" />
+      </a>
+      <p>Feito no Brasil, para negócios brasileiros. Por quem entende que captura começa antes do caixa.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Produto</h4>
+      <a href="#clientes">Para Clientes</a>
+      <a href="#vip">Programa VIP</a>
+      <a href="#precos">Preços</a>
+      <a href="#">Ver Demo</a>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <a href="#">Sobre</a>
+      <a href="#">Manifesto</a>
+      <a href="#">Carreiras</a>
+      <a href="#">Imprensa</a>
+      <a href="#">Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Ajuda</h4>
+      <a href="#">Central de ajuda</a>
+      <a href="#">contato@crminer.com.br</a>
+      <a href="#">Status do sistema</a>
+      <a href="#">API Docs</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="#">LGPD</a>
+      <a href="#">Termos</a>
+      <a href="#">Privacidade</a>
+      <a href="#">Cookies</a>
+    </div>
+  </div>
+  <div class="footer-bottom container">
+    <span>© 2026 CRMiner Tecnologia · CNPJ 00.000.000/0001-00 · São Paulo, SP</span>
+    <div class="footer-trust">
+      <span>LGPD</span>
+      <span>Meta Partner</span>
+      <span>Empresa BR</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
