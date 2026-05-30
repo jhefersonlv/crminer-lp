@@ -300,6 +300,45 @@ ul, ol { list-style: none; }
   border-radius: 2px;
   transition: all .3s ease;
 }
+.nav-hamburger.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.is-active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.is-active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile nav drawer */
+.nav-mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #0a0c10;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  padding: 12px 16px 20px;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 998;
+  box-shadow: 0 16px 40px rgba(0,0,0,.4);
+}
+.nav-mobile-menu.is-open { display: flex; }
+.nav-mobile-link {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  padding: 12px 14px;
+  border-radius: 8px;
+  transition: color .18s, background .18s;
+  font-family: var(--jakarta);
+}
+.nav-mobile-link:hover { color: #fff; background: rgba(255,255,255,.06); }
+.nav-mobile-cta {
+  margin-top: 8px;
+  background: #FFC800;
+  color: #0a0c10 !important;
+  font-weight: 700 !important;
+  text-align: center;
+  border-radius: 8px;
+}
 
 /* ============================================================
    3. HERO
@@ -364,6 +403,12 @@ ul, ol { list-style: none; }
       transparent 68%,
       rgba(18,20,23,1) 100%
     );
+}
+
+@media (max-width: 768px) {
+  .hero-bg-overlay {
+    background: rgba(18,20,23,.82);
+  }
 }
 
 .hero-container {
@@ -787,13 +832,8 @@ ul, ol { list-style: none; }
   color: var(--indigo);
 }
 .pain-back-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: rgba(255,200,0,.1);
   display: flex;
   align-items: center;
-  justify-content: center;
   color: var(--indigo);
   flex-shrink: 0;
 }
@@ -2415,8 +2455,42 @@ ul, ol { list-style: none; }
 @media (max-width: 480px) {
   .hero-ctas { flex-direction: column; }
   .btn-lg { width: 100%; justify-content: center; }
-  .footer-top { grid-template-columns: 1fr; }
   .pricing-grid { gap: 16px; }
+
+  /* CTA button — allow wrap on mobile */
+  .btn-xl {
+    font-size: 14px;
+    padding: 15px 20px;
+    width: 100%;
+    justify-content: center;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* Footer */
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px 40px;
+    padding: 40px 24px 32px;
+  }
+  .footer-brand {
+    width: 100%;
+    text-align: left;
+  }
+  .footer-col {
+    min-width: 120px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    font-size: 11px;
+    padding-bottom: 20px;
+  }
+  .footer-trust { justify-content: center; }
 }
 
 /* =======================================================
@@ -4830,8 +4904,56 @@ ul, ol { list-style: none; }
   .mod-panel-visual { min-height: 240px; padding: 32px; }
 }
 @media (max-width: 600px) {
-  .mod-tabs { gap: 2px; padding: 4px; }
-  .mod-tab { padding: 8px 12px; font-size: 12px; gap: 5px; }
+  .mod-tabs-outer {
+    position: relative;
+    width: 100%;
+  }
+  .mod-tabs-outer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 64px;
+    height: 100%;
+    background: linear-gradient(to right, transparent, #0a0c10 85%);
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity .3s ease;
+  }
+  .mod-tabs-outer.scrolled-end::after {
+    opacity: 0;
+  }
+  .mod-tabs-arrow {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    color: rgba(255,200,0,.85);
+    pointer-events: none;
+    animation: tabs-arrow-bounce .9s ease-in-out infinite;
+    transition: opacity .3s ease;
+  }
+  .mod-tabs-outer.scrolled-end .mod-tabs-arrow {
+    opacity: 0;
+  }
+  @keyframes tabs-arrow-bounce {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    50%       { transform: translateY(-50%) translateX(4px); }
+  }
+  .mod-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    max-width: 100%;
+    width: 100%;
+    gap: 2px;
+    padding: 4px;
+  }
+  .mod-tabs::-webkit-scrollbar { display: none; }
+  .mod-tab { padding: 8px 12px; font-size: 12px; gap: 5px; flex-shrink: 0; }
 }
 
 /* =======================================================

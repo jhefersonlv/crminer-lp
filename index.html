@@ -39,9 +39,19 @@
       <a href="#" class="nav-login">Entrar</a>
       <a href="#" class="btn btn-primary btn-sm">Começar grátis</a>
     </div>
-    <button class="nav-hamburger" aria-label="Menu">
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
+  </div>
+
+  <!-- Menu mobile -->
+  <div class="nav-mobile-menu" id="nav-mobile-menu" aria-hidden="true">
+    <a href="#problema" class="nav-mobile-link">O Problema</a>
+    <a href="#jornada" class="nav-mobile-link">Como Funciona</a>
+    <a href="#modulos" class="nav-mobile-link">Módulos</a>
+    <a href="#precos" class="nav-mobile-link">Preços</a>
+    <a href="#faq" class="nav-mobile-link">FAQ</a>
+    <a href="#" class="nav-mobile-link nav-mobile-cta">Começar grátis →</a>
   </div>
 </header>
 
@@ -68,7 +78,7 @@
         <em class="hero-accent">ANTES da venda.</em>
       </h1>
       <p class="hero-sub reveal" data-delay="2">
-        O CRMiner transforma cada pessoa que vê sua vitrine, escaneia um QR Code ou clica no seu Instagram em um contato no seu WhatsApp. Automaticamente.
+        O CRMiner transforma cada pessoa que vê sua vitrine, escaneia um QR Code ou clica no seu Instagram em um Lead no CRM Automaticamente.
       </p>
       <div class="hero-ctas reveal" data-delay="3">
         <a href="#" class="btn btn-primary btn-lg">
@@ -198,10 +208,10 @@
           <div class="pain-card pain-card-back">
             <p class="pain-back-eyebrow">O CRMiner resolve</p>
             <div class="pain-back-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              <img src="assets/icons/scan-icon.png" width="48" height="48" alt="Scan" />
             </div>
             <h3 class="pain-back-title">QR Code na vitrine captura o lead na hora</h3>
-            <p class="pain-back-text">Cada pessoa que passa escaneia, ganha um cupom e entra no seu WhatsApp automaticamente. Você vê quem foi, quando foi e retoma o contato.</p>
+            <p class="pain-back-text">Cada pessoa que passa escaneia, ganha um cupom e entra no seu CRM automaticamente. Você vê quem foi, quando foi e retoma o contato.</p>
             <a href="#modulos" class="pain-back-cta">Ver como funciona <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
           </div>
         </div>
@@ -219,7 +229,7 @@
           <div class="pain-card pain-card-back">
             <p class="pain-back-eyebrow">O CRMiner resolve</p>
             <div class="pain-back-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              <img src="assets/icons/link-icon.png" width="48" height="48" alt="Link" />
             </div>
             <h3 class="pain-back-title">Link rastreável identifica cada visitante</h3>
             <p class="pain-back-text">Você descobre quem clicou, de onde veio e o que buscava. O CRMiner dispara uma mensagem automática no WhatsApp em menos de 8 segundos.</p>
@@ -240,7 +250,7 @@
           <div class="pain-card pain-card-back">
             <p class="pain-back-eyebrow">O CRMiner resolve</p>
             <div class="pain-back-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <img src="assets/icons/check-icon.png" width="64" height="64" alt="Check" />
             </div>
             <h3 class="pain-back-title">QR Code que captura contato e vende</h3>
             <p class="pain-back-text">O mesmo QR leva ao menu E captura o contato. Ele entra direto no CRM e recebe uma mensagem automática — tudo sem você levantar do balcão.</p>
@@ -381,7 +391,8 @@
       <p class="section-sub reveal" data-delay="2">Do primeiro contato ao pagamento, do lead ao cliente fiel — sem abrir outra aba.</p>
     </div>
 
-    <div class="mod-tabs reveal" data-delay="3" role="tablist" aria-label="Módulos do CRMiner">
+    <div class="mod-tabs-outer">
+    <div class="mod-tabs reveal" data-delay="3" role="tablist" aria-label="Módulos do CRMiner" id="mod-tabs-scroll">
       <button class="mod-tab is-active" data-tab="0" role="tab" aria-selected="true">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="5" height="18"/><rect x="10" y="8" width="5" height="13"/><rect x="17" y="5" width="5" height="16"/></svg>
         CRM
@@ -406,7 +417,11 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
         Canais
       </button>
-    </div>
+    </div><!-- /mod-tabs -->
+    <span class="mod-tabs-arrow" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </span>
+    </div><!-- /mod-tabs-outer -->
 
     <div class="mod-panels">
 

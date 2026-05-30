@@ -1499,6 +1499,57 @@ function initIntegrationDraw() {
   });
 }
 
+/* ─── Tabs scroll indicator ─── */
+(function initTabsScrollIndicator() {
+  const tabs  = document.getElementById('mod-tabs-scroll');
+  const outer = tabs?.closest('.mod-tabs-outer');
+  if (!tabs || !outer) return;
+
+  function update() {
+    const atEnd = tabs.scrollLeft + tabs.clientWidth >= tabs.scrollWidth - 8;
+    outer.classList.toggle('scrolled-end', atEnd);
+  }
+
+  tabs.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+/* ─── Nav Mobile Hamburger ─── */
+(function initMobileNav() {
+  const hamburger = document.getElementById('nav-hamburger');
+  const mobileMenu = document.getElementById('nav-mobile-menu');
+  if (!hamburger || !mobileMenu) return;
+
+  function toggleMenu() {
+    const isOpen = mobileMenu.classList.toggle('is-open');
+    hamburger.classList.toggle('is-active', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    mobileMenu.setAttribute('aria-hidden', !isOpen);
+  }
+
+  hamburger.addEventListener('click', toggleMenu);
+
+  // Fechar ao clicar em qualquer link do menu
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('is-open');
+      hamburger.classList.remove('is-active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    });
+  });
+
+  // Fechar ao clicar fora
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+      mobileMenu.classList.remove('is-open');
+      hamburger.classList.remove('is-active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+
 /* ─── Widget Conversacional ─── */
 (function initWidget() {
   const btn    = document.getElementById('wdg-btn');
