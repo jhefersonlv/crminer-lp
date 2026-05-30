@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWordReveal();
   initFaq();
   initHeroEntrance();       // inclui word-by-word h1
+  initHeroCards();          // hero cards with animations
   initLeadCounter();
   initNavScroll();
   initSegmentCycling();
@@ -245,6 +246,59 @@ function initHeroEntrance() {
 /* ── Parallax na foto de fundo do hero ── */
 function initHeroParallax() {
   // Desativado — imagem já tem o tamanho exato, sem necessidade de travel
+}
+
+/* ── 7.5 Hero Cards ── */
+function initHeroCards() {
+  if (typeof gsap === 'undefined') return;
+
+  const container = document.getElementById('hero-cards');
+  if (!container) return;
+
+  const cards = [
+    {
+      id: 'vitrine',
+      label: 'Passou pela sua vitrine',
+      position: 'card-middle',
+      icon: '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="9" height="12" stroke="currentColor" stroke-width="1.5"/><rect x="12" y="3" width="9" height="12" stroke="currentColor" stroke-width="1.5"/><line x1="3" y1="15" x2="21" y2="15" stroke="currentColor" stroke-width="1.5"/><line x1="7" y1="15" x2="7" y2="21" stroke="currentColor" stroke-width="1.5"/><line x1="17" y1="15" x2="17" y2="21" stroke="currentColor" stroke-width="1.5"/></svg>'
+    },
+    {
+      id: 'qrcode',
+      label: 'Escaneou um QR Code',
+      position: 'card-bottom',
+      icon: '<svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="8" height="8" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="2" width="8" height="8" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="14" width="8" height="8" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="14" width="2" height="2" fill="currentColor"/><rect x="18" y="14" width="2" height="2" fill="currentColor"/><rect x="14" y="18" width="2" height="2" fill="currentColor"/><rect x="18" y="18" width="2" height="2" fill="currentColor"/></svg>'
+    },
+    {
+      id: 'instagram',
+      label: 'Clicou no Instagram',
+      position: 'card-top',
+      icon: '<svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="4.5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="7" r="1" fill="currentColor"/></svg>'
+    }
+  ];
+
+  // Create cards dynamically
+  cards.forEach((card) => {
+    const el = document.createElement('div');
+    el.className = `hero-card ${card.position}`;
+    el.innerHTML = `
+      <div style="width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        ${card.icon}
+      </div>
+      <span class="hero-card-label">${card.label}</span>
+    `;
+    container.appendChild(el);
+  });
+
+  // Animate cards entrance
+  const cardElements = container.querySelectorAll('.hero-card');
+  gsap.from(cardElements, {
+    opacity: 0,
+    scale: 0.8,
+    duration: 0.6,
+    stagger: 0.15,
+    ease: 'power3.out',
+    delay: 0.8  // Starts after hero entrance
+  });
 }
 
 /* ── 8. Live lead counter animation ── */
