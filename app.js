@@ -1499,6 +1499,70 @@ function initIntegrationDraw() {
   });
 }
 
+/* ─── Mod GIF Players ─── */
+(function initGifPlayers() {
+  const GIF_DURATION = 6000; // ms — ajuste conforme a duração real do tutorial-01.gif
+
+  document.querySelectorAll('.mod-gif-player').forEach(player => {
+    const img     = player.querySelector('.mod-gif-img');
+    const canvas  = player.querySelector('.mod-gif-canvas');
+    const btn     = player.querySelector('.mod-gif-play-btn');
+    const ctx     = canvas.getContext('2d');
+    const dataSrc = img.getAttribute('data-src');
+    let timer = null;
+    let hasEnteredView = false;
+
+    // Captura frame 1 para o canvas antes da animação começar
+    const snap = new Image();
+    snap.crossOrigin = 'anonymous';
+    snap.onload = function () {
+      canvas.width  = snap.naturalWidth  || 600;
+      canvas.height = snap.naturalHeight || 400;
+      ctx.drawImage(snap, 0, 0, canvas.width, canvas.height);
+    };
+    snap.src = dataSrc;
+
+    function stop() {
+      clearTimeout(timer);
+      player.classList.remove('is-playing');
+      player.classList.add('is-stopped');
+    }
+
+    function play() {
+      clearTimeout(timer);
+      img.src = dataSrc + '?t=' + Date.now();
+      player.classList.add('is-playing');
+      player.classList.remove('is-stopped');
+      timer = setTimeout(stop, GIF_DURATION);
+    }
+
+    btn.addEventListener('click', e => { e.stopPropagation(); play(); });
+
+    const panel = player.closest('.mod-panel');
+
+    // Toca quando o painel troca de aba (MutationObserver)
+    if (panel) {
+      new MutationObserver(() => {
+        if (panel.classList.contains('is-active') && hasEnteredView) play();
+      }).observe(panel, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    // Toca quando entra na viewport pela primeira vez
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasEnteredView) {
+          hasEnteredView = true;
+          // Só toca se o painel estiver ativo
+          if (!panel || panel.classList.contains('is-active')) play();
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    io.observe(player);
+  });
+})();
+
 /* ─── Tabs scroll indicator ─── */
 (function initTabsScrollIndicator() {
   const tabs  = document.getElementById('mod-tabs-scroll');

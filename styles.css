@@ -905,7 +905,9 @@ ul, ol { list-style: none; }
    5b. JORNADA — Onboarding 3 Mundos
    ============================================================ */
 .ob-journey {
-  background: #f4f5f7;
+  background:
+    linear-gradient(rgba(244,245,247,.95), rgba(244,245,247,.95)),
+    url('assets/bg-journey.jpg') center / cover no-repeat;
   padding: clamp(80px, 10vw, 128px) 0;
   position: relative;
   overflow: hidden;
@@ -1091,13 +1093,25 @@ ul, ol { list-style: none; }
   filter: blur(0.5px);
 }
 
-/* Navegação — canto inferior esquerdo */
+/* Navegação — laterais */
 .ob-stage-nav {
+  position: static;
+  display: contents;
+}
+
+.ob-stage-prev {
   position: absolute;
-  bottom: 20px;
   left: 0;
-  display: flex;
-  gap: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 60;
+}
+
+.ob-stage-next {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 60;
 }
 
@@ -1106,7 +1120,7 @@ ul, ol { list-style: none; }
   height: 52px;
   border-radius: 50%;
   background: transparent;
-  border: 2px solid rgba(0,0,0,.18);
+  border: 1.5px solid rgba(0,0,0,.08);
   color: rgba(0,0,0,.5);
   display: flex;
   align-items: center;
@@ -1115,11 +1129,12 @@ ul, ol { list-style: none; }
   transition: transform 150ms ease, background-color 150ms ease, border-color 150ms ease;
 }
 .ob-stage-btn:hover {
-  transform: scale(1.08);
   background: rgba(0,0,0,.06);
-  border-color: rgba(0,0,0,.35);
+  border-color: rgba(0,0,0,.18);
   color: #0a0c10;
 }
+.ob-stage-prev:hover { transform: translateY(-50%) scale(1.08); }
+.ob-stage-next:hover { transform: translateY(-50%) scale(1.08); }
 
 /* ── Card individual — sólido, sem hover ── */
 .ob-world-card {
@@ -2439,9 +2454,24 @@ ul, ol { list-style: none; }
   .how-grid { grid-template-columns: 1fr; }
 
   .stats-grid,
-  .testimonials-grid,
-  .pricing-grid { grid-template-columns: 1fr; }
-  .price-card-featured { transform: none; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+
+  /* Pricing — sticky stacking cards */
+  .pricing-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .price-card {
+    position: sticky;
+    transform: none !important;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 -6px 28px rgba(0,0,0,.14);
+  }
+  .price-card:nth-child(1) { top: 72px;  z-index: 10; }
+  .price-card:nth-child(2) { top: 84px;  z-index: 11; }
+  .price-card:nth-child(3) { top: 96px;  z-index: 12; }
 
   .footer-top { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: 1 / -1; }
@@ -2455,7 +2485,7 @@ ul, ol { list-style: none; }
 @media (max-width: 480px) {
   .hero-ctas { flex-direction: column; }
   .btn-lg { width: 100%; justify-content: center; }
-  .pricing-grid { gap: 16px; }
+  .pricing-grid { gap: 0; }
 
   /* CTA button — allow wrap on mobile */
   .btn-xl {
@@ -4887,6 +4917,12 @@ ul, ol { list-style: none; }
 .mod-panel[data-accent="cadastros"] .mod-panel-visual { background: radial-gradient(ellipse 75% 65% at 55% 50%, rgba(139,92,246,.15) 0%, #0d0f13 70%); }
 .mod-panel[data-accent="canais"]    .mod-panel-visual { background: radial-gradient(ellipse 75% 65% at 55% 50%, rgba(16,185,129,.14) 0%, #0d0f13 70%); }
 
+/* Remove padding quando tem GIF ou imagem estática */
+.mod-panel-visual:has(.mod-gif-player),
+.mod-panel-visual:has(.mod-static-img) {
+  padding: 0;
+}
+
 /* Dot grid decoration on visual side */
 .mod-panel-visual::before {
   content: '';
@@ -4901,7 +4937,9 @@ ul, ol { list-style: none; }
 @media (max-width: 960px) {
   .mod-panel-card { grid-template-columns: 1fr; min-height: auto; }
   .mod-panel-content { border-right: none; border-bottom: 1px solid rgba(255,255,255,.07); }
-  .mod-panel-visual { min-height: 240px; padding: 32px; }
+  .mod-panel-visual { min-height: 260px; padding: 32px; }
+  .mod-panel-visual:has(.mod-gif-player),
+  .mod-panel-visual:has(.mod-static-img) { padding: 0; }
 }
 @media (max-width: 600px) {
   .mod-tabs-outer {
@@ -5739,6 +5777,76 @@ ul, ol { list-style: none; }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* ============================================================
+   MOD GIF PLAYER
+   ============================================================ */
+.mod-gif-player {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 0;
+}
+.mod-gif-canvas,
+.mod-gif-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mod-gif-canvas { display: block; }
+.mod-gif-img    { display: none; }
+.mod-gif-player.is-playing .mod-gif-img    { display: block; }
+.mod-gif-player.is-playing .mod-gif-canvas { display: none; }
+
+.mod-gif-play-btn {
+  position: absolute;
+  z-index: 10;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(10,12,16,.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 2px solid rgba(255,255,255,.18);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease, transform .2s ease, background .15s;
+  padding-left: 3px; /* optical centering of play icon */
+}
+.mod-gif-play-btn:hover {
+  background: rgba(10,12,16,.85);
+  transform: scale(1.08);
+}
+.mod-gif-player.is-stopped .mod-gif-play-btn {
+  opacity: 1;
+  pointer-events: all;
+}
+.mod-gif-player:hover .mod-gif-play-btn {
+  opacity: .6;
+  pointer-events: all;
+}
+.mod-gif-player.is-stopped:hover .mod-gif-play-btn {
+  opacity: 1;
+}
+.mod-static-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  display: block;
 }
 
 /* ============================================================
