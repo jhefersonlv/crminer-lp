@@ -26,7 +26,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth — removido, Lenis cuida disso */
   -webkit-text-size-adjust: 100%;
 }
 
@@ -1009,9 +1009,9 @@ header.scrolled {
    DOBRA 3 — ICEBERG REDESIGN
    ═══════════════════════════════════════════════════════════ */
 
-/* ── Driver — determina quanto de scroll disponível ── */
+/* ── Driver — timeline completa scroll-driven (5000px de scroll) ── */
 #dobra3-driver {
-  height: calc(100vh + 800px);
+  height: calc(100vh + 5000px);
   position: relative;
 }
 
@@ -1027,7 +1027,7 @@ header.scrolled {
 .dobra3-bg {
   position: absolute;
   inset: 0;
-  background: url('../assets/section_3.jpeg') center center / cover no-repeat;
+  background: url('../assets/section_32.png') center center / cover no-repeat;
   z-index: 0;
 }
 
@@ -1040,14 +1040,7 @@ header.scrolled {
 
 /* ── SVG linhas (escondidas até cards subirem) ── */
 .dobra3-lines {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 500ms ease;
+  display: none; /* linhas removidas */
 }
 
 .d3line {
@@ -1070,6 +1063,7 @@ header.scrolled {
   align-items: center;
   justify-content: center;
   will-change: opacity, transform;
+  padding-top: 72px; /* compensa o nav fixo */
 }
 
 .dobra3-title-wrap .wrap {
@@ -1087,39 +1081,50 @@ header.scrolled {
   color: rgba(182, 186, 198, 0.85);
 }
 
-/* ── Cards outer — começa abaixo da viewport ── */
+/* ── Cards outer — overlay de tamanho total ── */
 .dobra3-cards-outer {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  inset: 0;
   z-index: 4;
-  padding-bottom: 48px;
-  will-change: transform;
-  transform: translateY(110%);
+  pointer-events: none;
 }
 
-/* Cards nos cantos — centro livre para o iceberg */
+/* Container relativo: full-height, centralizado via .wrap */
 .dobra3-cards {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 0;
+  position: relative;
+  height: 100%;
 }
 
-/* Card base — cada um em seu canto */
+/* Card base — mais ao centro */
 .d3card {
+  position: absolute;
   width: 30%;
   max-width: 320px;
   background: rgba(10, 12, 16, 0.82);
-  border-radius: 20px;
-  padding: 28px 24px 24px;
+  border-radius: 18px;
+  padding: 26px 24px 22px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  pointer-events: auto;
+  will-change: transform, opacity;
+  opacity: 0;
 }
 
-.d3card--left  { border: 1px solid rgba(74, 222, 128, 0.30); }
-.d3card--right { border: 1px solid rgba(248, 113, 113, 0.30); }
+/* Esquerdo: topo, deslocado para o centro */
+.d3card--left {
+  top: 80px;
+  left: 8%;
+  transform: translateX(-70px);
+  border: 1px solid rgba(74, 222, 128, 0.30);
+}
+
+/* Direito: fundo, deslocado para o centro */
+.d3card--right {
+  bottom: 48px;
+  right: 8%;
+  transform: translateX(70px);
+  border: 1px solid rgba(248, 113, 113, 0.30);
+}
 
 /* Cabeçalho do card */
 .d3card-head {
@@ -1244,6 +1249,247 @@ header.scrolled {
 
 .d3footer--green { color: #4ade80; }
 .d3footer--red   { color: #f87171; }
+
+/* ═══════════════════════════════════════════════════════════
+   DOBRA 5 — TIMELINE VERTICAL (Bottom-to-Top)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Nota: .tl-bg / .tl-overlay removidos — Dobra 3 fornece o background ── */
+
+/* ── Título fase 2 (acima dos cards da fase 1, z-index 4) ── */
+.tl-title-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: opacity, transform;
+  pointer-events: none;
+  opacity: 0; /* começa invisível — JS anima */
+  padding-top: 72px; /* compensa o nav fixo */
+}
+
+.tl-title-wrap .wrap { text-align: center; max-width: 680px; }
+.tl-title-wrap h2    { color: #F8F9FA; margin-top: 14px; }
+.tl-title-wrap .lead { margin-top: 14px; color: rgba(182, 186, 198, 0.85); }
+
+/* ── Cena (acima dos cards da fase 1) ── */
+.tl-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0; /* começa invisível — JS anima */
+  will-change: opacity;
+  padding-top: 100px; /* 72px nav + 88px para descer o conteúdo */
+}
+
+.tl-scene-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* ── Badge: CRM Tradicional (canto superior direito do wrapper) ── */
+.tl-crm-badge {
+  position: absolute;
+  top: -52px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.tl-crm-badge span {
+  font-size: 0.70rem;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(182, 186, 198, 0.50);
+}
+
+.tl-crm-sub {
+  color: rgba(182, 186, 198, 0.30) !important;
+  font-size: 0.62rem !important;
+}
+
+/* ── Linha vertical ── */
+.tl-vline-wrap {
+  position: relative;
+  width: 4px;
+  height: 58vh;
+  flex-shrink: 0;
+}
+
+.tl-vline-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 200, 0, 0.10);
+  border-radius: 2px;
+}
+
+#d3-tl-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  background: linear-gradient(to top, #FFC800 0%, rgba(255, 200, 0, 0.65) 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 16px rgba(255, 200, 0, 0.45);
+  will-change: height;
+  /* transition removida — GSAP anima diretamente */
+}
+
+/* ── Linha d'água ── */
+.tl-waterline {
+  position: absolute;
+  bottom: 76%; /* alinhado com o dot Compra (data-i="4") */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56vw;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.13);
+  pointer-events: none;
+}
+
+.tl-waterline-label {
+  position: absolute;
+  right: 0;
+  top: -18px;
+  font-size: 0.60rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.22);
+  white-space: nowrap;
+}
+
+/* ── Estágios (posição absoluta, bottom-to-top) ── */
+.tl-stage {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  width: 560px;
+  justify-content: center;
+}
+
+.tl-stage[data-i="0"] { bottom:  4%; }
+.tl-stage[data-i="1"] { bottom: 22%; }
+.tl-stage[data-i="2"] { bottom: 40%; }
+.tl-stage[data-i="3"] { bottom: 58%; }
+.tl-stage[data-i="4"] { bottom: 76%; }
+.tl-stage[data-i="5"] { bottom: 94%; }
+
+/* ── Dot — GSAP anima background/borderColor/boxShadow diretamente ── */
+.tl-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: rgba(255, 200, 0, 0.12);
+  border: 2px solid rgba(255, 200, 0, 0.25);
+  position: relative;
+  z-index: 1;
+  /* transition removida — GSAP scrub reverte corretamente */
+}
+
+.tl-dot--surface {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── Cards de estágio — GSAP anima opacity + x diretamente ── */
+.tl-stage-card {
+  position: absolute;
+  width: 230px;
+  opacity: 0;
+  /* transition e transform iniciais removidos — GSAP define os from states */
+}
+
+.tl-card--right {
+  left: calc(50% + 26px);
+}
+
+.tl-card--left {
+  right: calc(50% + 26px);
+  text-align: right;
+}
+/* .active removido — GSAP controla opacity/x diretamente (reverte com scrub) */
+
+.tl-stage-card strong {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255, 200, 0, 0.75);
+  margin-bottom: 5px;
+}
+
+.tl-stage-card p {
+  font-size: 0.77rem;
+  color: rgba(182, 186, 198, 0.80);
+  line-height: 1.45;
+}
+
+.tl-label-gold { color: #FFC800 !important; }
+
+/* ── Textos da Fase 2 — GSAP anima opacity + y diretamente ── */
+.d3-p2-text {
+  opacity: 0;
+  color: #F8F9FA;
+  text-align: center;
+  line-height: 1.15;
+  /* transition e transform removidos — GSAP scrub controla */
+}
+
+.d3-p2-text--sub {
+  font-size: clamp(1rem, 1.5vw, 1.28rem);
+  color: rgba(182, 186, 198, 0.85);
+  margin-top: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* ── Finale: H2 no topo + cards menores ── */
+#d3-finale {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 700ms ease;
+  pointer-events: none;
+}
+
+#d3-finale.visible {
+  opacity: 1;
+}
+
+.d3-finale-h2 {
+  position: absolute;
+  top: 88px; /* 72px nav + 16px respiro */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #F8F9FA;
+  white-space: nowrap;
+  font-size: clamp(1.2rem, 2.0vw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* Cards menores no finale: controlado via JS inline styles (ver main.js startPhase2) */
 
 /* ---------- DOBRA 4 — JOURNEY SCROLL STORYTELLING ---------- */
 #how {
@@ -1730,4 +1976,25 @@ footer {
   html {
     scroll-behavior: auto;
   }
+}
+
+/* ══════════════════════════════════════════════════════════
+   PAGE TRANSITION OVERLAY — SVG branco tela inteira
+   ══════════════════════════════════════════════════════════ */
+#page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+#page-transition.active {
+  pointer-events: all; /* bloqueia cliques/scroll durante a transição */
+}
+
+#pt-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }

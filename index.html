@@ -253,10 +253,10 @@
 
     <!-- SVG linhas (aparecem com os cards) -->
     <svg class="dobra3-lines" id="dobra3-lines" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true">
-      <!-- Esquerda: do meio-direita do card sobe em linha reta para o centro -->
-      <path class="d3line d3line--left"  d="M 376 379 L 590 300"/>
-      <!-- Direita: do meio do card aponta pra baixo em direção ao centro -->
-      <path class="d3line d3line--right" d="M 987 428 L 600 570"/>
+      <!-- Esquerda: card topo-esquerdo → centro do iceberg -->
+      <path class="d3line d3line--left"  d="M 340 230 L 590 295"/>
+      <!-- Direita: centro do iceberg → card fundo-direito -->
+      <path class="d3line d3line--right" d="M 615 305 L 860 380"/>
     </svg>
 
     <!-- Título (some com o scroll) -->
@@ -273,7 +273,7 @@
       <div class="wrap dobra3-cards">
 
         <!-- Card esquerdo: O que você vê -->
-        <div class="d3card d3card--left reveal">
+        <div class="d3card d3card--left">
           <div class="d3card-head">
             <div class="d3card-icon d3card-icon--green">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -301,7 +301,7 @@
         </div>
 
         <!-- Card direito: O que você não vê -->
-        <div class="d3card d3card--right reveal" style="transition-delay:.12s">
+        <div class="d3card d3card--right">
           <div class="d3card-head">
             <div class="d3card-icon d3card-icon--red">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
@@ -355,6 +355,98 @@
 
       </div>
     </div><!-- /dobra3-cards-outer -->
+
+    <!-- ── FASE 2: Timeline vertical (aparece depois dos cards) ── -->
+
+    <!-- Fase 2: textos sequenciais (JS controla cada um) -->
+    <div class="tl-title-wrap" id="d3-tl-title">
+      <div class="wrap">
+        <h2 id="d3-txt1" class="d3-p2-text">
+          Enquanto outros CRMs esperam a venda,<br>
+          <span class="gold">o CRMiner começa antes.</span>
+        </h2>
+        <p id="d3-txt2" class="d3-p2-text d3-p2-text--sub">
+          Cada interação deixa uma pista. Nós coletamos todas.
+        </p>
+      </div>
+    </div>
+
+    <!-- Cena da timeline vertical -->
+    <div class="tl-scene" id="d3-tl-scene">
+      <div class="wrap tl-scene-inner">
+
+        <div class="tl-crm-badge" aria-hidden="true">
+          <span>CRM TRADICIONAL</span>
+          <span class="tl-crm-sub">só começa aqui ↑</span>
+        </div>
+
+        <div class="tl-vline-wrap">
+          <div class="tl-vline-bg" aria-hidden="true"></div>
+          <div id="d3-tl-fill" aria-hidden="true"></div>
+
+          <div class="tl-waterline" aria-hidden="true">
+            <span class="tl-waterline-label">superfície</span>
+          </div>
+
+          <div class="tl-stage" data-i="0">
+            <div class="tl-dot"></div>
+            <div class="tl-stage-card tl-card--right">
+              <strong>Interesse</strong>
+              <p>Identificamos de onde o lead veio e o que buscou antes de qualquer formulário.</p>
+            </div>
+          </div>
+
+          <div class="tl-stage" data-i="1">
+            <div class="tl-dot"></div>
+            <div class="tl-stage-card tl-card--left">
+              <strong>Visita</strong>
+              <p>Mapeamos o comportamento no ponto de venda e no WhatsApp em uma base unificada.</p>
+            </div>
+          </div>
+
+          <div class="tl-stage" data-i="2">
+            <div class="tl-dot"></div>
+            <div class="tl-stage-card tl-card--right">
+              <strong>Engajamento</strong>
+              <p>Acompanhamos padrões de comportamento, frequência e canais de origem.</p>
+            </div>
+          </div>
+
+          <div class="tl-stage" data-i="3">
+            <div class="tl-dot"></div>
+            <div class="tl-stage-card tl-card--left">
+              <strong>Intenção</strong>
+              <p>Avisamos seu time no momento exato em que o lead demonstra comportamento de compra.</p>
+            </div>
+          </div>
+
+          <div class="tl-stage" data-i="4">
+            <div class="tl-dot tl-dot--surface"></div>
+            <div class="tl-stage-card tl-card--right">
+              <strong class="tl-label-gold">Compra</strong>
+              <p>Onde os outros CRMs acordam — nós já entregamos o histórico completo da jornada.</p>
+            </div>
+          </div>
+
+          <div class="tl-stage" data-i="5">
+            <div class="tl-dot tl-dot--surface"></div>
+            <div class="tl-stage-card tl-card--left">
+              <strong>Cliente</strong>
+              <p>Relacionamento contínuo com dados enriquecidos desde o primeiro contato.</p>
+            </div>
+          </div>
+
+        </div><!-- /tl-vline-wrap -->
+      </div>
+    </div><!-- /d3-tl-scene -->
+
+    <!-- Fase 2: finale — H2 no topo + cards menores (via classe no sticky) -->
+    <div id="d3-finale">
+      <h2 class="d3-finale-h2">
+        Enquanto outros CRMs esperam a venda,<br>
+        <span class="gold">o CRMiner começa antes.</span>
+      </h2>
+    </div>
 
   </div><!-- /dobra3-sticky -->
   </div><!-- /dobra3-driver -->
@@ -412,44 +504,6 @@
         </div>
 
       </div>
-  </section>
-
-  <!-- ============ DOBRA 5 — LINHA DO TEMPO COMPARATIVA ============ -->
-  <section class="dobra" aria-labelledby="tl-title">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 id="tl-title" class="reveal">Enquanto outros CRMs esperam a venda,<br>o CRMiner começa antes.</h2>
-      </div>
-
-      <div class="timeline-scroll reveal">
-        <svg viewBox="0 0 1000 300" role="img" aria-label="Linha do tempo: o CRM tradicional cobre apenas Compra e Cliente; o CRMiner cobre desde o Interesse.">
-          <!-- ===== CRM Tradicional — faixa cinza acima, só Compra e Cliente ===== -->
-          <text x="652" y="60" fill="#B6BAC6" font-size="17" font-weight="700" letter-spacing="1.5" font-family="Plus Jakarta Sans">CRM TRADICIONAL</text>
-          <text x="652" y="84" fill="#6b7280" font-size="14" font-weight="600" font-family="Plus Jakarta Sans">só registra depois da venda</text>
-          <line x1="652" y1="104" x2="908" y2="104" stroke="#2A2F38" stroke-width="6" stroke-linecap="round"/>
-          <line x1="740" y1="104" x2="740" y2="152" stroke="#2A2F38" stroke-width="1.5" stroke-dasharray="3 5"/>
-          <line x1="900" y1="104" x2="900" y2="152" stroke="#2A2F38" stroke-width="1.5" stroke-dasharray="3 5"/>
-
-          <!-- ===== baseline + CRMiner gold track (cobre tudo) ===== -->
-          <line x1="100" y1="168" x2="900" y2="168" stroke="#1f242b" stroke-width="2"/>
-          <line x1="100" y1="168" x2="900" y2="168" stroke="#FFC800" stroke-width="6" stroke-linecap="round"/>
-
-          <!-- pontos: Interesse 100 / Visita 260 / Engajamento 420 / Intenção 580 / Compra 740 / Cliente 900 -->
-          <g font-family="Plus Jakarta Sans" font-size="19" font-weight="600">
-            <circle cx="100" cy="168" r="9" fill="#FFC800"/><text x="100" y="210" fill="#F8F9FA" text-anchor="middle">Interesse</text>
-            <circle cx="260" cy="168" r="9" fill="#FFC800"/><text x="260" y="210" fill="#F8F9FA" text-anchor="middle">Visita</text>
-            <circle cx="420" cy="168" r="9" fill="#FFC800"/><text x="420" y="210" fill="#F8F9FA" text-anchor="middle">Engajamento</text>
-            <circle cx="580" cy="168" r="9" fill="#FFC800"/><text x="580" y="210" fill="#F8F9FA" text-anchor="middle">Intenção</text>
-            <circle cx="740" cy="168" r="11" fill="#FFC800" stroke="#121417" stroke-width="3"/><text x="740" y="210" fill="#F8F9FA" text-anchor="middle">Compra</text>
-            <circle cx="900" cy="168" r="11" fill="#FFC800" stroke="#121417" stroke-width="3"/><text x="900" y="210" fill="#F8F9FA" text-anchor="middle">Cliente</text>
-          </g>
-
-          <!-- CRMiner label abaixo -->
-          <text x="100" y="262" fill="#FFC800" font-size="17" font-weight="700" letter-spacing="1.5" font-family="Plus Jakarta Sans">CRMINER</text>
-          <text x="218" y="262" fill="#B6BAC6" font-size="15" font-weight="600" font-family="Plus Jakarta Sans">— captura desde o primeiro sinal</text>
-        </svg>
-      </div>
-    </div>
   </section>
 
   <!-- ============ DOBRA 6 — IMPACTO FINANCEIRO ============ -->
@@ -543,8 +597,20 @@
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<!-- ── Vendors: Lenis + GSAP ── -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<!-- ── App ── -->
+<script src="js/main.js" defer></script>
 <script src="js/hero.js" defer></script>
+
+<!-- ── Page transition overlay ── -->
+<div id="page-transition" aria-hidden="true">
+  <svg id="pt-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMin slice">
+    <path id="pt-path" fill="#ffffff" d="M 0 100 V 100 Q 50 100 100 100 V 100 z"/>
+  </svg>
+</div>
 
 </body>
 </html>

@@ -1,113 +1,129 @@
-// ============================================
-// STICKY HEADER — Aparece após 100px de scroll
-// ============================================
+/* ============================================================
+   INIT — Lenis smooth scroll + GSAP/ScrollTrigger
+   (var lenis é global — hero.js também usa)
+   ============================================================ */
+var lenis = new Lenis({ duration: 1.2, smoothTouch: false });
+gsap.registerPlugin(ScrollTrigger);
+gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+gsap.ticker.lagSmoothing(0);
+lenis.on('scroll', ScrollTrigger.update);
+
+/* ============================================================
+   STICKY HEADER — aparece após 100px de scroll
+   ============================================================ */
 (function () {
   var header = document.getElementById('site-header');
-
-  function onScroll() {
-    if (window.scrollY > 100) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  }
-
+  if (!header) return;
+  function onScroll() { header.classList.toggle('scrolled', window.scrollY > 100); }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 })();
 
-// ============================================
-// SCROLL REVEAL — Anima elementos com classe .reveal
-// ============================================
+/* ============================================================
+   SCROLL REVEAL — adiciona .in quando entra na viewport
+   ============================================================ */
+ScrollTrigger.batch('.reveal', {
+  onEnter: function (els) {
+    els.forEach(function (el) { el.classList.add('in'); });
+  },
+  start: 'top 90%',
+  once: true
+});
+// Safety net: garante visibilidade mesmo sem scroll
+setTimeout(function () {
+  document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+}, 2500);
+
+/* ============================================================
+   DOBRA 3 — Timeline scroll-driven completa (GSAP scrub)
+   ============================================================ */
 (function () {
-  var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
-  var ticking = false;
-
-  function reveal() {
-    ticking = false;
-    var vh = window.innerHeight || document.documentElement.clientHeight;
-
-    for (var i = els.length - 1; i >= 0; i--) {
-      var el = els[i];
-      var top = el.getBoundingClientRect().top;
-
-      if (top < vh * 0.9) {
-        el.classList.add('in');
-        els.splice(i, 1);
-      }
-    }
-  }
-
-  function onScroll() {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(reveal);
-    }
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
-  window.addEventListener('load', reveal);
-  reveal();
-
-  // Safety net: nunca deixa conteúdo escondido
-  setTimeout(function () {
-    els.forEach(function (el) {
-      el.classList.add('in');
-    });
-  }, 2500);
-})();
-
-// ============================================
-// DOBRA 3 — Scroll: título some, cards sobem
-// ============================================
-(function () {
-  var driver  = document.getElementById('dobra3-driver');
-  var titleWr = document.getElementById('dobra3-title');
-  var cardsWr = document.getElementById('dobra3-cards');
-  var linesEl = document.getElementById('dobra3-lines');
+  var driver = document.getElementById('dobra3-driver');
   if (!driver) return;
 
-  function ease(t) { return 1 - Math.pow(1 - Math.max(0, Math.min(1, t)), 3); }
+  var dots       = gsap.utils.toArray('#d3-tl-scene .tl-dot');
+  var stageCards = gsap.utils.toArray('#d3-tl-scene .tl-stage-card');
 
-  function getProgress() {
-    var rect = driver.getBoundingClientRect();
-    return Math.max(0, Math.min(1, -rect.top / (driver.offsetHeight - window.innerHeight)));
-  }
+  // transform-origin dos cards para o finale (fora da timeline — estático)
+  gsap.set('.d3card--left',  { transformOrigin: 'top left' });
+  gsap.set('.d3card--right', { transformOrigin: 'bottom right' });
 
-  function update() {
-    var p = getProgress();
-
-    // Título: some entre 0 → 0.35
-    var tp = Math.min(1, p / 0.35);
-    if (titleWr) {
-      titleWr.style.opacity   = String(1 - tp);
-      titleWr.style.transform = 'translateY(' + (-tp * 28) + 'px)';
+  var d3tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#dobra3-driver',
+      start: 'top top',
+      end: '+=5000',  // mais espaço → cena mais fluida
+      scrub: 1
     }
+  });
 
-    // Cards: sobem entre 0.25 → 0.75
-    var cp = ease((p - 0.25) / 0.50);
-    if (cardsWr) {
-      cardsWr.style.transform = 'translateY(' + ((1 - cp) * 110) + '%)';
+  // ── Título some, cards entram ──────────────────────────────
+  d3tl
+    .fromTo('#dobra3-title',
+      { opacity: 1, y: 0 },
+      { opacity: 0, y: -28, ease: 'none', duration: 2.2 }, 0)
+    .fromTo('.d3card--left',
+      { opacity: 0, x: -70 },
+      { opacity: 1, x: 0, ease: 'power2.out', duration: 4.3 }, 1.2)
+    .fromTo('.d3card--right',
+      { opacity: 0, x: 70 },
+      { opacity: 1, x: 0, ease: 'power2.out', duration: 4.3 }, 1.2)
+
+  // ── Cards somem ────────────────────────────────────────────
+  .to(['.d3card--left', '.d3card--right'],
+    { opacity: 0, duration: 0.7 }, 5.5)
+
+  // ── Textos da Fase 2 ───────────────────────────────────────
+  .to('#d3-tl-title',  { opacity: 1, duration: 0.1 }, 6.0)
+  .fromTo('#d3-txt1',  { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1.0 }, 6.1)
+  .fromTo('#d3-txt2',  { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1.0 }, 6.9)
+  .to(['#d3-txt1', '#d3-txt2'], { opacity: 0, duration: 0.5 }, 7.9)
+  .to('#d3-tl-title',  { opacity: 0, duration: 0.4 }, 8.2)
+
+  // ── Cena da timeline (permanece visível até o fim) ─────────
+  .fromTo('#d3-tl-scene',
+    { opacity: 0 }, { opacity: 1, duration: 0.4 }, 8.3)
+
+  // ── Linha vertical cresce suavemente ──────────────────────
+  .fromTo('#d3-tl-fill',
+    { height: '0%' }, { height: '100%', ease: 'none', duration: 2.2 }, 8.3);
+
+  // ── Dots + cards ativam sequencialmente (0.4s por dot = ~200px cada) ──
+  var DOT_START = 8.30;
+  var DOT_STEP  = 0.40;
+
+  dots.forEach(function (dot, i) {
+    var t       = DOT_START + i * DOT_STEP;
+    var card    = stageCards[i];
+    var isRight = card && card.classList.contains('tl-card--right');
+
+    d3tl.fromTo(dot,
+      { backgroundColor: 'rgba(255,200,0,0.12)', borderColor: 'rgba(255,200,0,0.25)', boxShadow: 'none' },
+      { backgroundColor: '#FFC800', borderColor: 'rgba(255,200,0,0.60)',
+        boxShadow: '0 0 0 6px rgba(255,200,0,0.12), 0 0 18px rgba(255,200,0,0.55)',
+        duration: 0.08 }, t);
+
+    if (card) {
+      d3tl.fromTo(card,
+        { opacity: 0, x: isRight ? 10 : -10 },
+        { opacity: 1, x: 0, duration: 0.12 }, t);
     }
+  });
 
-    // Linhas: aparecem quando cards estão chegando
-    if (linesEl) {
-      var lp = Math.max(0, Math.min(1, (cp - 0.5) / 0.5));
-      linesEl.style.opacity = String(lp);
-    }
-  }
+  // ── Cena PERMANECE visível — finale aparece sobre ela ─────
+  d3tl
+    .fromTo('#d3-finale',
+      { opacity: 0 }, { opacity: 1, duration: 0.4 }, 10.6)
 
-  var raf = false;
-  window.addEventListener('scroll', function () {
-    if (!raf) { raf = true; requestAnimationFrame(function () { raf = false; update(); }); }
-  }, { passive: true });
-  update();
+  // ── Cards reaparecem menores nos cantos ────────────────────
+    .fromTo(['.d3card--left', '.d3card--right'],
+      { opacity: 0, scale: 0.68 },
+      { opacity: 1, scale: 0.68, duration: 0.4 }, 10.7);
 })();
 
-// ============================================
-// HOW IT WORKS — Card Slider com peek do próximo
-// ============================================
+/* ============================================================
+   HOW IT WORKS — Card Slider com peek do próximo
+   ============================================================ */
 (function () {
   var section = document.getElementById('how');
   if (!section) return;
@@ -133,7 +149,6 @@
   nextBtn.addEventListener('click', function () {
     if (current < total - 1) { current++; updateSlider(); }
   });
-
   prevBtn.addEventListener('click', function () {
     if (current > 0) { current--; updateSlider(); }
   });
