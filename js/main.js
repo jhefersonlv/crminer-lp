@@ -59,6 +59,53 @@
 })();
 
 // ============================================
+// DOBRA 3 — Scroll: título some, cards sobem
+// ============================================
+(function () {
+  var driver  = document.getElementById('dobra3-driver');
+  var titleWr = document.getElementById('dobra3-title');
+  var cardsWr = document.getElementById('dobra3-cards');
+  var linesEl = document.getElementById('dobra3-lines');
+  if (!driver) return;
+
+  function ease(t) { return 1 - Math.pow(1 - Math.max(0, Math.min(1, t)), 3); }
+
+  function getProgress() {
+    var rect = driver.getBoundingClientRect();
+    return Math.max(0, Math.min(1, -rect.top / (driver.offsetHeight - window.innerHeight)));
+  }
+
+  function update() {
+    var p = getProgress();
+
+    // Título: some entre 0 → 0.35
+    var tp = Math.min(1, p / 0.35);
+    if (titleWr) {
+      titleWr.style.opacity   = String(1 - tp);
+      titleWr.style.transform = 'translateY(' + (-tp * 28) + 'px)';
+    }
+
+    // Cards: sobem entre 0.25 → 0.75
+    var cp = ease((p - 0.25) / 0.50);
+    if (cardsWr) {
+      cardsWr.style.transform = 'translateY(' + ((1 - cp) * 110) + '%)';
+    }
+
+    // Linhas: aparecem quando cards estão chegando
+    if (linesEl) {
+      var lp = Math.max(0, Math.min(1, (cp - 0.5) / 0.5));
+      linesEl.style.opacity = String(lp);
+    }
+  }
+
+  var raf = false;
+  window.addEventListener('scroll', function () {
+    if (!raf) { raf = true; requestAnimationFrame(function () { raf = false; update(); }); }
+  }, { passive: true });
+  update();
+})();
+
+// ============================================
 // HOW IT WORKS — Card Slider com peek do próximo
 // ============================================
 (function () {

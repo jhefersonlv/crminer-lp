@@ -244,27 +244,33 @@
   </section>
 
   <!-- ============ DOBRA 3 — ICEBERG REDESIGN ============ -->
-  <section class="dobra dobra3-iceberg" aria-labelledby="prob-title">
+  <div id="dobra3-driver" aria-labelledby="prob-title">
+  <div id="dobra3-sticky">
 
-    <!-- SVG linhas conectoras (absolutas na seção) -->
-    <svg class="dobra3-lines" viewBox="0 0 1200 520" preserveAspectRatio="none" aria-hidden="true">
-      <!-- Linha esquerda: sai um pouco abaixo do topo do card esquerdo, vai reto ao centro -->
-      <path class="d3line d3line--left"  d="M 295 120 L 580 320"/>
-      <!-- Linha direita: sai do topo do card direito, faz curva até o centro -->
-      <path class="d3line d3line--right" d="M 905 80 Q 800 180 620 320"/>
+    <!-- BG fixo -->
+    <div class="dobra3-bg" aria-hidden="true"></div>
+    <div class="dobra3-overlay" aria-hidden="true"></div>
+
+    <!-- SVG linhas (aparecem com os cards) -->
+    <svg class="dobra3-lines" id="dobra3-lines" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true">
+      <!-- Esquerda: do meio-direita do card sobe em linha reta para o centro -->
+      <path class="d3line d3line--left"  d="M 376 379 L 590 300"/>
+      <!-- Direita: do meio do card aponta pra baixo em direção ao centro -->
+      <path class="d3line d3line--right" d="M 987 428 L 600 570"/>
     </svg>
 
-    <div class="wrap">
-
-      <!-- TOPO: texto da seção -->
-      <div class="dobra3-header reveal">
+    <!-- Título (some com o scroll) -->
+    <div class="dobra3-title-wrap" id="dobra3-title">
+      <div class="wrap">
         <span class="eyebrow">O problema</span>
         <h2 id="prob-title">O problema não é falta de tráfego.<br><span class="gold">É falta de captura.</span></h2>
         <p class="lead">Seu CRM só registra o que acontece depois da venda. Tudo o que acontece antes fica invisível.</p>
       </div>
+    </div>
 
-      <!-- CARDS -->
-      <div class="dobra3-cards">
+    <!-- Cards (sobem com o scroll) -->
+    <div class="dobra3-cards-outer" id="dobra3-cards">
+      <div class="wrap dobra3-cards">
 
         <!-- Card esquerdo: O que você vê -->
         <div class="d3card d3card--left reveal">
@@ -348,8 +354,10 @@
         </div>
 
       </div>
-    </div>
-  </section>
+    </div><!-- /dobra3-cards-outer -->
+
+  </div><!-- /dobra3-sticky -->
+  </div><!-- /dobra3-driver -->
 
   <!-- ============ DOBRA 4 — COMO FUNCIONA (CARD SLIDER) ============ -->
   <section id="how" aria-labelledby="how-title">
