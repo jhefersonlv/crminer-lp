@@ -68,24 +68,55 @@
   /* Centralizar card esquerdo: left 11% + width 75% = centro exato */
   .d3card--left  { left: 11%; }
 
-  /* Como Funciona: grid empilhado */
-  .how-grid {
+  /* Como Funciona: grid empilhado (conteúdo acima, imagem abaixo) */
+  #how {
+    height: auto;
+    padding: 76px 1.5rem 48px;
+    overflow: visible;
+  }
+
+  .how-content {
     grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 0 1.5rem;
+    gap: 32px;
+    padding: 0;
+    height: auto;
   }
 
-  /* Manter position relative para o z-index:2 funcionar */
   .how-left {
-    position: relative;
+    height: auto;
+    overflow: visible;
   }
 
-  /* Reduzir altura mínima do carrossel */
-  .how-cards-vp   { min-height: 360px; }
-  .how-cards-loop { min-height: 360px; }
+  .how-list-wrap {
+    margin-top: 20px;
+    flex: none;
+    height: auto;
+  }
+
+  .how-list {
+    gap: 16px;
+    justify-content: flex-start;
+  }
+
+  .how-desc-area {
+    margin-top: 20px;
+    height: 120px;
+  }
+
+  /* Imagem ocupa largura total com altura reduzida */
+  .how-right {
+    height: 320px;
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .how-slide {
+    height: 100%;
+    width: 100%;
+  }
 
   /* Heading menor no mobile */
-  .how-heading { font-size: clamp(2.8rem, 7.5vw, 4rem); }
+  .how-heading { font-size: clamp(2.2rem, 7.5vw, 3rem); }
 
   /* Rede tablet: ícones menores */
   .net-node {
@@ -181,11 +212,10 @@
   .d3card--left { left: 10%; }
 
   /* Como Funciona mobile */
-  .how-heading  { font-size: clamp(2.2rem, 8vw, 3rem); }
-  #how          { padding: 80px 0; }
-  .how-grid     { padding: 0 1rem; }
-  .how-cards-vp   { min-height: 300px; }
-  .how-cards-loop { min-height: 300px; }
+  .how-heading   { font-size: clamp(1.9rem, 8vw, 2.5rem); }
+  #how           { padding: 60px 1rem 32px; }
+  .how-right     { height: 240px; }
+  .how-desc-area { height: 140px; }
 
   /* Rede mobile: labels somem, só ícone */
   .net-node__label {

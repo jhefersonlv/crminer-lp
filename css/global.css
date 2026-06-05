@@ -1520,167 +1520,201 @@ header.scrolled {
 
 /* Cards menores no finale: controlado via JS inline styles (ver main.js startPhase2) */
 
-/* ---------- DOBRA 4 — COMO FUNCIONA (CARD LOOP) ---------- */
+/* ---------- DOBRA 4 — SCROLL-DRIVEN PIN "CADA SINAL SE TORNA UM LEAD" ---------- */
+
 #how {
-  padding: 120px 0;
+  height: 100vh;
+  padding: 0;
+  overflow: hidden;
+  /* border: none — GSAP pin cria o efeito de sticky */
+}
+
+/* ── Wrapper principal: duas colunas ── */
+.how-content {
+  width: 100%;
+  height: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 80px 4rem 48px; /* top=80: nav 72px + 8px gap */
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 72px;
+  align-items: stretch;
+}
+
+/* ── Coluna esquerda ── */
+.how-left {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   overflow: hidden;
 }
 
-.how-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.3fr;
-  column-gap: 6%;
-  padding: 0 4rem;
-  align-items: center;
-  max-width: var(--maxw);
-  margin: 0 auto;
-}
-
-.how-left {
-  position: relative;
-  z-index: 2;        /* fica acima do overflow dos cards da direita */
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 8px;
-}
-
-.how-left .eyebrow {
-  align-self: flex-start;  /* impede o flex de esticar o pill */
-}
-
-.how-heading {
-  font-size: clamp(3.6rem, 6.5vw, 6rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.0;
-  margin-top: 16px;
-  color: var(--text);
-}
-
-.how-nav {
-  display: flex;
-  gap: 12px;
-  margin-top: 32px;
-}
-
-.how-nav-btn {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  border: 1px solid var(--border-bright);
-  background: var(--card);
-  color: var(--text);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.2s var(--ease), background 0.2s var(--ease), transform 0.15s;
+.how-left-top {
   flex-shrink: 0;
 }
 
-.how-nav-btn svg { width: 20px; height: 20px; }
-
-.how-nav-btn:hover {
-  border-color: var(--gold);
-  background: rgba(255, 228, 80, 0.08);
-  transform: scale(1.06);
+.how-left-top .eyebrow {
+  display: inline-block;
 }
 
-.how-nav-btn:disabled {
-  opacity: 0.3;
-  cursor: default;
-  transform: none;
-}
-
-.how-counter {
-  margin-top: 20px;
-  font-size: 0.9rem;
-  color: var(--muted);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.how-count-cur {
+.how-heading {
+  font-size: clamp(2.4rem, 3.6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
   color: var(--text);
-  font-size: 1.05rem;
-  font-weight: 700;
+  margin-top: 14px;
 }
 
-.how-cards-vp {
-  position: relative;
-  z-index: 1;        /* cria stacking context — cards filhos ficam contidos aqui */
+/* ── Lista de etapas + barra fill ── */
+.how-list-wrap {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 500px;
-  overflow: visible;
-  cursor: grab;
+  gap: 18px;
+  margin-top: 28px;
+  flex: 1;
+  min-height: 0;
 }
 
-.how-cards-vp:active {
-  cursor: grabbing;
-}
-
-.how-cards-loop {
+/* trilha da barra */
+.how-fill-track {
+  width: 2px;
+  flex-shrink: 0;
+  align-self: stretch;
+  background: rgba(255, 228, 80, 0.13);
+  border-radius: 2px;
   position: relative;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 500px;
 }
 
-.how-cards-loop li {
+/* barra dourada que cresce via GSAP scaleY */
+.how-fill {
   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    var(--gold) 0%,
+    var(--gold-dark) 100%
+  );
+  border-radius: 2px;
+  transform-origin: top left;
+  transform: scaleY(0); /* GSAP controla */
+  box-shadow: 0 0 10px rgba(255, 228, 80, 0.45);
+}
+
+/* lista em si */
+.how-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
-.how-cards-loop li img {
-  display: block;
-  width: auto;
-  height: auto;
-  max-height: 65vh;
-  max-width: 100%;
-  border-radius: 1rem;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.45);
-  pointer-events: none;
+/* item da lista */
+.how-list-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* GSAP define a cor — não usar transition aqui */
+  color: rgba(182, 186, 198, 0.3);
+  cursor: default;
   user-select: none;
-  -webkit-user-select: none;
-  -webkit-user-drag: none;
 }
 
-.how-card__step {
-  font-size: 0.72rem;
+.how-list-num {
+  font-size: 0.6rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.1em;
+  min-width: 22px;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.8;
+}
+
+.how-list-title {
+  font-size: clamp(0.76rem, 1.05vw, 0.92rem);
+  font-weight: 700;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--gold);
-  display: block;
-  margin-bottom: 10px;
-}
-
-.how-card__body h3 {
-  font-size: clamp(1.2rem, 1.8vw, 1.45rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
   line-height: 1.2;
-  margin-bottom: 8px;
-  color: var(--text);
 }
 
-.how-card__body p {
-  font-size: 0.9rem;
+/* ── Área de descrição (abaixo da lista) ── */
+.how-desc-area {
+  flex-shrink: 0;
+  margin-top: 24px;
+  position: relative;
+  height: 88px; /* altura fixa — evita layout shift */
+}
+
+.how-desc-item {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.how-desc-text {
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  color: var(--text);
+  font-weight: 500;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.how-desc-destaque {
+  font-size: clamp(0.82rem, 1vw, 0.9rem);
   color: var(--muted);
   line-height: 1.6;
+  margin: 0;
+  padding-left: 12px;
+  border-left: 2px solid rgba(255, 228, 80, 0.38);
 }
+
+/* ── Coluna direita: imagens empilhadas ── */
+.how-right {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255, 228, 80, 0.09),
+    0 40px 90px -20px rgba(0, 0, 0, 0.7),
+    0 0 60px -24px rgba(255, 228, 80, 0.07);
+}
+
+/* cada slide: position absolute e preenche o container */
+.how-slide {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.how-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 20px;
+}
+
+/* bordas laterais internas suaves — evita corte brusco */
+.how-right::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+  z-index: 2;
+}
+
 
 /* ---------- DOBRA 5 — TIMELINE ---------- */
 .timeline-scroll {

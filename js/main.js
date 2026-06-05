@@ -171,82 +171,184 @@ setTimeout(function () {
 })();
 
 /* ============================================================
-   HOW IT WORKS — 3-card deck (prev/ativo/next) com GSAP + Draggable
+   DOBRA 4 — SCROLL-DRIVEN PIN "CADA SINAL SE TORNA UM LEAD"
+   Inspirado na referência GSAP: pin + scrub + lista progressiva
    ============================================================ */
 (function () {
-  var section = document.getElementById('how');
+  var section    = document.getElementById('how');
   if (!section) return;
 
-  var prevBtn = section.querySelector('.how-prev');
-  var nextBtn = section.querySelector('.how-next');
-  var curEl   = section.querySelector('.how-count-cur');
-  var vp      = section.querySelector('.how-cards-vp');
-  // Usa apenas os 5 cards únicos (primeiros 5 li)
-  var cards   = gsap.utils.toArray('.how-cards-loop li').slice(0, 5);
-  var total   = cards.length;
-  var current = 0;
-  var busy    = false;
+  var listItems  = gsap.utils.toArray('.how-list-item',  section);
+  var slides     = gsap.utils.toArray('.how-slide',      section);
+  var descs      = gsap.utils.toArray('.how-desc-item',  section);
+  var fill       = section.querySelector('.how-fill');
 
-  var isMobile     = window.innerWidth < 768;
-  var ACTIVE_SCALE = isMobile ? 1.3 : 2;
-  var PEEK_X       = isMobile ? 80  : 110;
-  var PEEK_SCALE   = 0.68;
-  var PEEK_OP      = 0.72;
-  var DUR         = 0.42;
-  var EASE        = 'power2.inOut';
+  if (!listItems.length || !slides.length) return;
 
-  // Estado inicial: todos invisíveis
-  gsap.set(cards, { opacity: 0, scale: 0, xPercent: 0, zIndex: 10 });
+  var total       = listItems.length;
+  var GOLD        = '#ffe450';
+  var MUTED       = 'rgba(182,186,198,0.28)';
 
-  function render(idx, animate) {
-    var p = ((idx - 1) + total) % total;
-    var n = (idx + 1) % total;
-    var dur = animate ? DUR : 0;
+  var mm = gsap.matchMedia();
 
-    // Esconde cards que não são prev/active/next
-    cards.forEach(function (c, i) {
-      if (i !== p && i !== idx && i !== n) {
-        gsap.to(c, { opacity: 0, scale: 0, duration: dur * 0.6, overwrite: true });
+  // Desktop (min-width: 769px): Scroll-driven pin layout
+  mm.add("(min-width: 769px)", function () {
+    // Reset any layout props from mobile
+    gsap.set(listItems, { clearProps: "all" });
+    gsap.set(slides, { clearProps: "all" });
+    gsap.set(descs, { clearProps: "all" });
+    gsap.set(fill, { clearProps: "all" });
+
+    // Initial state
+    gsap.set(fill, { scaleY: 1 / total, transformOrigin: 'top left' });
+    gsap.set(slides, { autoAlpha: 0, scale: 1.04 });
+    gsap.set(descs,  { autoAlpha: 0, y: 8 });
+
+    gsap.set(slides[0], { autoAlpha: 1, scale: 1 });
+    gsap.set(descs[0],  { autoAlpha: 1, y: 0 });
+
+    gsap.set(listItems, { color: MUTED });
+    gsap.set(listItems[0], { color: GOLD });
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start:   'top top',
+        end:     '+=' + (total * 90) + '%', /* 90% viewport per slide */
+        pin:     true,
+        scrub:   1,
+        anticipatePin: 1
       }
     });
 
-    gsap.to(cards[p],   { xPercent: -PEEK_X, scale: PEEK_SCALE,  opacity: PEEK_OP, zIndex: 50,  duration: dur, ease: EASE, overwrite: true });
-    gsap.to(cards[idx], { xPercent: 0,        scale: ACTIVE_SCALE, opacity: 1,       zIndex: 100, duration: dur, ease: EASE, overwrite: true,
-                          onComplete: function () { busy = false; } });
-    gsap.to(cards[n],   { xPercent: PEEK_X,   scale: PEEK_SCALE,  opacity: PEEK_OP, zIndex: 50,  duration: dur, ease: EASE, overwrite: true });
+    // Fill line grows
+    tl.to(fill, {
+      scaleY: 1,
+      ease: 'none',
+      duration: total - 1
+    }, 0);
 
-    if (curEl) curEl.textContent = String(idx + 1).padStart(2, '0');
-    current = idx;
-  }
+    // Transitions
+    for (var i = 1; i < total; i++) {
+      var prev      = listItems[i - 1];
+      var curr      = listItems[i];
+      var prevSlide = slides[i - 1];
+      var currSlide = slides[i];
+      var prevDesc  = descs[i - 1];
+      var currDesc  = descs[i];
 
-  function go(dir) {
-    if (busy) return;
-    busy = true;
-    render(((current + dir) + total) % total, true);
-  }
+      var startTime = i - 0.5;
 
-  // Render inicial sem animação
-  render(0, false);
+      tl.to(prev, { color: MUTED, duration: 0.3 }, startTime)
+        .to(curr, { color: GOLD, duration: 0.3 }, startTime)
+        .to(prevSlide, { autoAlpha: 0, scale: 1.04, duration: 0.3 }, startTime)
+        .fromTo(currSlide, { autoAlpha: 0, scale: 1.04 }, { autoAlpha: 1, scale: 1, duration: 0.3 }, startTime)
+        .to(prevDesc,  { autoAlpha: 0, y: -8, duration: 0.3 }, startTime)
+        .fromTo(currDesc,  { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.3 }, startTime);
+    }
 
-  nextBtn.addEventListener('click', function () { go(1); });
-  prevBtn.addEventListener('click', function () { go(-1); });
+    // Add brief pause at the end
+    tl.to({}, { duration: 0.5 });
 
-  // Swipe via pointer events — não move o container, só detecta direção
-  var swipeStartX = 0;
-  var swipeActive = false;
-
-  vp.addEventListener('pointerdown', function (e) {
-    swipeStartX = e.clientX;
-    swipeActive = true;
-    vp.setPointerCapture(e.pointerId);
+    return function() {
+      // Cleanup desktop
+    };
   });
 
-  vp.addEventListener('pointerup', function (e) {
-    if (!swipeActive) return;
-    swipeActive = false;
-    var delta = e.clientX - swipeStartX;
-    if (Math.abs(delta) > 45) go(delta < 0 ? 1 : -1);
-  });
+  // Mobile (max-width: 768px): Interactive tabs + auto rotation
+  mm.add("(max-width: 768px)", function () {
+    var activeIdx = 0;
+    var autoTimer = null;
 
-  vp.addEventListener('pointercancel', function () { swipeActive = false; });
+    // Reset styles
+    gsap.set(listItems, { clearProps: "all" });
+    gsap.set(slides, { clearProps: "all" });
+    gsap.set(descs, { clearProps: "all" });
+    gsap.set(fill, { clearProps: "all" });
+
+    function updateTabs(index, animate) {
+      activeIdx = index;
+
+      listItems.forEach(function (item, idx) {
+        gsap.to(item, {
+          color: idx === index ? GOLD : MUTED,
+          duration: animate ? 0.3 : 0
+        });
+      });
+
+      gsap.to(fill, {
+        scaleY: (index + 1) / total,
+        transformOrigin: 'top left',
+        duration: animate ? 0.3 : 0
+      });
+
+      slides.forEach(function (slide, idx) {
+        if (idx === index) {
+          gsap.fromTo(slide,
+            { autoAlpha: 0, scale: 1.04 },
+            { autoAlpha: 1, scale: 1, duration: animate ? 0.4 : 0 }
+          );
+        } else {
+          gsap.to(slide, {
+            autoAlpha: 0,
+            scale: 1.04,
+            duration: animate ? 0.4 : 0
+          });
+        }
+      });
+
+      descs.forEach(function (desc, idx) {
+        if (idx === index) {
+          gsap.fromTo(desc,
+            { autoAlpha: 0, y: 8 },
+            { autoAlpha: 1, y: 0, duration: animate ? 0.3 : 0 }
+          );
+        } else {
+          gsap.to(desc, {
+            autoAlpha: 0,
+            y: -8,
+            duration: animate ? 0.3 : 0
+          });
+        }
+      });
+    }
+
+    // Init state
+    updateTabs(0, false);
+
+    // Setup tap/click actions
+    listItems.forEach(function (item, idx) {
+      item.style.cursor = 'pointer';
+      item.onclick = function () {
+        stopAuto();
+        updateTabs(idx, true);
+      };
+    });
+
+    function startAuto() {
+      autoTimer = setInterval(function () {
+        var next = (activeIdx + 1) % total;
+        updateTabs(next, true);
+      }, 5000);
+    }
+
+    function stopAuto() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+    }
+
+    startAuto();
+
+    return function () {
+      stopAuto();
+      listItems.forEach(function (item) {
+        item.style.cursor = '';
+        item.onclick = null;
+      });
+    };
+  });
 })();
+
+
