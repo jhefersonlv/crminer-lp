@@ -919,7 +919,6 @@ header.scrolled {
 
 .dobra-white {
   background: #FFFFFF;
-  height: 100vh;
 }
 
 /* Textos principais */
@@ -1875,7 +1874,8 @@ header.scrolled {
 }
 .person-icon--active { background: var(--gold); }
 .imp-persons--glow .person-icon--active {
-  box-shadow: 0 0 6px rgba(255, 200, 0, 0.6);
+  
+  background:var(--gold);
 }
 
 /* ── Cards de comparação ── */
