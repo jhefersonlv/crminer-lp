@@ -41,6 +41,23 @@
     max-width: none;
   }
 
+  /* Dobra 2: empilhar rede + texto em coluna única */
+  .dobra2-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .network-wrap {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* Texto da dobra 2 volta a centralizar quando empilhado */
+  .dobra2-right .section-head,
+  .dobra2-right .signals-close {
+    text-align: center;
+  }
+
   .scene {
     max-width: 440px;
     margin: 0 auto;
@@ -50,8 +67,68 @@
     display: none;
   }
 
-  /* Hero: esconder cards desktop no mobile */
-  .hero-cards { display: none; }
+  /* Nav mobile: botão menor e logo sem distorção/esticado */
+  .nav-cta .btn {
+    padding: 7px 14px;
+    font-size: 0.82rem;
+  }
+  .brand { flex-shrink: 0; }
+  .brand img {
+    height: 22px;
+    width: auto;
+    object-fit: contain;
+  }
+  .nav-cta { flex-shrink: 0; }
+
+  /* Hero mobile: overlay escurece o hero atrás dos cards */
+  .hero-mobile-overlay {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    background: rgba(10, 11, 14, 0.9);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;            /* controlado via GSAP em hero.js */
+    pointer-events: none;
+  }
+
+  /* Hero mobile: cards empilhados no centro da tela, sobre o overlay.
+     inset:0 faz o container preencher todo o hero, então o flex centraliza. */
+  .hero-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    inset: 0;
+    width: auto;
+    max-width: none;
+    height: auto;
+    gap: 10px;
+    padding: 24px;
+    z-index: 6;            /* acima do overlay (5) e do conteúdo (4) */
+    pointer-events: none;
+  }
+
+  /* Cada card volta ao fluxo normal (desfaz o empilhamento absoluto do desktop) e fica menor */
+  .hero-cards .hero-card {
+    position: static;
+    height: auto;
+    min-height: 0;
+    width: 100%;
+    max-width: 280px;
+    padding: 11px 16px;
+    gap: 12px;
+  }
+
+  .hero-card-number {
+    font-size: 1.5rem;
+  }
+
+  .hero-card-label {
+    font-size: 0.8rem;
+  }
 
   /* Hero: desfazer o layout que empurra conteúdo p/ esquerda */
   .hero-content.anim-active {
@@ -63,51 +140,109 @@
   .hero-content.anim-active .hero-actions { justify-content: center; }
   .hero-content.anim-active .hc-lead      { margin-left: auto; }
 
-  /* Dobra 3: esconder card direito (evita sobreposição em telas estreitas) */
-  .d3card--right { display: none; }
-  /* Centralizar card esquerdo: left 11% + width 75% = centro exato */
-  .d3card--left  { left: 11%; }
+  /* Dobra 3: os dois cards no mesmo ponto (centro), exibidos em sequência via main.js.
+     Centralização por margin:auto (sem transform), pois no mobile o GSAP anima só a opacidade. */
+  .d3card--right { display: block; }
+  .d3card {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 84%;
+    max-width: 360px;
+    height: fit-content;
+    max-height: 84vh;
+    overflow-y: auto;
+    transform: none;
+  }
 
-  /* Como Funciona: grid empilhado (conteúdo acima, imagem abaixo) */
+  /* Card direito ("O que você não vê") tem 8 linhas — compactar para caber e não estourar */
+  .d3card--right { padding: 16px 14px 12px; }
+  .d3card--right .d3card-head { margin-bottom: 10px; gap: 10px; }
+  .d3card--right .d3card-icon { width: 32px; height: 32px; }
+  .d3card--right .d3card-icon svg { width: 16px; height: 16px; }
+  .d3card--right .d3card-title { font-size: 0.85rem; }
+  .d3card--right .d3card-rows { gap: 4px; }
+  .d3card--right .d3row { padding: 5px 8px; gap: 7px; }
+  .d3card--right .d3row-icon { width: 15px; height: 15px; }
+  .d3card--right .d3row-icon svg { width: 14px; height: 14px; }
+  .d3card--right .d3row-label { font-size: 0.7rem; }
+  .d3card--right .d3not { font-size: 0.62rem; }
+  .d3card--right .d3card-footer { margin-top: 10px; padding-top: 9px; font-size: 0.74rem; }
+
+  /* Dobra 3 timeline: cards de estágio (Interesse, Visita...) menores p/ caber ao lado da linha */
+  .tl-stage-card { width: 38vw; max-width: 150px; }
+  .tl-card--right { left: calc(50% + 16px); }
+  .tl-card--left  { right: calc(50% + 16px); }
+  .tl-stage-card p { font-size: 0.62rem; line-height: 1.35; }
+
+  /* Badges "CRM TRADICIONAL" e "crminer": menores e mais à esquerda p/ não encavalar nos cards */
+  .tl-crm-badge,
+  .tl-crm-badge-crminer { left: 3%; }
+  .tl-crm-badge span,
+  .tl-crm-badge-crminer span { font-size: 0.55rem; letter-spacing: 0.05em; }
+  .tl-crm-badge .tl-crm-sub,
+  .tl-crm-badge-crminer .tl-crm-sub { font-size: 0.48rem !important; }
+  /* Desce o badge "crminer" (linha permanece no lugar) */
+  .tl-crm-badge-crminer { bottom: 2%; }
+
+  /* Títulos "A venda é só a ponta / o crminer minera tudo que vem antes" — menores p/ caber */
+  .d3-p2-text { font-size: 1.35rem; }
+  .d3-finale-h2 {
+    font-size: 1.15rem;
+    white-space: normal;
+    width: 88%;
+    max-width: 340px;
+  }
+
+  /* Como Funciona: layout fixo de 100vh, scroll-driven (pin via GSAP — igual ao desktop).
+     Empilhado: texto em cima, imagem preenche o espaço restante. */
   #how {
-    height: auto;
-    padding: 76px 1.5rem 48px;
-    overflow: visible;
+    height: 100vh;
+    min-height: 560px;
+    padding: 72px 1.25rem 18px;
+    overflow: hidden;
   }
 
   .how-content {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: none;
+    gap: 14px;
     padding: 0;
-    height: auto;
+    height: 100%;
   }
 
   .how-left {
     height: auto;
     overflow: visible;
+    flex-shrink: 0;
   }
 
   .how-list-wrap {
-    margin-top: 20px;
+    margin-top: 14px;
     flex: none;
     height: auto;
   }
 
   .how-list {
-    gap: 16px;
+    gap: 10px;
     justify-content: flex-start;
   }
 
   .how-desc-area {
-    margin-top: 20px;
-    height: 120px;
+    margin-top: 14px;
+    height: 84px;
   }
 
-  /* Imagem ocupa largura total com altura reduzida */
+  /* Imagem preenche o espaço restante abaixo do texto */
   .how-right {
-    height: 320px;
+    flex: 1;
+    min-height: 150px;
     width: 100%;
-    margin-top: 12px;
+    height: auto;
+    margin-top: 0;
   }
 
   .how-slide {
@@ -116,7 +251,7 @@
   }
 
   /* Heading menor no mobile */
-  .how-heading { font-size: clamp(2.2rem, 7.5vw, 3rem); }
+  .how-heading { font-size: clamp(1.7rem, 6.2vw, 2.4rem); margin-top: 10px; }
 
   /* Rede tablet: ícones menores */
   .net-node {
@@ -172,28 +307,59 @@
     grid-template-columns: 1fr;
   }
 
+  /* Benefícios: grade de 2 colunas no mobile (5º card centralizado na última linha) */
   .benefits {
     grid-template-columns: repeat(2, 1fr);
-    gap: 22px;
+    gap: 12px;
+    max-width: 420px;
   }
-
-  .benefits .benefit:last-child {
+  .benefit {
+    padding: 20px 12px;
+    gap: 12px;
+  }
+  .benefit span { font-size: 0.78rem; }
+  .benefit:last-child {
     grid-column: 1 / -1;
+    width: calc(50% - 6px);
+    margin: 0 auto;
   }
 
-  .impact-flow .arrow {
+  /* Impacto: empilhar o fluxo na vertical (cards um sobre o outro) */
+  .imp-flow {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .imp-panel-group {
+    max-width: 320px;
+    width: 100%;
+  }
+
+  .imp-arrow {
     transform: rotate(90deg);
+    padding-top: 0;
+    align-self: center;
   }
 
-  .cta-box {
-    padding: 52px 24px;
+  /* CTA final: empilhar (imagem em cima, conteúdo embaixo) e centralizar tudo */
+  .cta-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    max-width: 480px;
   }
+  .cta-content { align-items: center; }
+  .cta-content h2,
+  .cta-content .lead { text-align: center; }
+  .cta-content .cta-actions { align-items: center; }
 
   .foot-bar {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
   }
+  .foot-bar img { flex-shrink: 0; width: auto; object-fit: contain; }
 }
 
 /* ---------- MOBILE (430px e abaixo) ---------- */
@@ -207,15 +373,24 @@
     width: 100%;
   }
 
-  /* Dobra 3 mobile: card único um pouco mais largo, centralizado */
-  .d3card       { width: 80%; padding: 16px 14px 12px; }
-  .d3card--left { left: 10%; }
+  /* Dobra 3 mobile: padding um pouco menor (centralização herdada do bloco 768px) */
+  .d3card { padding: 20px 16px 16px; }
 
-  /* Como Funciona mobile */
-  .how-heading   { font-size: clamp(1.9rem, 8vw, 2.5rem); }
-  #how           { padding: 60px 1rem 32px; }
-  .how-right     { height: 240px; }
-  .how-desc-area { height: 140px; }
+  /* Header: botão primário ainda mais compacto + logo menor em telas estreitas */
+  .nav-cta .btn {
+    padding: 6px 12px;
+    font-size: 0.76rem;
+  }
+  .brand img { height: 20px; }
+
+  /* Footer: respiro vertical reduzido */
+  footer { padding: 60px 0 40px; }
+  .foot-quote { margin-bottom: 44px; }
+
+  /* Como Funciona mobile (mantém 100vh + pin; só compacta texto/paddings) */
+  .how-heading   { font-size: clamp(1.5rem, 7vw, 2.1rem); }
+  #how           { padding: 64px 1rem 14px; }
+  .how-desc-area { height: 78px; }
 
   /* Rede mobile: labels somem, só ícone */
   .net-node__label {

@@ -180,6 +180,11 @@
   justify-content: flex-start;
 }
 
+/* ── Overlay mobile (escurece o hero quando os cards sobem) — oculto no desktop ── */
+.hero-mobile-overlay {
+  display: none;
+}
+
 /* ── Metric cards — right side stack, all visible ── */
 .hero-cards {
   position: absolute;
