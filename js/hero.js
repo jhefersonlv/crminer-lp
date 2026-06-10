@@ -9,6 +9,9 @@
 
   var isMobile     = window.innerWidth < 768;
 
+  // Mobile: hero estático — sem animação scroll-driven (cards/overlay/finale ficam ocultos via CSS)
+  if (isMobile) return;
+
   var content      = driver.querySelector('.hero-content');
   var cards        = gsap.utils.toArray('#hero-sticky .hero-card');
   var finaleEl     = driver.querySelector('.hero-finale');

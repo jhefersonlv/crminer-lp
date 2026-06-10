@@ -80,65 +80,28 @@
   }
   .nav-cta { flex-shrink: 0; }
 
-  /* Hero mobile: overlay escurece o hero atrás dos cards */
-  .hero-mobile-overlay {
-    display: block;
-    position: absolute;
-    inset: 0;
-    z-index: 5;
-    background: rgba(10, 11, 14, 0.9);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    opacity: 0;            /* controlado via GSAP em hero.js */
-    pointer-events: none;
-  }
-
-  /* Hero mobile: cards empilhados no centro da tela, sobre o overlay.
-     inset:0 faz o container preencher todo o hero, então o flex centraliza. */
-  .hero-cards {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    inset: 0;
-    width: auto;
-    max-width: none;
-    height: auto;
-    gap: 10px;
-    padding: 24px;
-    z-index: 6;            /* acima do overlay (5) e do conteúdo (4) */
-    pointer-events: none;
-  }
-
-  /* Cada card volta ao fluxo normal (desfaz o empilhamento absoluto do desktop) e fica menor */
-  .hero-cards .hero-card {
+  /* Hero mobile: ESTÁTICO (sem animação scroll-driven).
+     Colapsa o driver de 5000px e mostra só o conteúdo, centralizado em 1 tela. */
+  #hero-scroll-driver { height: auto; }
+  #hero-sticky {
     position: static;
     height: auto;
-    min-height: 0;
-    width: 100%;
-    max-width: 280px;
-    padding: 11px 16px;
-    gap: 12px;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+  .hero-content {
+    position: relative;
+    inset: auto;
+    min-height: 100vh;
+    padding: 100px 6vw 72px;
   }
 
-  .hero-card-number {
-    font-size: 1.5rem;
+  /* Elementos que só existem para a animação ficam ocultos no mobile */
+  .hero-cards,
+  .hero-mobile-overlay,
+  .hero-finale {
+    display: none;
   }
-
-  .hero-card-label {
-    font-size: 0.8rem;
-  }
-
-  /* Hero: desfazer o layout que empurra conteúdo p/ esquerda */
-  .hero-content.anim-active {
-    padding-left: 5vw;
-    padding-right: 5vw;
-    align-items: center;
-    text-align: center;
-  }
-  .hero-content.anim-active .hero-actions { justify-content: center; }
-  .hero-content.anim-active .hc-lead      { margin-left: auto; }
 
   /* Dobra 3: os dois cards no mesmo ponto (centro), exibidos em sequência via main.js.
      Centralização por margin:auto (sem transform), pois no mobile o GSAP anima só a opacidade. */
@@ -307,22 +270,20 @@
     grid-template-columns: 1fr;
   }
 
-  /* Benefícios: grade de 2 colunas no mobile (5º card centralizado na última linha) */
+  /* Benefícios: 5 numa única linha também no mobile, bem compacto/sutil */
   .benefits {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    max-width: 420px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    max-width: 100%;
+    margin-top: 36px;
   }
   .benefit {
-    padding: 20px 12px;
-    gap: 12px;
+    padding: 4px 2px;
+    gap: 6px;
   }
-  .benefit span { font-size: 0.78rem; }
-  .benefit:last-child {
-    grid-column: 1 / -1;
-    width: calc(50% - 6px);
-    margin: 0 auto;
-  }
+  .benefit .ic { width: 30px; height: 30px; border-radius: 8px; }
+  .benefit .ic svg { width: 14px; height: 14px; }
+  .benefit span { font-size: 0.58rem; line-height: 1.25; }
 
   /* Impacto: empilhar o fluxo na vertical (cards um sobre o outro) */
   .imp-flow {
@@ -352,6 +313,8 @@
   .cta-content h2,
   .cta-content .lead { text-align: center; }
   .cta-content .cta-actions { align-items: center; }
+  .micro { font-size: 0.72rem; }
+  .micro .sep { margin: 0 5px; }
 
   .foot-bar {
     flex-direction: column;

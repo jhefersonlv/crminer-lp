@@ -2200,26 +2200,27 @@ header.scrolled {
 .benefits {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-  max-width: 920px;
-  margin: 56px auto 0;
+  align-items: start;       /* todos os cards alinhados pelo topo → ícones na mesma linha */
+  gap: 10px;
+  max-width: 720px;
+  margin: 44px auto 0;
 }
 
 .benefit {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
-  gap: 14px;
-  padding: 8px;
+  gap: 9px;
+  padding: 6px;
   cursor: default;
 }
 
 .benefit .ic {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
   background: var(--card);
   border: 1px solid var(--border);
   display: flex;
@@ -2236,14 +2237,14 @@ header.scrolled {
 }
 
 .benefit .ic svg {
-  width: 22px;
-  height: 22px;
+  width: 17px;
+  height: 17px;
 }
 
 .benefit span {
-  font-size: 0.84rem;
+  font-size: 0.74rem;
   font-weight: 600;
-  color: var(--text);
+  color: var(--muted);
   line-height: 1.3;
 }
 
