@@ -66,7 +66,7 @@
         '<p class="crm-consent__title">Bora deixar sua visita melhor?</p>' +
         '<p class="crm-consent__text">' +
           'Com seu aceite, a gente entende como você usa o site e deixa tudo mais rápido e relevante pra você. ' +
-          'Você muda quando quiser. Veja a <a href="privacidade.html#cookies">Política de Privacidade</a>.' +
+          'Você muda quando quiser. Veja a <a href="/privacidade#cookies">Política de Privacidade</a>.' +
         '</p>' +
       '</div>' +
       '<div class="crm-consent__actions">' +
