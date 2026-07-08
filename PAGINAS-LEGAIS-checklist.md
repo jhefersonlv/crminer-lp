@@ -26,7 +26,7 @@
 ## 3. Publicação e rotas
 
 - [x] Definir as URLs finais: `crminer.com.br/termos`, `/privacidade` e `/anexo-de-dados` (arquivos locais: `termos.html`, `privacidade.html` e `dpa.html`).
-- [x] **Linkar no rodapé do site** (`index.html`) para `/termos`, `/privacidade` e `/anexo-de-dados`.
+- [x] **Linkar no rodapé do site** (`index.html`) para `termos.html`, `privacidade.html` e `dpa.html`, abrindo em nova aba, até configurar as rotas finais no servidor.
 - [ ] Apontar os links do **signup** (app) para estas páginas (gap #10/#11 do produto).
 
 ## 4. Embed como iframe/modal
