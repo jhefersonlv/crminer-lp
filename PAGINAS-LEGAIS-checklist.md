@@ -1,20 +1,19 @@
-# Páginas legais (termos.html / privacidade.html) — checklist
+# Páginas legais (termos.html / privacidade.html / dpa.html) — checklist
 
-> Criadas como **páginas prontas** (branco + logo crminer, CSS embutido, prontas pra abrir como iframe/modal). O conteúdo veio dos rascunhos do cofre (`Termos de Uso.md`, `Política de Privacidade.md`).
+> Criadas como **páginas prontas** (branco + logo crminer, CSS embutido, prontas pra abrir como iframe/modal). O conteúdo veio dos rascunhos do cofre (`Termos de Uso.md`, `Política de Privacidade.md`, `DPA — Anexo de Tratamento de Dados.md`).
 >
 > ⚠️ **ANTES DE PUBLICAR: validar todo o conteúdo com advogado(a)/DPO.** São rascunhos juridicamente não revisados.
 
-## 1. Preencher os placeholders (marcados em amarelo nas páginas)
+## 1. Dados preenchidos nas páginas
 
-Procure os trechos com fundo amarelo `[ASSIM]` e substitua:
-
-- [ ] **[RAZÃO SOCIAL]** — razão social da empresa do crminer · em `termos.html` (1.1) e `privacidade.html` (1.1)
-- [ ] **[CNPJ]** — CNPJ da empresa · `termos.html` (1.1) e `privacidade.html` (1.1)
-- [ ] **[E-MAIL DE SUPORTE]** — e-mail de suporte · `termos.html` em 3 lugares (3.2, 6.4, 12.3)
-- [ ] **[CIDADE/UF DO FORO]** — foro eleito · `termos.html` (12.2)
-- [ ] **[NOME DO ENCARREGADO]** — nome do Encarregado (DPO) · `privacidade.html` (10)
-- [ ] **[DATA DE VIGÊNCIA]** — data em que as páginas entram em vigor · topo das duas páginas
-- [ ] Conferir o ano do rodapé (`© 2026 crminer`) e a **Versão 1.0**.
+- [x] **Razão social** — `CRMINER DATA INTELLIGENCE LTDA` · em `termos.html` (1.1) e `privacidade.html` (1.1)
+- [x] **CNPJ** — `67.874.516/0001-36` · `termos.html` (1.1) e `privacidade.html` (1.1)
+- [x] **E-mail de suporte** — `contato@crminer.com.br` · `termos.html` (3.2, 6.4, 12.3)
+- [x] **Foro eleito** — Comarca da Capital do Estado de São Paulo · `termos.html` (12.2)
+- [x] **Canal de privacidade** — `privacidade@crminer.com.br` · `privacidade.html` (10)
+- [x] **Data de vigência** — 06/07/2026 · topo das páginas legais
+- [x] **DPA / Anexo de Dados** — `dpa.html` criado e linkado nos Termos.
+- [x] Conferir o ano do rodapé (`© 2026 crminer`) e a **Versão 1.0**.
 
 ## 2. Confirmar / validar com jurídico
 
@@ -26,18 +25,18 @@ Procure os trechos com fundo amarelo `[ASSIM]` e substitua:
 
 ## 3. Publicação e rotas
 
-- [ ] Definir as URLs finais (ex.: `crminer.com.br/termos` e `/privacidade` — hoje os arquivos são `termos.html` e `privacidade.html`).
-- [ ] **Linkar no rodapé do site** (`index.html`) para `/termos` e `/privacidade`.
+- [ ] Definir as URLs finais (ex.: `crminer.com.br/termos`, `/privacidade` e `/anexo-de-dados` — hoje os arquivos são `termos.html`, `privacidade.html` e `dpa.html`).
+- [x] **Linkar no rodapé do site** (`index.html`) para `termos.html`, `privacidade.html` e `dpa.html`.
 - [ ] Apontar os links do **signup** (app) para estas páginas (gap #10/#11 do produto).
 
 ## 4. Embed como iframe/modal
 
-- [ ] As páginas são **auto-contidas** (CSS inline, sem JS) — abrem direto em `<iframe>`.
+- [x] As páginas são **auto-contidas** (CSS inline, sem JS) — abrem direto em `<iframe>`.
 - [ ] Para embutir em **outro domínio** (ex.: `linkminer.app`), configurar no servidor o header **`Content-Security-Policy: frame-ancestors 'self' https://*.crminer.com.br https://linkminer.app`** (sem isso, o navegador pode bloquear o enquadramento).
 - [ ] O **termo de consentimento por loja** (com nome da loja injetado) é outra página, servida pelo produto em `linkminer.app/{nomedocliente}/termo` — não está aqui (ver `Kit LGPD — Plano de Implementação` no cofre).
 
 ## 5. Manutenção
 
-- [ ] **Fonte única:** se editar o texto, manter sincronizado com os `.md` do cofre (`Termos de Uso.md`, `Política de Privacidade.md`) — ou eleger um dos dois como fonte.
-- [ ] Logo usado: `assets/logo/logo_black.png` (escuro sobre branco). Trocar se quiser outra versão.
-- [ ] Conferir que não voltou nenhum "wordvirtua"/"orbit".
+- [x] **Fonte única:** alterações sincronizadas com os `.md` do cofre (`Termos de Uso.md`, `Política de Privacidade.md`, `DPA — Anexo de Tratamento de Dados.md`).
+- [x] Logo usado: `assets/logo/logo_black.png` (escuro sobre branco).
+- [x] Conferir que não voltou nenhum "wordvirtua"/"orbit".
