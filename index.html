@@ -94,6 +94,17 @@
       <!-- Cinematic depth mask -->
       <div class="hero-depth-mask" aria-hidden="true"></div>
 
+      <!-- Product mockups carousel -->
+      <div class="hero-mockups" aria-hidden="true">
+        <div class="hero-mockups__glow"></div>
+        <div class="hero-mockups__stage">
+          <img class="hero-mockup is-center" src="assets/mock01.png" alt="" draggable="false" data-mockup-index="0" />
+          <img class="hero-mockup is-right" src="assets/mock02.png" alt="" draggable="false" data-mockup-index="1" />
+          <img class="hero-mockup is-back" src="assets/mock03.png" alt="" draggable="false" data-mockup-index="2" />
+          <img class="hero-mockup is-left" src="assets/mock04.png" alt="" draggable="false" data-mockup-index="3" />
+        </div>
+      </div>
+
       <!-- Signal canvas (dots + connections + labels) -->
       <canvas id="hero-signals-canvas" aria-hidden="true"></canvas>
 
@@ -106,13 +117,14 @@
         <p class="hc-lead">
           O movimento existe. O interesse também. <br/> O que falta é uma forma de transformar visitas em relacionamento.
         </p>
-        <form class="hero-actions hero-linkform" data-linkminer-form action="https://app.crminer.com.br/signup">
+        <form class="hero-actions hero-linkform" data-linkminer-form action="https://app.crminer.com.br/signup" method="get">
           <label class="hero-linkbox" aria-label="Escolha o endereço do seu linkminer">
             <span class="hero-linkbox-prefix">linkminer.app/</span>
-            <input class="hero-linkbox-input" type="text" name="linkminer" autocomplete="off" inputmode="url" spellcheck="false" aria-label="Nome desejado para o seu linkminer" />
+            <input class="hero-linkbox-input" type="text" name="linkminer" autocomplete="off" inputmode="text" spellcheck="false" maxlength="42" placeholder="sua-loja" aria-label="Nome desejado para o seu linkminer" />
           </label>
           <button class="btn btn-primary hero-linkbox-cta" type="submit" data-cta="hero-linkminer" aria-label="Criar meu linkminer">Criar meu linkminer</button>
         </form>
+        <p class="hero-proof">14 dias grátis. Sem cartão. Seu link pronto em minutos.</p>
       </div>
 
     </div>
