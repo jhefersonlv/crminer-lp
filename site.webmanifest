@@ -1,14 +1,17 @@
 {
+  "id": "/",
   "name": "crminer",
   "short_name": "crminer",
-  "description": "Capture visitantes, QR Codes e interacoes digitais como oportunidades reais para o seu negocio.",
+  "description": "Capture visitantes, QR Codes e interações digitais como oportunidades reais para o seu negócio.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "orientation": "portrait-primary",
-  "background_color": "#121417",
-  "theme_color": "#121417",
-  "categories": ["business", "productivity"],
+  "background_color": "#F7F3EA",
+  "theme_color": "#1E242B",
+  "categories": [
+    "business",
+    "productivity"
+  ],
   "lang": "pt-BR",
   "icons": [
     {
@@ -21,23 +24,25 @@
       "src": "/assets/logo/logo_icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/assets/logo/logo_white.png",
-      "sizes": "1482x288",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Logo crminer branco"
+      "purpose": "any"
     },
     {
-      "src": "/assets/logo/logo_black.png",
-      "sizes": "1482x285",
+      "src": "/assets/logo/icon-192.png",
+      "sizes": "192x192",
       "type": "image/png",
-      "form_factor": "wide",
-      "label": "Logo crminer preto"
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/logo/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/logo/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

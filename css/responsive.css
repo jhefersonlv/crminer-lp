@@ -80,29 +80,6 @@
   }
   .nav-cta { flex-shrink: 0; }
 
-  /* Hero mobile: ESTÁTICO (sem animação scroll-driven).
-     Colapsa o driver de 5000px e mostra só o conteúdo, centralizado em 1 tela. */
-  #hero-scroll-driver { height: auto; }
-  #hero-sticky {
-    position: static;
-    height: auto;
-    min-height: 100vh;
-    overflow: hidden;
-  }
-  .hero-content {
-    position: relative;
-    inset: auto;
-    min-height: 100vh;
-    padding: 100px 6vw 72px;
-  }
-
-  /* Elementos que só existem para a animação ficam ocultos no mobile */
-  .hero-cards,
-  .hero-mobile-overlay,
-  .hero-finale {
-    display: none;
-  }
-
   /* Dobra 3: os dois cards no mesmo ponto (centro), exibidos em sequência via main.js.
      Centralização por margin:auto (sem transform), pois no mobile o GSAP anima só a opacidade. */
   .d3card--right { display: block; }
@@ -150,7 +127,7 @@
   /* Desce o badge "crminer" (linha permanece no lugar) */
   .tl-crm-badge-crminer { bottom: 2%; }
 
-  /* Títulos "A venda é só a ponta / o crminer minera tudo que vem antes" — menores p/ caber */
+  /* Títulos "A venda é só a ponta / o crminer captura tudo que vem antes" — menores p/ caber */
   .d3-p2-text { font-size: 1.35rem; }
   .d3-finale-h2 {
     font-size: 1.15rem;
@@ -159,62 +136,74 @@
     max-width: 340px;
   }
 
-  /* Como Funciona: layout fixo de 100vh, scroll-driven (pin via GSAP — igual ao desktop).
-     Empilhado: texto em cima, imagem preenche o espaço restante. */
+  /* Como Funciona: cards sticky compactos. */
   #how {
-    height: 100vh;
-    min-height: 560px;
-    padding: 72px 1.25rem 18px;
-    overflow: hidden;
+    padding: 84px 0 72px;
+    overflow: visible;
   }
 
   .how-content {
-    display: flex;
-    flex-direction: column;
-    grid-template-columns: none;
-    gap: 14px;
-    padding: 0;
-    height: 100%;
+    padding: 0 1.15rem;
   }
 
-  .how-left {
+  .how-heading {
+    font-size: clamp(1.9rem, 6vw, 2.8rem);
+    line-height: 1.08;
+  }
+
+  .how-head {
+    margin-bottom: 28px;
+  }
+
+  .how-stack {
+    gap: 24vh;
+  }
+
+  .how-step-card {
+    position: sticky;
+    top: 84px;
     height: auto;
-    overflow: visible;
-    flex-shrink: 0;
+    min-height: min(620px, calc(100vh - 102px));
+    max-height: none;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 18px;
+    border-radius: 24px;
   }
 
-  .how-list-wrap {
-    margin-top: 14px;
-    flex: none;
-    height: auto;
-  }
-
-  .how-list {
-    gap: 10px;
-    justify-content: flex-start;
-  }
-
-  .how-desc-area {
-    margin-top: 14px;
-    height: 84px;
-  }
-
-  /* Imagem preenche o espaço restante abaixo do texto */
-  .how-right {
-    flex: 1;
-    min-height: 150px;
-    width: 100%;
-    height: auto;
+  .how-step-card + .how-step-card {
     margin-top: 0;
   }
 
-  .how-slide {
-    height: 100%;
-    width: 100%;
+  .how-card-copy {
+    gap: 14px;
+    padding: 0;
+    height: auto;
+    align-self: stretch;
   }
 
-  /* Heading menor no mobile */
-  .how-heading { font-size: clamp(1.7rem, 6.2vw, 2.4rem); margin-top: 10px; }
+  .how-card-num {
+    font-size: clamp(2.4rem, 12vw, 5.5rem);
+  }
+
+  .how-card-copy h3 {
+    margin-top: 0;
+    font-size: clamp(1.25rem, 4vw, 2rem);
+  }
+
+  .how-card-copy p {
+    font-size: 0.86rem;
+  }
+
+  .how-card-media {
+    aspect-ratio: 1448 / 1086;
+    height: auto;
+    max-height: min(48vh, 380px);
+  }
+
+  .how-card-media img {
+    border-radius: 20px;
+  }
 
   /* Rede tablet: ícones menores */
   .net-node {
@@ -361,10 +350,22 @@
   footer { padding: 60px 0 40px; }
   .foot-quote { margin-bottom: 44px; }
 
-  /* Como Funciona mobile (mantém 100vh + pin; só compacta texto/paddings) */
-  .how-heading   { font-size: clamp(1.5rem, 7vw, 2.1rem); }
-  #how           { padding: 64px 1rem 14px; }
-  .how-desc-area { height: 78px; }
+  /* Como Funciona mobile: cards em uma coluna. */
+  #how { padding: 72px 0 60px; }
+  .how-content { padding: 0 0.85rem; }
+  .how-heading { font-size: clamp(1.65rem, 8vw, 2.18rem); }
+  .how-step-card {
+    top: 72px;
+    min-height: min(560px, calc(100vh - 86px));
+    padding: 14px;
+    border-radius: 20px;
+  }
+  .how-step-card + .how-step-card { margin-top: 0; }
+  .how-card-copy { gap: 10px; }
+  .how-card-copy h3 { font-size: 1.22rem; }
+  .how-card-copy p { font-size: 0.78rem; line-height: 1.42; }
+  .how-card-media { max-height: min(38vh, 280px); }
+  .how-card-media img { border-radius: 16px; }
 
   /* Rede mobile: labels somem, só ícone */
   .net-node__label {
@@ -416,5 +417,25 @@
 
   .section-cta {
     margin-top: 36px;
+  }
+}
+
+/* Light Craft: ajustes finais do hero mobile ficam em hero.css. */
+@media (max-width: 768px) {
+  #hero-scroll-driver {
+    height: auto;
+  }
+
+  #hero-sticky {
+    position: relative;
+    height: auto;
+    min-height: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    inset: auto;
+    min-height: auto;
+    padding: 102px 18px 28px;
   }
 }
