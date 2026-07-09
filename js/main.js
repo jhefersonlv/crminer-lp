@@ -8,15 +8,83 @@ gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
 gsap.ticker.lagSmoothing(0);
 lenis.on('scroll', ScrollTrigger.update);
 
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+function rgbaVar(name, alpha) {
+  return 'rgba(' + cssVar(name) + ',' + alpha + ')';
+}
+
 /* ============================================================
-   STICKY HEADER — aparece após 100px de scroll
+   STICKY HEADER — some ao rolar para baixo e volta ao rolar para cima
    ============================================================ */
 (function () {
   var header = document.getElementById('site-header');
   if (!header) return;
-  function onScroll() { header.classList.toggle('scrolled', window.scrollY > 100); }
+
+  var lastY = window.scrollY || 0;
+  var threshold = 12;
+
+  function onScroll() {
+    var currentY = window.scrollY || 0;
+    var delta = currentY - lastY;
+
+    header.classList.toggle('scrolled', currentY > 100);
+
+    if (currentY <= 80) {
+      header.classList.remove('nav-hidden');
+    } else if (Math.abs(delta) > threshold) {
+      header.classList.toggle('nav-hidden', delta > 0);
+      lastY = currentY;
+      return;
+    }
+
+    lastY = currentY;
+  }
+
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+})();
+
+/* ============================================================
+   HERO LINKMINER — mascara slug e redireciona para cadastro
+   ============================================================ */
+(function () {
+  var form = document.querySelector('[data-linkminer-form]');
+  if (!form) return;
+
+  var input = form.querySelector('input[name="linkminer"]');
+  var signupUrl = form.getAttribute('action') || 'https://app.crminer.com.br/signup';
+
+  function slugify(value) {
+    return (value || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9-]+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+
+  if (input) {
+    input.addEventListener('input', function () {
+      var cleaned = slugify(input.value);
+      if (input.value !== cleaned) input.value = cleaned;
+    });
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var slug = input ? slugify(input.value) : '';
+    var url = signupUrl;
+
+    if (slug) {
+      url += (url.indexOf('?') === -1 ? '?' : '&') + 'linkminer=' + encodeURIComponent(slug);
+    }
+
+    window.location.href = url;
+  });
 })();
 
 /* ============================================================
@@ -127,9 +195,9 @@ setTimeout(function () {
     var isRight = card && card.classList.contains('tl-card--right');
 
     d3tl.fromTo(dot,
-      { backgroundColor: 'rgba(255,200,0,0.12)', borderColor: 'rgba(255,200,0,0.25)', boxShadow: 'none' },
-      { backgroundColor: '#FFC800', borderColor: 'rgba(255,200,0,0.60)',
-        boxShadow: '0 0 0 6px rgba(255,200,0,0.12), 0 0 18px rgba(255,200,0,0.55)',
+      { backgroundColor: rgbaVar('--gold-rgb', 0.12), borderColor: rgbaVar('--gold-rgb', 0.25), boxShadow: 'none' },
+      { backgroundColor: cssVar('--gold'), borderColor: rgbaVar('--gold-rgb', 0.55),
+        boxShadow: '0 0 0 6px ' + rgbaVar('--gold-rgb', 0.10) + ', 0 0 18px ' + rgbaVar('--gold-rgb', 0.24),
         duration: 0.08 }, t);
 
     if (card) {
@@ -146,89 +214,72 @@ setTimeout(function () {
 })();
 
 /* ============================================================
-   DOBRA 4 — SCROLL-DRIVEN PIN "CADA SINAL SE TORNA UM LEAD"
-   Inspirado na referência GSAP: pin + scrub + lista progressiva
+   DOBRA 4 — CARDS STICKY "CADA SINAL SE TORNA UM LEAD"
    ============================================================ */
 (function () {
-  var section    = document.getElementById('how');
+  var section = document.getElementById('how');
   if (!section) return;
 
-  var listItems  = gsap.utils.toArray('.how-list-item',  section);
-  var slides     = gsap.utils.toArray('.how-slide',      section);
-  var descs      = gsap.utils.toArray('.how-desc-item',  section);
-  var fill       = section.querySelector('.how-fill');
-
-  if (!listItems.length || !slides.length) return;
-
-  var total       = listItems.length;
-  var GOLD        = '#ffe450';
-  var MUTED       = 'rgba(182,186,198,0.28)';
+  var cards = gsap.utils.toArray('.how-step-card', section);
+  if (!cards.length) return;
 
   var mm = gsap.matchMedia();
 
-  // Scroll-driven pin layout em todas as larguras (desktop e mobile)
-  mm.add("(min-width: 1px)", function () {
-    // Reset any layout props from mobile
-    gsap.set(listItems, { clearProps: "all" });
-    gsap.set(slides, { clearProps: "all" });
-    gsap.set(descs, { clearProps: "all" });
-    gsap.set(fill, { clearProps: "all" });
+  mm.add("(min-width: 769px)", function () {
+    gsap.set(cards, { clearProps: "transform" });
 
-    // Initial state
-    gsap.set(fill, { scaleY: 1 / total, transformOrigin: 'top left' });
-    gsap.set(slides, { autoAlpha: 0, scale: 1.04 });
-    gsap.set(descs,  { autoAlpha: 0, y: 8 });
+    cards.forEach(function (card, index) {
+      if (index === cards.length - 1) return;
 
-    gsap.set(slides[0], { autoAlpha: 1, scale: 1 });
-    gsap.set(descs[0],  { autoAlpha: 1, y: 0 });
+      var targetScale = 1 - ((cards.length - 1 - index) * 0.025);
 
-    gsap.set(listItems, { color: MUTED });
-    gsap.set(listItems[0], { color: GOLD });
-
-    var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start:   'top top',
-        end:     '+=' + (total * 90) + '%', /* 90% viewport per slide */
-        pin:     true,
-        scrub:   1,
-        anticipatePin: 1
-      }
+      gsap.to(card, {
+        scale: targetScale,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: cards[index + 1],
+          start: 'top 78%',
+          end: 'top 104px',
+          scrub: true
+        }
+      });
     });
 
-    // Fill line grows
-    tl.to(fill, {
-      scaleY: 1,
-      ease: 'none',
-      duration: total - 1
-    }, 0);
-
-    // Transitions
-    for (var i = 1; i < total; i++) {
-      var prev      = listItems[i - 1];
-      var curr      = listItems[i];
-      var prevSlide = slides[i - 1];
-      var currSlide = slides[i];
-      var prevDesc  = descs[i - 1];
-      var currDesc  = descs[i];
-
-      var startTime = i - 0.5;
-
-      tl.to(prev, { color: MUTED, duration: 0.3 }, startTime)
-        .to(curr, { color: GOLD, duration: 0.3 }, startTime)
-        .to(prevSlide, { autoAlpha: 0, scale: 1.04, duration: 0.3 }, startTime)
-        .fromTo(currSlide, { autoAlpha: 0, scale: 1.04 }, { autoAlpha: 1, scale: 1, duration: 0.3 }, startTime)
-        .to(prevDesc,  { autoAlpha: 0, y: -8, duration: 0.3 }, startTime)
-        .fromTo(currDesc,  { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.3 }, startTime);
-    }
-
-    // Add brief pause at the end
-    tl.to({}, { duration: 0.5 });
-
-    return function() {
-      // Cleanup
+    return function () {
+      gsap.set(cards, { clearProps: "transform" });
     };
   });
+
+  mm.add("(max-width: 768px)", function () {
+    gsap.set(cards, { clearProps: "transform" });
+
+    cards.forEach(function (card) {
+      gsap.fromTo(card,
+        { autoAlpha: 0.92, y: 18 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.45,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 86%',
+            once: true
+          }
+        });
+    });
+
+    return function () {
+      gsap.set(cards, { clearProps: "all" });
+    };
+  });
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    ScrollTrigger.getAll().forEach(function (st) {
+      if (st.trigger && section.contains(st.trigger)) st.kill();
+    });
+    gsap.set(cards, { clearProps: "all" });
+  }
 })();
 
 /* ============================================================
@@ -340,5 +391,3 @@ setTimeout(function () {
   });
   sync(st.isActive);
 })();
-
-
