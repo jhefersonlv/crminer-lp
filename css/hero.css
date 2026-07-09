@@ -249,6 +249,9 @@
     height: auto;
     min-height: 900px;
     overflow: visible;
+    --hero-glow-r: 18;
+    --hero-glow-g: 20;
+    --hero-glow-b: 23;
   }
 
   .hero-bg,
@@ -270,8 +273,8 @@
 
   .hero-mockups {
     position: absolute;
-    inset: auto 0 0;
-    height: 400px;
+    inset: 485px 0 auto;
+    height: 360px;
     z-index: 3;
   }
 
@@ -285,26 +288,41 @@
 
   .hero-mockup {
     height: 100%;
-    top: auto;
-    bottom: -8%;
+    top: 0;
+    bottom: auto;
   }
 
   .hero-mockup.is-center {
     left: 50%;
-    transform: translateX(-50%) rotate(0deg) scale(0.78);
+    transform: translateX(-50%) rotate(0deg) scale(0.76);
   }
 
-  .hero-mockup.is-left,
-  .hero-mockup.is-right,
+  .hero-mockup.is-left {
+    left: 38%;
+    opacity: 0.82;
+    filter: none;
+    transform: translateX(-50%) rotate(-7deg) scale(0.58);
+  }
+
+  .hero-mockup.is-right {
+    left: 62%;
+    opacity: 0.82;
+    filter: none;
+    transform: translateX(-50%) rotate(7deg) scale(0.58);
+  }
+
   .hero-mockup.is-back {
-    opacity: 0;
+    left: 50%;
+    opacity: 0.72;
+    filter: none;
+    transform: translateX(-50%) rotate(0deg) scale(0.48);
   }
 
   .hero-content {
     position: relative;
     width: 100%;
     min-height: auto;
-    padding: 112px 24px 360px;
+    padding: 112px 24px 54px;
     align-items: flex-start;
     z-index: 5;
   }
@@ -317,15 +335,31 @@
 
 @media (max-width: 560px) {
   .hero-content {
-    padding: 102px 18px 330px;
+    padding: 102px 18px 46px;
   }
 
   .hero-mockups {
-    height: 360px;
+    inset: 470px 0 auto;
+    height: 340px;
   }
 
   .hero-mockup.is-center {
-    transform: translateX(-50%) rotate(0deg) scale(0.74);
+    transform: translateX(-50%) rotate(0deg) scale(0.72);
+  }
+
+  .hero-mockup.is-left {
+    left: 30%;
+    transform: translateX(-50%) rotate(-7deg) scale(0.5);
+  }
+
+  .hero-mockup.is-right {
+    left: 70%;
+    transform: translateX(-50%) rotate(7deg) scale(0.5);
+  }
+
+  .hero-mockup.is-back {
+    left: 50%;
+    transform: translateX(-50%) rotate(0deg) scale(0.42);
   }
 
   .hero-content .hero-actions {
