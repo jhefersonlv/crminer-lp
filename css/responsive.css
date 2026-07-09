@@ -52,10 +52,40 @@
     margin: 0 auto;
   }
 
-  /* Texto da dobra 2 volta a centralizar quando empilhado */
+  /* Dobra 2: texto e CTA centralizados no mobile */
   .dobra2-right .section-head,
   .dobra2-right .signals-close {
     text-align: center;
+  }
+
+  .dobra2-right {
+    align-items: center;
+    gap: 22px;
+    padding-top: 0;
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .dobra2-right .section-head,
+  .dobra2-right .signals-close,
+  .dobra2-right .section-cta {
+    width: 100%;
+  }
+
+  .dobra2-right .section-cta {
+    justify-content: center;
+    margin-top: 4px;
+  }
+
+  .dobra2-right .section-cta .btn {
+    min-height: 54px;
+    padding: 14px 22px;
+    border-radius: 16px;
+    font-size: 0.98rem;
+    line-height: 1.15;
+    white-space: normal;
+    text-align: center;
+    max-width: 280px;
   }
 
   .scene {
@@ -367,9 +397,27 @@
   .how-card-media { max-height: min(38vh, 280px); }
   .how-card-media img { border-radius: 16px; }
 
-  /* Rede mobile: labels somem, só ícone */
+  /* Rede mobile: labels compactos abaixo dos ícones */
   .net-node__label {
-    display: none;
+    display: block;
+    left: 50%;
+    right: auto;
+    top: calc(100% + 5px);
+    width: max-content;
+    max-width: 92px;
+    transform: translateX(-50%);
+    text-align: center;
+    white-space: normal;
+  }
+
+  .net-node__label strong {
+    font-size: 0.58rem;
+    line-height: 1.1;
+  }
+
+  .net-node__label span {
+    font-size: 0.5rem;
+    line-height: 1.15;
   }
 
   .net-node__icon {
@@ -429,13 +477,14 @@
   #hero-sticky {
     position: relative;
     height: auto;
-    min-height: 0;
+    min-height: 900px;
+    overflow: visible;
   }
 
   .hero-content {
     position: relative;
     inset: auto;
     min-height: auto;
-    padding: 102px 18px 28px;
+    padding: 102px 18px 46px;
   }
 }

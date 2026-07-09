@@ -56,6 +56,7 @@ function rgbaVar(name, alpha) {
 
   var input = form.querySelector('input[name="linkminer"]');
   var signupUrl = form.getAttribute('action') || 'https://app.crminer.com.br/signup';
+  var paramName = input ? input.getAttribute('name') || 'linkminer' : 'linkminer';
 
   function slugify(value) {
     return (value || '')
@@ -77,10 +78,25 @@ function rgbaVar(name, alpha) {
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     var slug = input ? slugify(input.value) : '';
-    var url = signupUrl;
+    var url;
 
-    if (slug) {
-      url += (url.indexOf('?') === -1 ? '?' : '&') + 'linkminer=' + encodeURIComponent(slug);
+    try {
+      url = new URL(signupUrl, window.location.href);
+      if (slug) url.searchParams.set(paramName, slug);
+      url = url.toString();
+    } catch (err) {
+      url = signupUrl;
+      if (slug) {
+        url += (url.indexOf('?') === -1 ? '?' : '&') + encodeURIComponent(paramName) + '=' + encodeURIComponent(slug);
+      }
+    }
+
+    if (typeof window.crmTrack === 'function') {
+      window.crmTrack('generate_lead', {
+        cta_location: 'hero-linkminer',
+        cta_label: 'Criar meu linkminer',
+        linkminer_slug_present: slug ? 'true' : 'false'
+      });
     }
 
     window.location.href = url;
@@ -334,7 +350,7 @@ setTimeout(function () {
     var type = 'other';
     if (loc.indexOf('social-') === 0)      type = 'social';
     else if (loc.indexOf('video') !== -1)  type = 'video';
-    else if (dest.indexOf('signup') !== -1) type = 'signup';
+    else if (dest.indexOf('signup') !== -1 || loc.indexOf('linkminer') !== -1) type = 'signup';
 
     track('cta_click', {
       cta_location:    loc,
