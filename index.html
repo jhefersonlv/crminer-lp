@@ -94,16 +94,8 @@
       <!-- Cinematic depth mask -->
       <div class="hero-depth-mask" aria-hidden="true"></div>
 
-      <!-- Product mockups carousel -->
-      <div class="hero-mockups" aria-hidden="true">
-        <div class="hero-mockups__glow"></div>
-        <div class="hero-mockups__stage">
-          <img class="hero-mockup is-center" src="assets/mock01.png" alt="" draggable="false" data-mockup-index="0" />
-          <img class="hero-mockup is-right" src="assets/mock02.png" alt="" draggable="false" data-mockup-index="1" />
-          <img class="hero-mockup is-back" src="assets/mock03.png" alt="" draggable="false" data-mockup-index="2" />
-          <img class="hero-mockup is-left" src="assets/mock04.png" alt="" draggable="false" data-mockup-index="3" />
-        </div>
-      </div>
+      <img class="hero-logo-decor hero-logo-decor--bottom-left" src="assets/logo/logo_black_linha.png" alt="" aria-hidden="true" draggable="false" />
+      <img class="hero-logo-decor hero-logo-decor--top-right" src="assets/logo/logo_black_linha.png" alt="" aria-hidden="true" draggable="false" />
 
       <!-- Signal canvas (dots + connections + labels) -->
       <canvas id="hero-signals-canvas" aria-hidden="true"></canvas>
@@ -111,22 +103,50 @@
       <!-- Centered copy -->
       <div class="hero-content">
         <h1 id="hero-title">
-          Transforme visitantes em
-          <span class="gold-text">oportunidades.</span>
+          O CRM que transforma <span class="hero-title-nowrap">visitantes em <span class="gold-text">oportunidades.</span></span>
         </h1>
         <p class="hc-lead">
-          O movimento existe. O interesse também. <br/> O que falta é uma forma de transformar visitas em relacionamento.
-        </p>
+          Capture intenção de compra na loja física e nas redes sociais com o poder da Inteligência Artificial. Converta cada clique, cada visita e cada escaneamento em um lead.</p>
         <form class="hero-actions hero-linkform" data-linkminer-form action="https://app.crminer.com.br/signup" method="get">
           <label class="hero-linkbox" aria-label="Escolha o endereço do seu linkminer">
             <span class="hero-linkbox-prefix">linkminer.app/</span>
             <input class="hero-linkbox-input" type="text" name="linkminer" autocomplete="off" inputmode="text" spellcheck="false" maxlength="42" placeholder="sua-loja" aria-label="Nome desejado para o seu linkminer" />
           </label>
-          <button class="btn btn-primary hero-linkbox-cta" type="submit" data-cta="hero-linkminer" aria-label="Criar meu linkminer">Criar meu linkminer</button>
+          <button class="btn btn-primary hero-linkbox-cta" type="submit" data-cta="hero-linkminer" aria-label="Criar meu linkminer">Iniciar Gratuitamente</button>
         </form>
-        <p class="hero-proof">14 dias grátis. Sem cartão. Seu link pronto em minutos.</p>
+        <p class="hero-proof">14 dias grátis. Sem cartão. Seu CRM pronto em poucos segundos.</p>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ============ HERO MOCKUP ============ -->
+  <section class="hero-mockup-strip" aria-label="Prévia do crminer">
+    <div class="wrap">
+      <div class="hero-mockup-stage" data-hero-mockup-stage>
+        <img class="hero-mockup-main" src="assets/mock01.png" alt="Prévia da plataforma crminer" loading="eager" />
+        <img class="hero-mockup-card hero-mockup-card--02" src="assets/mock02.png" alt="" aria-hidden="true" loading="eager" data-hero-mockup-card />
+        <img class="hero-mockup-card hero-mockup-card--03" src="assets/mock03.png" alt="" aria-hidden="true" loading="eager" data-hero-mockup-card />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLIENTES ============ -->
+  <section class="client-logos" aria-labelledby="client-logos-title">
+    <div class="wrap">
+      <div class="client-logos__head">
+        <p class="client-logos__eyebrow">Clientes em operação</p>
+        <h2 id="client-logos-title">Marcas que já capturam intenção com crminer.</h2>
+        <p>Operações que transformam visitas, cliques e QR Codes em oportunidades agora.</p>
+      </div>
+      <div class="client-logos__grid" aria-label="Logos de clientes crminer">
+        <div class="client-logo">
+          <img src="assets/clients/cliente-01.webp" alt="Cliente crminer" loading="lazy" />
+        </div>
+        <div class="client-logo">
+          <img src="assets/clients/cliente-02" alt="Cliente crminer" loading="lazy" />
+        </div>
+      </div>
     </div>
   </section>
 
@@ -211,35 +231,35 @@
         <!-- Nodos — Esquerda -->
         <div class="net-node net-node--left net-node--instagram">
           <div class="net-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.3" fill="currentColor" stroke="none"/></svg></div>
-          <div class="net-node__label"><strong>Instagram</strong><span>200 clicaram</span></div>
+          <div class="net-node__label"><strong>Instagram</strong><span>200 clicaram <br> no link da sua bio</span></div>
         </div>
         <div class="net-node net-node--left net-node--tiktok">
           <div class="net-node__icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .52.04.77.11V9.66a5.7 5.7 0 0 0-.77-.05 5.69 5.69 0 1 0 5.69 5.69V8.99a7.33 7.33 0 0 0 4.3 1.38V7.28a4.3 4.3 0 0 1-3.25-1.46Z"/></svg></div>
-          <div class="net-node__label"><strong>TikTok</strong><span>Assistiu seu vídeo</span></div>
+          <div class="net-node__label"><strong>TikTok</strong><span>2.000 pessoas <br> assistiram ao seu vídeo</span></div>
         </div>
         <div class="net-node net-node--left net-node--google">
           <div class="net-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.686 2 6 4.686 6 8c0 5.25 6 14 6 14s6-8.75 6-14c0-3.314-2.686-6-6-6z"/><circle cx="12" cy="8" r="2"/></svg></div>
-          <div class="net-node__label"><strong>Google Maps</strong><span>Pesquisou sua loja</span></div>
+          <div class="net-node__label"><strong>Google Maps</strong><span>135 pessoas <br> pesquisaram por sua loja</span></div>
         </div>
 
         <!-- Nodo — Topo -->
         <div class="net-node net-node--top net-node--vitrine">
           <div class="net-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l2.45-6h13.1L21 9M3 9h18M3 9v1a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0V9M5 21V11M19 21V11M5 21h14M9 21v-6h6v6"/></svg></div>
-          <div class="net-node__label"><strong>Vitrine</strong><span>47 passaram</span></div>
+          <div class="net-node__label"><strong>Vitrine</strong><span>47 pessoas <br> passaram em frente</span></div>
         </div>
 
         <!-- Nodos — Direita -->
         <div class="net-node net-node--right net-node--qr">
           <div class="net-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 21v-3M17 21h-1"/></svg></div>
-          <div class="net-node__label"><strong>QR Code</strong><span>23 escanearam</span></div>
+          <div class="net-node__label"><strong>QR Code</strong><span>23 pessoas <br> escanearam</span></div>
         </div>
         <div class="net-node net-node--right net-node--loja">
           <div class="net-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg></div>
-          <div class="net-node__label"><strong>Loja física</strong><span>89 visitaram</span></div>
+          <div class="net-node__label"><strong>Loja física</strong><span>89 pessoas <br>  visitaram</span></div>
         </div>
         <div class="net-node net-node--right net-node--whatsapp">
           <div class="net-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div>
-          <div class="net-node__label"><strong>WhatsApp</strong><span>12 iniciaram</span></div>
+          <div class="net-node__label"><strong>WhatsApp</strong><span>12 iniciaram <br> uma conversa</span></div>
         </div>
 
       </div>
@@ -248,8 +268,8 @@
       <!-- COLUNA DIREITA: Cabeçalho + fechamento -->
       <div class="dobra2-right">
         <div class="section-head">
-          <h2 id="sig-title" class="reveal">Sua loja recebe mais sinais do que vendas.</h2>
-          <p class="lead reveal" style="transition-delay:.08s">Clientes demonstram interesse antes de comprar. <br/> A maioria deles nunca entra no seu CRM.</p>
+          <h2 id="sig-title" class="reveal">No e-commerce, cada clique conta. <br> Na loja física, quase tudo se perde.</h2>
+          <p class="lead reveal" style="transition-delay:.08s">Clientes olham vitrines, entram na loja, fazem perguntas e demonstram interesse. <br/> Mas se não compram, eles desaparecem.</p>
         </div>
 
         <div class="signals-close reveal">
@@ -494,62 +514,124 @@
   <section id="how" aria-labelledby="how-title">
     <div class="how-content">
       <div class="how-head">
-        <h2 id="how-title" class="how-heading">Cada sinal se torna um <span class="gold">lead.</span></h2>
+        <p class="how-eyebrow">Como funciona</p>
+        <h2 id="how-title" class="how-heading">Cada sinal se torna um lead.</h2>
+        <p class="how-subhead">O crminer transforma interações físicas e digitais em relacionamento com origem, interesse, contato e contexto.</p>
       </div>
 
       <div class="how-stack" aria-label="Como cada sinal vira lead">
         <article class="how-step-card" data-index="0">
           <div class="how-card-copy">
-            <span class="how-card-num">01</span>
-            <h3>O sinal acontece</h3>
-            <p>O interesse começa antes da abordagem: na vitrine, no QR Code, na sacola, no caixa ou no link da bio.</p>
+            <div class="how-card-kicker"><span>01</span><small>O sinal acontece</small></div>
+            <div class="how-card-main">
+              <h3>O sinal acontece.</h3>
+              <p>O interesse pela sua marca acontece em múltiplos canais simultaneamente.</p>
+            </div>
+            <div class="how-tags" aria-label="Canais capturados">
+              <span>Loja física</span>
+              <span>QR Code</span>
+              <span>Social</span>
+            </div>
           </div>
           <div class="how-card-media">
-            <img src="assets/journey/01.png" alt="Passou pela vitrine" loading="lazy" />
+            <img src="assets/how/step-01.png" alt="Cliente demonstrando interesse em loja física" loading="lazy" />
+            <div class="how-overlay-card how-overlay-card--light">
+              <strong>Sinal capturado</strong>
+              <span>Origem, canal e momento do interesse registrados automaticamente.</span>
+            </div>
+            <div class="how-overlay-pill">Intenção em tempo real</div>
           </div>
         </article>
 
         <article class="how-step-card" data-index="1">
           <div class="how-card-copy">
-            <span class="how-card-num">02</span>
-            <h3>O visitante recebe valor</h3>
-            <p>Ao escanear, a pessoa encontra uma oferta, brinde ou benefício e dá o primeiro passo para se identificar.</p>
+            <div class="how-card-kicker"><span>02</span><small>Valor para continuar</small></div>
+            <div class="how-card-main">
+              <h3>O visitante recebe valor.</h3>
+              <p>Ele acessa um benefício, catálogo, campanha, produto, serviço ou cupom e encontra um motivo real para continuar a interação.</p>
+            </div>
+            <div class="how-tags" aria-label="Gatilhos de conversão">
+              <span>Oferta</span>
+              <span>Catálogo</span>
+              <span>Atendimento</span>
+            </div>
           </div>
           <div class="how-card-media">
-            <img src="assets/journey/02.png" alt="Escaneou o QR Code" loading="lazy" />
+            <img src="assets/how/step-02.png" alt="Cliente escaneando QR Code em uma loja" loading="lazy" />
+            <div class="how-overlay-card how-overlay-card--glass">
+              <strong>Experiência guiada</strong>
+              <span>O visitante entra pelo benefício certo e começa uma conversa identificável.</span>
+            </div>
+            <div class="how-overlay-pill">QR Code + campanha</div>
           </div>
         </article>
 
         <article class="how-step-card" data-index="2">
           <div class="how-card-copy">
-            <span class="how-card-num">03</span>
-            <h3>O crminer conecta a interação</h3>
-            <p>O interesse vira automaticamente um lead no CRM, enquanto o form conversa, captura dados e responde dúvidas.</p>
+            <div class="how-card-kicker"><span>03</span><small>Conversa guiada</small></div>
+            <div class="how-card-main">
+              <h3>O valor é entregue em uma conversa.</h3>
+              <p>Na loja, pelo QR Code. No digital, pelo LinkMiner ou por qualquer link compartilhado. A IA responde dúvidas e conduz o visitante até a identificação.</p>
+            </div>
+            <div class="how-tags" aria-label="Dados adicionados ao lead">
+              <span>Origem</span>
+              <span>Interesse</span>
+              <span>Histórico</span>
+            </div>
           </div>
           <div class="how-card-media">
-            <img src="assets/journey/03.png" alt="Veio do Instagram" loading="lazy" />
+            <img src="assets/how/step-03.png" alt="Interface de CRM com lead enriquecido por origem e interesse" loading="lazy" />
+            <div class="how-overlay-card how-overlay-card--light">
+              <strong>Perfil enriquecido</strong>
+              <span>O CRM recebe o lead com histórico, interesse e canal de entrada.</span>
+            </div>
+            <div class="how-overlay-pill">Instagram, bio e links</div>
           </div>
         </article>
 
         <article class="how-step-card" data-index="3">
           <div class="how-card-copy">
-            <span class="how-card-num">04</span>
-            <h3>O visitante deixa de ser anônimo</h3>
-            <p>O histórico da interação fica salvo, mostrando origem, interesse, contato e contexto do cliente.</p>
+            <div class="how-card-kicker"><span>04</span><small>Lead identificado</small></div>
+            <div class="how-card-main">
+              <h3>O visitante deixa de ser anônimo.</h3>
+              <p>O histórico dessas interações no mundo físico e digital fica registrado no CRM com origem, interesse, contato e contexto do cliente.</p>
+            </div>
+            <div class="how-tags" aria-label="Próximas ações comerciais">
+              <span>Prioridade</span>
+              <span>Contexto</span>
+              <span>Próxima ação</span>
+            </div>
           </div>
           <div class="how-card-media">
-            <img src="assets/journey/04.png" alt="Entrou na loja" loading="lazy" />
+            <img src="assets/how/step-04.png" alt="Vendedor entrando em contato com lead qualificado" loading="lazy" />
+            <div class="how-overlay-card how-overlay-card--glass">
+              <strong>Próxima ação</strong>
+              <span>O atendimento começa com contexto, timing e motivo claro.</span>
+            </div>
+            <div class="how-overlay-pill">Contato qualificado</div>
           </div>
         </article>
 
         <article class="how-step-card" data-index="4">
           <div class="how-card-copy">
-            <span class="how-card-num">05</span>
-            <h3>O relacionamento começa</h3>
-            <p>O vendedor entra em contato com contexto para vender, revender e construir um relacionamento real.</p>
+            <div class="how-card-kicker"><span>05</span><small>Relacionamento</small></div>
+            <div class="how-card-main">
+              <h3>O relacionamento começa.</h3>
+              <p>Você poderá entrar em contato para construir um relacionamento real e hiperpersonalizado com cada pessoa interessada na sua marca.</p>
+            </div>
+            <div class="how-tags" aria-label="Resultados esperados">
+              <span>Recompra</span>
+              <span>Campanhas</span>
+              <span>Base própria</span>
+            </div>
           </div>
           <div class="how-card-media">
-            <img src="assets/journey/05.png" alt="Lead identificado" loading="lazy" />
+            <img src="assets/how/step-05.png" alt="Equipe usando dados para relacionamento e recompra" loading="lazy" />
+            <div class="how-overlay-card how-overlay-card--light">
+              <strong>Jornada preservada</strong>
+              <span>O histórico vira base para relacionamento, campanhas e recompra.</span>
+            </div>
+            <div class="how-overlay-pill">Relacionamento contínuo</div>
           </div>
         </article>
       </div>

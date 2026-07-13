@@ -60,10 +60,33 @@
 
   .dobra2-right {
     align-items: center;
-    gap: 22px;
+    gap: 18px;
     padding-top: 0;
     padding-left: 0;
     border-left: 0;
+  }
+
+  .dobra2-right .section-head {
+    max-width: 620px;
+  }
+
+  .dobra2-right .section-head h2 {
+    font-size: clamp(1.65rem, 5.6vw, 2.25rem);
+    line-height: 1.08;
+  }
+
+  .dobra2-right .section-head .lead {
+    max-width: 520px;
+    margin-top: 14px;
+    font-size: 0.94rem;
+    line-height: 1.55;
+  }
+
+  .dobra2-right .signals-close .q {
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: clamp(1.18rem, 4.6vw, 1.55rem);
   }
 
   .dobra2-right .section-head,
@@ -78,10 +101,10 @@
   }
 
   .dobra2-right .section-cta .btn {
-    min-height: 54px;
-    padding: 14px 22px;
-    border-radius: 16px;
-    font-size: 0.98rem;
+    min-height: 48px;
+    padding: 12px 18px;
+    border-radius: 14px;
+    font-size: 0.9rem;
     line-height: 1.15;
     white-space: normal;
     text-align: center;
@@ -181,23 +204,27 @@
     line-height: 1.08;
   }
 
+  .how-subhead {
+    font-size: 0.95rem;
+  }
+
   .how-head {
     margin-bottom: 28px;
   }
 
   .how-stack {
-    gap: 24vh;
+    gap: 22vh;
   }
 
   .how-step-card {
     position: sticky;
     top: 84px;
     height: auto;
-    min-height: min(620px, calc(100vh - 102px));
+    min-height: min(720px, calc(100vh - 102px));
     max-height: none;
     grid-template-columns: 1fr;
-    gap: 18px;
-    padding: 18px;
+    gap: 8px;
+    padding: 8px;
     border-radius: 24px;
   }
 
@@ -206,33 +233,47 @@
   }
 
   .how-card-copy {
-    gap: 14px;
-    padding: 0;
+    gap: 16px;
+    padding: 22px;
     height: auto;
     align-self: stretch;
   }
 
-  .how-card-num {
-    font-size: clamp(2.4rem, 12vw, 5.5rem);
+  .how-card-kicker span {
+    font-size: clamp(2.6rem, 12vw, 5.2rem);
+  }
+
+  .how-card-kicker small {
+    font-size: 0.64rem;
   }
 
   .how-card-copy h3 {
     margin-top: 0;
-    font-size: clamp(1.25rem, 4vw, 2rem);
+    font-size: clamp(1.35rem, 4.6vw, 2.15rem);
   }
 
   .how-card-copy p {
     font-size: 0.86rem;
   }
 
-  .how-card-media {
-    aspect-ratio: 1448 / 1086;
-    height: auto;
-    max-height: min(48vh, 380px);
+  .how-tags span {
+    min-height: 30px;
+    font-size: 0.72rem;
   }
 
-  .how-card-media img {
-    border-radius: 20px;
+  .how-card-media {
+    min-height: min(44vh, 390px);
+    height: auto;
+  }
+
+  .how-overlay-card {
+    width: min(72%, 300px);
+    min-height: 118px;
+  }
+
+  .how-overlay-pill {
+    min-height: 34px;
+    font-size: 0.72rem;
   }
 
   /* Rede tablet: ícones menores */
@@ -384,18 +425,26 @@
   #how { padding: 72px 0 60px; }
   .how-content { padding: 0 0.85rem; }
   .how-heading { font-size: clamp(1.65rem, 8vw, 2.18rem); }
+  .how-subhead { font-size: 0.86rem; line-height: 1.5; }
   .how-step-card {
     top: 72px;
-    min-height: min(560px, calc(100vh - 86px));
-    padding: 14px;
+    min-height: min(680px, calc(100vh - 86px));
+    padding: 7px;
     border-radius: 20px;
   }
   .how-step-card + .how-step-card { margin-top: 0; }
-  .how-card-copy { gap: 10px; }
-  .how-card-copy h3 { font-size: 1.22rem; }
+  .how-card-copy { gap: 10px; padding: 18px; }
+  .how-card-kicker span { font-size: 2.7rem; }
+  .how-card-kicker small { max-width: 96px; font-size: 0.58rem; }
+  .how-card-copy h3 { font-size: 1.22rem; line-height: 1.06; }
   .how-card-copy p { font-size: 0.78rem; line-height: 1.42; }
-  .how-card-media { max-height: min(38vh, 280px); }
-  .how-card-media img { border-radius: 16px; }
+  .how-tags { gap: 6px; }
+  .how-tags span { min-height: 28px; padding: 0 10px; font-size: 0.68rem; }
+  .how-card-media { min-height: min(38vh, 280px); }
+  .how-overlay-card { width: calc(100% - 24px); min-height: 96px; padding: 14px; }
+  .how-overlay-card strong { font-size: 1rem; }
+  .how-overlay-card span { font-size: 0.72rem; }
+  .how-overlay-pill { display: none; }
 
   /* Rede mobile: labels compactos abaixo dos ícones */
   .net-node__label {
@@ -477,7 +526,7 @@
   #hero-sticky {
     position: relative;
     height: auto;
-    min-height: 900px;
+    min-height: 0;
     overflow: visible;
   }
 
@@ -485,6 +534,13 @@
     position: relative;
     inset: auto;
     min-height: auto;
-    padding: 102px 18px 46px;
+    padding: 102px 18px 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-mockup-strip + .dobra-white {
+    margin-top: 0;
+    padding-top: 0;
   }
 }
