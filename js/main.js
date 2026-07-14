@@ -157,6 +157,7 @@ if (reduceMotion) {
   var journey = document.querySelector('[data-how-journey]');
   if (!journey) return;
 
+  var stepNav = journey.querySelector('.how-step-nav');
   var triggers = Array.prototype.slice.call(journey.querySelectorAll('[data-how-target]'));
   var panels = Array.prototype.slice.call(journey.querySelectorAll('[data-how-panel]'));
   var currentNumber = journey.querySelector('[data-how-current]');
@@ -164,10 +165,29 @@ if (reduceMotion) {
   var positionText = journey.querySelector('[data-how-position]');
   var prevButton = journey.querySelector('[data-how-prev]');
   var nextButton = journey.querySelector('[data-how-next]');
+  var mobileJourney = window.matchMedia('(max-width: 820px)');
+  var journeyReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var activeIndex = 0;
   if (!triggers.length || !panels.length) return;
 
-  function activate(step, focusTab) {
+  function alignMobileTrigger(trigger, immediate) {
+    if (!stepNav || !trigger || !mobileJourney.matches) return;
+
+    var paddingLeft = parseFloat(window.getComputedStyle(stepNav).paddingLeft) || 0;
+    var targetLeft = Math.max(0, trigger.offsetLeft - paddingLeft);
+    stepNav.scrollTo({
+      left: targetLeft,
+      behavior: immediate || journeyReducedMotion.matches ? 'auto' : 'smooth'
+    });
+  }
+
+  function resetMobileJourney() {
+    if (!stepNav || !mobileJourney.matches) return;
+    activeIndex = 0;
+    activate(triggers[0].getAttribute('data-how-target'), false, true);
+  }
+
+  function activate(step, focusTab, immediateScroll) {
     var nextIndex = Math.max(0, triggers.findIndex(function (trigger) {
       return trigger.getAttribute('data-how-target') === step;
     }));
@@ -196,6 +216,8 @@ if (reduceMotion) {
       nextButton.querySelector('span').textContent = isLast ? 'Voltar ao início' : 'Próxima etapa';
       nextButton.setAttribute('aria-label', isLast ? 'Voltar para a primeira etapa' : 'Avançar para a próxima etapa');
     }
+
+    alignMobileTrigger(triggers[activeIndex], immediateScroll);
   }
 
   triggers.forEach(function (trigger, index) {
@@ -229,6 +251,14 @@ if (reduceMotion) {
     nextButton.addEventListener('click', function () {
       var nextIndex = activeIndex === triggers.length - 1 ? 0 : activeIndex + 1;
       activate(triggers[nextIndex].getAttribute('data-how-target'), false);
+    });
+  }
+
+  window.requestAnimationFrame(resetMobileJourney);
+  window.addEventListener('pageshow', resetMobileJourney);
+  if (typeof mobileJourney.addEventListener === 'function') {
+    mobileJourney.addEventListener('change', function (event) {
+      if (event.matches) resetMobileJourney();
     });
   }
 })();
@@ -425,8 +455,9 @@ if (reduceMotion) {
   var particles = cursor && cursor.querySelector('.mining-particles');
   var goldButton = section.querySelector('[data-cta="dobra3-reframe"]');
   var desktopPointer = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 769px)');
+  var touchPointer = window.matchMedia('(max-width: 768px) and (pointer: coarse)');
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (!cursor || !particles || !goldButton || !desktopPointer.matches || reducedMotion.matches) return;
+  if (!cursor || !particles || !goldButton || reducedMotion.matches) return;
 
   var x = -80;
   var y = -80;
@@ -435,6 +466,8 @@ if (reduceMotion) {
   var rafId = 0;
   var cycleStart = 0;
   var lastImpactCycle = -1;
+  var touchImpactTimer = 0;
+  var touchCleanupTimer = 0;
   var swingDuration = 720;
   var impactPhase = 0.58;
   var stoneColors = ['#343837', '#5d6361', '#858b88', '#4a4f4d'];
@@ -509,33 +542,127 @@ if (reduceMotion) {
     }
   }
 
-  section.classList.add('is-mining-enabled');
+  function setupDesktopMining() {
+    if (!desktopPointer.matches) return;
+    section.classList.add('is-mining-enabled');
 
-  section.addEventListener('pointerenter', function (event) {
-    if (event.pointerType === 'touch') return;
-    active = true;
-    x = event.clientX;
-    y = event.clientY;
-    cycleStart = performance.now();
-    lastImpactCycle = -1;
-    setGold(goldButton.contains(event.target));
-    cursor.classList.add('is-visible');
-    if (!rafId) rafId = window.requestAnimationFrame(frame);
+    section.addEventListener('pointerenter', function (event) {
+      if (event.pointerType === 'touch') return;
+      active = true;
+      x = event.clientX;
+      y = event.clientY;
+      cycleStart = performance.now();
+      lastImpactCycle = -1;
+      setGold(goldButton.contains(event.target));
+      cursor.classList.add('is-visible');
+      if (!rafId) rafId = window.requestAnimationFrame(frame);
+    });
+
+    section.addEventListener('pointermove', function (event) {
+      if (!active || event.pointerType === 'touch') return;
+      x = event.clientX;
+      y = event.clientY;
+      setGold(goldButton.contains(event.target));
+    }, { passive: true });
+
+    section.addEventListener('pointerleave', function () {
+      active = false;
+      gold = false;
+      cursor.classList.remove('is-visible', 'is-gold');
+      goldButton.classList.remove('is-mined');
+      if (rafId) window.cancelAnimationFrame(rafId);
+      rafId = 0;
+    });
+  }
+
+  function setupTouchMining() {
+    if (!touchPointer.matches) return;
+
+    section.addEventListener('pointerdown', function (event) {
+      if (event.pointerType !== 'touch') return;
+
+      window.clearTimeout(touchImpactTimer);
+      window.clearTimeout(touchCleanupTimer);
+      cursor.classList.remove('is-touch-impact', 'is-visible');
+      goldButton.classList.remove('is-mined');
+
+      x = Math.max(34, Math.min(window.innerWidth - 34, event.clientX));
+      y = Math.max(62, Math.min(window.innerHeight - 24, event.clientY));
+      cursor.style.setProperty('--cursor-x', (x - 11) + 'px');
+      cursor.style.setProperty('--cursor-y', (y - 56) + 'px');
+      setGold(goldButton.contains(event.target));
+
+      // Reinicia a animação a cada novo toque, inclusive em toques consecutivos.
+      void cursor.offsetWidth;
+      cursor.classList.add('is-touch-impact');
+
+      touchImpactTimer = window.setTimeout(function () {
+        impact();
+      }, swingDuration * impactPhase);
+
+      touchCleanupTimer = window.setTimeout(function () {
+        gold = false;
+        cursor.classList.remove('is-touch-impact', 'is-gold');
+        goldButton.classList.remove('is-mined');
+      }, swingDuration + 160);
+    }, { passive: true });
+  }
+
+  setupDesktopMining();
+  setupTouchMining();
+})();
+
+/* Abas de preços no mobile; comparação lado a lado no desktop. */
+(function () {
+  var pricingTabs = Array.prototype.slice.call(document.querySelectorAll('[data-pricing-tab]'));
+  var pricingPanels = Array.prototype.slice.call(document.querySelectorAll('[data-pricing-panel]'));
+  var mobilePricing = window.matchMedia('(max-width: 768px)');
+  var activePlan = 'free';
+  if (!pricingTabs.length || !pricingPanels.length) return;
+
+  function activatePricing(plan, focusTab) {
+    activePlan = plan;
+
+    pricingTabs.forEach(function (tab) {
+      var active = tab.getAttribute('data-pricing-tab') === plan;
+      tab.classList.toggle('is-active', active);
+      tab.setAttribute('aria-selected', active ? 'true' : 'false');
+      tab.setAttribute('tabindex', active ? '0' : '-1');
+      if (active && focusTab) tab.focus({ preventScroll: true });
+    });
+
+    pricingPanels.forEach(function (panel) {
+      var active = panel.getAttribute('data-pricing-panel') === plan;
+      panel.classList.toggle('is-mobile-active', active);
+      panel.classList.add('in');
+      if (mobilePricing.matches) panel.setAttribute('aria-hidden', active ? 'false' : 'true');
+      else panel.removeAttribute('aria-hidden');
+    });
+  }
+
+  pricingTabs.forEach(function (tab, index) {
+    tab.addEventListener('click', function () {
+      activatePricing(tab.getAttribute('data-pricing-tab'), false);
+    });
+
+    tab.addEventListener('keydown', function (event) {
+      var nextIndex = index;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (index + 1) % pricingTabs.length;
+      else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (index - 1 + pricingTabs.length) % pricingTabs.length;
+      else if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = pricingTabs.length - 1;
+      else return;
+
+      event.preventDefault();
+      activatePricing(pricingTabs[nextIndex].getAttribute('data-pricing-tab'), true);
+    });
   });
 
-  section.addEventListener('pointermove', function (event) {
-    if (!active || event.pointerType === 'touch') return;
-    x = event.clientX;
-    y = event.clientY;
-    setGold(goldButton.contains(event.target));
-  }, { passive: true });
-
-  section.addEventListener('pointerleave', function () {
-    active = false;
-    gold = false;
-    cursor.classList.remove('is-visible', 'is-gold');
-    goldButton.classList.remove('is-mined');
-    if (rafId) window.cancelAnimationFrame(rafId);
-    rafId = 0;
-  });
+  window.requestAnimationFrame(function () { activatePricing('free', false); });
+  window.addEventListener('pageshow', function () { activatePricing('free', false); });
+  if (typeof mobilePricing.addEventListener === 'function') {
+    mobilePricing.addEventListener('change', function () {
+      activatePricing(activePlan, false);
+    });
+  }
 })();

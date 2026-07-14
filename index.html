@@ -116,6 +116,11 @@
         <p class="hero-support">Crie sua primeira página de captura e comece gratuitamente.</p>
         <a class="btn btn-primary hero-trial-cta" href="https://app.crminer.com.br/signup" target="_blank" rel="noopener" data-cta="hero-trial" aria-label="Começar teste grátis de 14 dias no crminer">Criar minha página</a>
         <p class="hero-proof">14 dias grátis. Sem cartão. Seu CRM pronto em poucos segundos.</p>
+
+        <div class="hero-mobile-mockups" aria-hidden="true">
+          <img class="hero-mobile-mockup hero-mobile-mockup--main" src="assets/mock01.png" alt="" width="1461" height="766" draggable="false" />
+          <img class="hero-mobile-mockup hero-mobile-mockup--phone" src="assets/mock03.png" alt="" width="291" height="582" draggable="false" />
+        </div>
       </div>
 
       <!-- ============ HERO MOCKUP ============ -->
@@ -591,8 +596,13 @@
         <p class="lead reveal" style="transition-delay:.12s">Use o LinkMiner gratuito para validar sua captura. Os planos completos liberam a jornada com IA, widget, CRM e inteligência comercial.</p>
       </div>
 
+      <div class="pricing-tabs" role="tablist" aria-label="Escolha um plano">
+        <button class="pricing-tab is-active" type="button" role="tab" id="pricing-tab-free" aria-selected="true" aria-controls="pricing-panel-free" data-pricing-tab="free">Gratuito</button>
+        <button class="pricing-tab" type="button" role="tab" id="pricing-tab-complete" aria-selected="false" aria-controls="pricing-panel-complete" data-pricing-tab="complete" tabindex="-1">Planos completos</button>
+      </div>
+
       <div class="pricing-grid" aria-label="Planos do crminer">
-        <article class="price-card pricing-plan reveal" style="transition-delay:.08s" aria-label="Plano gratuito LinkMiner">
+        <article class="price-card pricing-plan reveal is-mobile-active" id="pricing-panel-free" role="tabpanel" aria-labelledby="pricing-tab-free" data-pricing-panel="free" style="transition-delay:.08s" aria-label="Plano gratuito LinkMiner">
           <div class="price-plan-head">
             <div>
               <div class="price-plan">Gratuito</div>
@@ -615,7 +625,7 @@
           <a class="btn btn-ghost price-cta" href="https://app.crminer.com.br/signup" target="_blank" rel="noopener" data-cta="pricing-free" aria-label="Começar no plano gratuito do crminer">Começar grátis</a>
         </article>
 
-        <article class="price-card price-card--featured pricing-plan reveal" style="transition-delay:.14s" aria-label="Planos completos do crminer">
+        <article class="price-card price-card--featured pricing-plan reveal" id="pricing-panel-complete" role="tabpanel" aria-labelledby="pricing-tab-complete" data-pricing-panel="complete" style="transition-delay:.14s" aria-label="Planos completos do crminer">
           <div class="price-flag">Mais completo</div>
           <div class="price-plan-head">
             <div>
