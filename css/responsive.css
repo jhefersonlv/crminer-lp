@@ -286,12 +286,12 @@
   }
 
   .client-logo {
-    width: 82px;
-    min-height: 28px;
+    width: 74px;
+    min-height: 25px;
   }
 
   .client-logo img {
-    max-height: 26px;
+    max-height: 23px;
   }
 
   /* Recupera o respiro removido pela regra de seções adjacentes. */

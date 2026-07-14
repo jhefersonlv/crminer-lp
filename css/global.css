@@ -647,9 +647,8 @@ header.nav-hidden {
   grid-template-columns: minmax(260px, 0.27fr) minmax(250px, 0.23fr) minmax(0, 0.5fr);
   gap: clamp(18px, 2.2vw, 34px);
   align-items: center;
-  max-width: none;
-  padding-left: 2rem;
-  padding-right: 1rem;
+  max-width: var(--maxw);
+  padding-inline: 24px;
 }
 
 .interest-copy {
@@ -672,7 +671,7 @@ header.nav-hidden {
 .interest-head h2 {
   max-width: 340px;
   margin-top: 14px;
-  font-size: clamp(1.8rem, 2.45vw, 2.9rem);
+  font-size: clamp(1.65rem, 2vw, 2.4rem);
   line-height: 1.07;
   letter-spacing: 0;
 }
