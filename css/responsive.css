@@ -8,18 +8,6 @@
     padding: 96px 0;
   }
 
-  .hero-grid {
-    gap: 40px;
-  }
-
-  .iceberg-grid {
-    gap: 44px;
-  }
-
-  .benefits {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-  }
 }
 
 /* ---------- TABLETS (768px e abaixo) ---------- */
@@ -28,79 +16,70 @@
     padding: 76px 0;
   }
 
-  #hero {
-    padding: 120px 0 72px;
-  }
-
-  .hero-grid {
+  /* Dobra 2: empilhar texto + galeria em coluna unica */
+  .interest-layout {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 32px;
+    padding-left: 2rem;
   }
 
-  .hero-copy {
+  .interest-copy {
+    display: block;
     max-width: none;
   }
 
-  /* Dobra 2: empilhar rede + texto em coluna única */
-  .dobra2-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .interest-head {
+    padding: 0;
+    margin-bottom: 18px;
   }
 
-  .network-wrap {
-    max-width: 480px;
-    margin: 0 auto;
+  .interest-head,
+  .interest-support .signals-close {
+    text-align: left;
   }
 
-  /* Dobra 2: texto e CTA centralizados no mobile */
-  .dobra2-right .section-head,
-  .dobra2-right .signals-close {
-    text-align: center;
-  }
-
-  .dobra2-right {
-    align-items: center;
-    gap: 18px;
-    padding-top: 0;
-    padding-left: 0;
-    border-left: 0;
-  }
-
-  .dobra2-right .section-head {
+  .interest-head h2 {
     max-width: 620px;
-  }
-
-  .dobra2-right .section-head h2 {
-    font-size: clamp(1.65rem, 5.6vw, 2.25rem);
+    font-size: clamp(1.9rem, 6vw, 2.55rem);
     line-height: 1.08;
   }
 
-  .dobra2-right .section-head .lead {
-    max-width: 520px;
-    margin-top: 14px;
+  .interest-support {
+    gap: 16px;
+    padding: 24px 0 0;
+  }
+
+  .interest-support::before {
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      rgba(var(--gold-rgb), 0.54) 0%,
+      rgba(var(--graphite-rgb), 0.14) 72%,
+      transparent 100%
+    );
+  }
+
+  .interest-support .lead {
+    max-width: 620px;
     font-size: 0.94rem;
     line-height: 1.55;
   }
 
-  .dobra2-right .signals-close .q {
-    max-width: 460px;
-    margin-left: auto;
-    margin-right: auto;
+  .interest-support .signals-close .q {
+    max-width: 520px;
     font-size: clamp(1.18rem, 4.6vw, 1.55rem);
   }
 
-  .dobra2-right .section-head,
-  .dobra2-right .signals-close,
-  .dobra2-right .section-cta {
-    width: 100%;
+  .interest-support .section-cta {
+    justify-content: flex-start;
   }
 
-  .dobra2-right .section-cta {
-    justify-content: center;
-    margin-top: 4px;
-  }
-
-  .dobra2-right .section-cta .btn {
+  .interest-support .section-cta .btn {
     min-height: 48px;
     padding: 12px 18px;
     border-radius: 14px;
@@ -111,9 +90,24 @@
     max-width: 280px;
   }
 
-  .scene {
-    max-width: 440px;
-    margin: 0 auto;
+  .interest-gallery {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    max-width: 100%;
+    padding: 0 12px 18px;
+    margin: 0;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    animation: none;
+    filter: drop-shadow(0 18px 34px rgba(var(--graphite-rgb), 0.12));
+  }
+
+  .intent-card {
+    flex: 0 0 min(58vw, 250px);
+    min-height: 0;
+    scroll-snap-align: start;
+    margin-left: -12px;
   }
 
   .nav-cta .btn-ghost {
@@ -132,236 +126,6 @@
     object-fit: contain;
   }
   .nav-cta { flex-shrink: 0; }
-
-  /* Dobra 3: os dois cards no mesmo ponto (centro), exibidos em sequência via main.js.
-     Centralização por margin:auto (sem transform), pois no mobile o GSAP anima só a opacidade. */
-  .d3card--right { display: block; }
-  .d3card {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    width: 84%;
-    max-width: 360px;
-    height: fit-content;
-    max-height: 84vh;
-    overflow-y: auto;
-    transform: none;
-  }
-
-  /* Card direito ("O que você não vê") tem 8 linhas — compactar para caber e não estourar */
-  .d3card--right { padding: 16px 14px 12px; }
-  .d3card--right .d3card-head { margin-bottom: 10px; gap: 10px; }
-  .d3card--right .d3card-icon { width: 32px; height: 32px; }
-  .d3card--right .d3card-icon svg { width: 16px; height: 16px; }
-  .d3card--right .d3card-title { font-size: 0.85rem; }
-  .d3card--right .d3card-rows { gap: 4px; }
-  .d3card--right .d3row { padding: 5px 8px; gap: 7px; }
-  .d3card--right .d3row-icon { width: 15px; height: 15px; }
-  .d3card--right .d3row-icon svg { width: 14px; height: 14px; }
-  .d3card--right .d3row-label { font-size: 0.7rem; }
-  .d3card--right .d3not { font-size: 0.62rem; }
-  .d3card--right .d3card-footer { margin-top: 10px; padding-top: 9px; font-size: 0.74rem; }
-
-  /* Dobra 3 timeline: cards de estágio (Interesse, Visita...) menores p/ caber ao lado da linha */
-  .tl-stage-card { width: 38vw; max-width: 150px; }
-  .tl-card--right { left: calc(50% + 16px); }
-  .tl-card--left  { right: calc(50% + 16px); }
-  .tl-stage-card p { font-size: 0.62rem; line-height: 1.35; }
-
-  /* Badges "CRM TRADICIONAL" e "crminer": menores e mais à esquerda p/ não encavalar nos cards */
-  .tl-crm-badge,
-  .tl-crm-badge-crminer { left: 3%; }
-  .tl-crm-badge span,
-  .tl-crm-badge-crminer span { font-size: 0.55rem; letter-spacing: 0.05em; }
-  .tl-crm-badge .tl-crm-sub,
-  .tl-crm-badge-crminer .tl-crm-sub { font-size: 0.48rem !important; }
-  /* Desce o badge "crminer" (linha permanece no lugar) */
-  .tl-crm-badge-crminer { bottom: 2%; }
-
-  /* Títulos "A venda é só a ponta / o crminer captura tudo que vem antes" — menores p/ caber */
-  .d3-p2-text { font-size: 1.35rem; }
-  .d3-finale-h2 {
-    font-size: 1.15rem;
-    white-space: normal;
-    width: 88%;
-    max-width: 340px;
-  }
-
-  /* Como Funciona: cards sticky compactos. */
-  #how {
-    padding: 84px 0 72px;
-    overflow: visible;
-  }
-
-  .how-content {
-    padding: 0 1.15rem;
-  }
-
-  .how-heading {
-    font-size: clamp(1.9rem, 6vw, 2.8rem);
-    line-height: 1.08;
-  }
-
-  .how-subhead {
-    font-size: 0.95rem;
-  }
-
-  .how-head {
-    margin-bottom: 28px;
-  }
-
-  .how-stack {
-    gap: 22vh;
-  }
-
-  .how-step-card {
-    position: sticky;
-    top: 84px;
-    height: auto;
-    min-height: min(720px, calc(100vh - 102px));
-    max-height: none;
-    grid-template-columns: 1fr;
-    gap: 8px;
-    padding: 8px;
-    border-radius: 24px;
-  }
-
-  .how-step-card + .how-step-card {
-    margin-top: 0;
-  }
-
-  .how-card-copy {
-    gap: 16px;
-    padding: 22px;
-    height: auto;
-    align-self: stretch;
-  }
-
-  .how-card-kicker span {
-    font-size: clamp(2.6rem, 12vw, 5.2rem);
-  }
-
-  .how-card-kicker small {
-    font-size: 0.64rem;
-  }
-
-  .how-card-copy h3 {
-    margin-top: 0;
-    font-size: clamp(1.35rem, 4.6vw, 2.15rem);
-  }
-
-  .how-card-copy p {
-    font-size: 0.86rem;
-  }
-
-  .how-tags span {
-    min-height: 30px;
-    font-size: 0.72rem;
-  }
-
-  .how-card-media {
-    min-height: min(44vh, 390px);
-    height: auto;
-  }
-
-  .how-overlay-card {
-    width: min(72%, 300px);
-    min-height: 118px;
-  }
-
-  .how-overlay-pill {
-    min-height: 34px;
-    font-size: 0.72rem;
-  }
-
-  /* Rede tablet: ícones menores */
-  .net-node {
-    width: 44px;
-    height: 44px;
-  }
-
-  .net-node__icon {
-    width: 44px;
-    height: 44px;
-  }
-
-  .net-node__icon svg {
-    width: 19px;
-    height: 19px;
-  }
-
-  /* Labels migram para abaixo do ícone (sem overflow lateral) */
-  .net-node--left .net-node__label,
-  .net-node--right .net-node__label {
-    right: auto;
-    left: 50%;
-    top: calc(100% + 6px);
-    transform: translateX(-50%);
-    text-align: center;
-  }
-
-  .net-node__label strong { font-size: 0.68rem; }
-  .net-node__label span   { font-size: 0.58rem; }
-
-  .iceberg-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ice-stack {
-    max-width: 380px;
-  }
-
-  .journey-text {
-    left: 24px;
-    right: 24px;
-  }
-
-  .journey-text h3 {
-    font-size: clamp(1.4rem, 5vw, 1.8rem);
-  }
-
-  .journey-header {
-    top: 80px;
-  }
-
-  .compare {
-    grid-template-columns: 1fr;
-  }
-
-  /* Benefícios: 5 numa única linha também no mobile, bem compacto/sutil */
-  .benefits {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
-    max-width: 100%;
-    margin-top: 36px;
-  }
-  .benefit {
-    padding: 4px 2px;
-    gap: 6px;
-  }
-  .benefit .ic { width: 30px; height: 30px; border-radius: 8px; }
-  .benefit .ic svg { width: 14px; height: 14px; }
-  .benefit span { font-size: 0.58rem; line-height: 1.25; }
-
-  /* Impacto: empilhar o fluxo na vertical (cards um sobre o outro) */
-  .imp-flow {
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-  }
-
-  .imp-panel-group {
-    max-width: 320px;
-    width: 100%;
-  }
-
-  .imp-arrow {
-    transform: rotate(90deg);
-    padding-top: 0;
-    align-self: center;
-  }
 
   /* CTA final: empilhar (imagem em cima, conteúdo embaixo) e centralizar tudo */
   .cta-grid {
@@ -407,9 +171,6 @@
     width: 100%;
   }
 
-  /* Dobra 3 mobile: padding um pouco menor (centralização herdada do bloco 768px) */
-  .d3card { padding: 20px 16px 16px; }
-
   /* Header: botão primário ainda mais compacto + logo menor em telas estreitas */
   .nav-cta .btn {
     padding: 6px 12px;
@@ -421,77 +182,12 @@
   footer { padding: 60px 0 40px; }
   .foot-quote { margin-bottom: 44px; }
 
-  /* Como Funciona mobile: cards em uma coluna. */
-  #how { padding: 72px 0 60px; }
-  .how-content { padding: 0 0.85rem; }
-  .how-heading { font-size: clamp(1.65rem, 8vw, 2.18rem); }
-  .how-subhead { font-size: 0.86rem; line-height: 1.5; }
-  .how-step-card {
-    top: 72px;
-    min-height: min(680px, calc(100vh - 86px));
-    padding: 7px;
-    border-radius: 20px;
-  }
-  .how-step-card + .how-step-card { margin-top: 0; }
-  .how-card-copy { gap: 10px; padding: 18px; }
-  .how-card-kicker span { font-size: 2.7rem; }
-  .how-card-kicker small { max-width: 96px; font-size: 0.58rem; }
-  .how-card-copy h3 { font-size: 1.22rem; line-height: 1.06; }
-  .how-card-copy p { font-size: 0.78rem; line-height: 1.42; }
-  .how-tags { gap: 6px; }
-  .how-tags span { min-height: 28px; padding: 0 10px; font-size: 0.68rem; }
-  .how-card-media { min-height: min(38vh, 280px); }
-  .how-overlay-card { width: calc(100% - 24px); min-height: 96px; padding: 14px; }
-  .how-overlay-card strong { font-size: 1rem; }
-  .how-overlay-card span { font-size: 0.72rem; }
   .how-overlay-pill { display: none; }
 
-  /* Rede mobile: labels compactos abaixo dos ícones */
-  .net-node__label {
-    display: block;
-    left: 50%;
-    right: auto;
-    top: calc(100% + 5px);
-    width: max-content;
-    max-width: 92px;
-    transform: translateX(-50%);
-    text-align: center;
-    white-space: normal;
-  }
-
-  .net-node__label strong {
-    font-size: 0.58rem;
-    line-height: 1.1;
-  }
-
-  .net-node__label span {
-    font-size: 0.5rem;
-    line-height: 1.15;
-  }
-
-  .net-node__icon {
-    width: 38px;
-    height: 38px;
-  }
-
-  .net-node {
-    width: 38px;
-    height: 38px;
-  }
-
-  .net-node__icon svg {
-    width: 17px;
-    height: 17px;
-  }
 }
 
 /* ---------- PRICING responsivo ---------- */
 @media (max-width: 1024px) {
-  .pricing-grid {
-    grid-template-columns: 1fr;
-    max-width: 480px;
-  }
-
   /* Plano em destaque primeiro no mobile */
   .price-card--featured {
     order: -1;
@@ -539,8 +235,26 @@
     text-align: center;
   }
 
-  .hero-mockup-strip + .dobra-white {
+  .hero-mockup-strip + .interest-section {
     margin-top: 0;
     padding-top: 0;
+  }
+
+}
+
+@media (max-width: 430px) {
+  #how .how-card-copy {
+    gap: 14px;
+    padding: 24px 22px 26px;
+  }
+
+  #how .how-card-copy h3 {
+    font-size: 1.3rem;
+    line-height: 1.12;
+  }
+
+  #how .how-card-copy p {
+    font-size: 0.84rem;
+    line-height: 1.55;
   }
 }

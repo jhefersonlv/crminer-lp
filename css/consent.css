@@ -7,7 +7,7 @@
   left: 16px;
   right: 16px;
   bottom: 22px;
-  z-index: 2147483647;          /* máximo: acima do FAB de stories (9998) e do bubble "Bora conversar" (2147483646) */
+  z-index: 2147483647;          /* máximo: acima do FAB de stories (9998) e do bubble "Fale conosco" (2147483646) */
   max-width: 680px;
   margin-inline: auto;
   display: flex;

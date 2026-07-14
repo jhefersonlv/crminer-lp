@@ -3,18 +3,84 @@
    (var lenis é global — hero.js também usa)
    ============================================================ */
 var lenis = new Lenis({ duration: 1.2, smoothTouch: false });
-gsap.registerPlugin(ScrollTrigger, Draggable);
+gsap.registerPlugin(ScrollTrigger);
 gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
 gsap.ticker.lagSmoothing(0);
 lenis.on('scroll', ScrollTrigger.update);
 
-function cssVar(name) {
-  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-}
+/* ============================================================
+   NAVEGAÇÃO POR ÂNCORAS — scroll suave com offset do header
+   ============================================================ */
+(function () {
+  var header = document.getElementById('site-header');
+  var anchorLinks = Array.prototype.slice.call(document.querySelectorAll('a[href^="#"]'));
+  var menuLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
 
-function rgbaVar(name, alpha) {
-  return 'rgba(' + cssVar(name) + ',' + alpha + ')';
-}
+  function setCurrentMenu(hash) {
+    menuLinks.forEach(function (link) {
+      var isCurrent = link.getAttribute('href') === hash;
+      link.classList.toggle('is-current', isCurrent);
+      if (isCurrent) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  }
+
+  function getOffset() {
+    return -((header ? header.offsetHeight : 0) + 18);
+  }
+
+  anchorLinks.forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      var hash = link.getAttribute('href');
+      if (!hash || hash === '#') return;
+
+      var target = document.querySelector(hash);
+      if (!target) return;
+
+      event.preventDefault();
+      if (header) header.classList.remove('nav-hidden');
+      setCurrentMenu(hash);
+      window.crmAnchorScrolling = true;
+
+      var anchorScrollFallback = window.setTimeout(function () {
+        window.crmAnchorScrolling = false;
+      }, 1800);
+
+      lenis.scrollTo(target, {
+        offset: getOffset(),
+        duration: 1.15,
+        easing: function (t) { return 1 - Math.pow(1 - t, 4); },
+        onComplete: function () {
+          window.clearTimeout(anchorScrollFallback);
+          window.crmAnchorScrolling = false;
+          if (window.location.hash !== hash) history.pushState(null, '', hash);
+        }
+      });
+    });
+  });
+
+  menuLinks.forEach(function (link) {
+    var hash = link.getAttribute('href');
+    var section = document.querySelector(hash);
+    if (!section) return;
+
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top 48%',
+      end: 'bottom 48%',
+      onEnter: function () { setCurrentMenu(hash); },
+      onEnterBack: function () { setCurrentMenu(hash); }
+    });
+  });
+
+  ScrollTrigger.create({
+    trigger: '#hero-scroll-driver',
+    start: 'top top',
+    end: 'bottom 52%',
+    onEnter: function () { setCurrentMenu(''); },
+    onEnterBack: function () { setCurrentMenu(''); }
+  });
+})();
 
 /* ============================================================
    STICKY HEADER — some ao rolar para baixo e volta ao rolar para cima
@@ -32,6 +98,12 @@ function rgbaVar(name, alpha) {
 
     header.classList.toggle('scrolled', currentY > 100);
 
+    if (window.crmAnchorScrolling) {
+      header.classList.remove('nav-hidden');
+      lastY = currentY;
+      return;
+    }
+
     if (currentY <= 80) {
       header.classList.remove('nav-hidden');
     } else if (Math.abs(delta) > threshold) {
@@ -48,253 +120,116 @@ function rgbaVar(name, alpha) {
 })();
 
 /* ============================================================
-   HERO LINKMINER — mascara slug e redireciona para cadastro
-   ============================================================ */
-(function () {
-  var form = document.querySelector('[data-linkminer-form]');
-  if (!form) return;
-
-  var input = form.querySelector('input[name="linkminer"]');
-  var signupUrl = form.getAttribute('action') || 'https://app.crminer.com.br/signup';
-  var paramName = input ? input.getAttribute('name') || 'linkminer' : 'linkminer';
-
-  function slugify(value) {
-    return (value || '')
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-      .replace(/[^a-z0-9-]+/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/^-|-$/g, '');
-  }
-
-  if (input) {
-    input.addEventListener('input', function () {
-      var cleaned = slugify(input.value);
-      if (input.value !== cleaned) input.value = cleaned;
-    });
-  }
-
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    var slug = input ? slugify(input.value) : '';
-    var url;
-
-    try {
-      url = new URL(signupUrl, window.location.href);
-      if (slug) url.searchParams.set(paramName, slug);
-      url = url.toString();
-    } catch (err) {
-      url = signupUrl;
-      if (slug) {
-        url += (url.indexOf('?') === -1 ? '?' : '&') + encodeURIComponent(paramName) + '=' + encodeURIComponent(slug);
-      }
-    }
-
-    if (typeof window.crmTrack === 'function') {
-      window.crmTrack('generate_lead', {
-        cta_location: 'hero-linkminer',
-        cta_label: 'Criar meu linkminer',
-        linkminer_slug_present: slug ? 'true' : 'false'
-      });
-    }
-
-    window.location.href = url;
-  });
-})();
-
-/* ============================================================
    SCROLL REVEAL — adiciona .in quando entra na viewport
    ============================================================ */
-ScrollTrigger.batch('.reveal', {
-  onEnter: function (els) {
-    els.forEach(function (el) { el.classList.add('in'); });
-  },
-  start: 'top 90%',
-  once: true
-});
-// Safety net: garante visibilidade mesmo sem scroll
-setTimeout(function () {
-  document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
-}, 2500);
+var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var revealElements = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
 
-/* ── Grades de pessoas — Dobra 6 ── */
-(function () {
-  document.querySelectorAll('.imp-persons').forEach(function (el) {
-    var total  = parseInt(el.dataset.total, 10) || 0;
-    var active = parseInt(el.dataset.active, 10) || 0;
-    for (var i = 0; i < total; i++) {
-      var p = document.createElement('span');
-      p.className = 'person-icon' + (i < active ? ' person-icon--active' : '');
-      el.appendChild(p);
-    }
+if (reduceMotion) {
+  revealElements.forEach(function (el) { el.classList.add('in'); });
+} else {
+  ScrollTrigger.batch('.reveal', {
+    interval: 0.1,
+    batchMax: 4,
+    onEnter: function (els) {
+      els.forEach(function (el, index) {
+        el.style.setProperty('--reveal-delay', (index * 75) + 'ms');
+        el.classList.add('in');
+      });
+    },
+    start: 'top 88%',
+    once: true
   });
-})();
+
+  // Safety net apenas para conteúdo já visível, sem revelar o restante da página.
+  setTimeout(function () {
+    revealElements.forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.94 && rect.bottom > 0) el.classList.add('in');
+    });
+  }, 1400);
+}
 
 /* ============================================================
-   DOBRA 3 — Timeline scroll-driven completa (GSAP scrub)
+   COMO FUNCIONA — troca interativa dos 5 passos
    ============================================================ */
 (function () {
-  var driver = document.getElementById('dobra3-driver');
-  if (!driver) return;
+  var journey = document.querySelector('[data-how-journey]');
+  if (!journey) return;
 
-  var isMobile   = window.innerWidth < 768;
-  var dots       = gsap.utils.toArray('#d3-tl-scene .tl-dot');
-  var stageCards = gsap.utils.toArray('#d3-tl-scene .tl-stage-card');
+  var triggers = Array.prototype.slice.call(journey.querySelectorAll('[data-how-target]'));
+  var panels = Array.prototype.slice.call(journey.querySelectorAll('[data-how-panel]'));
+  var currentNumber = journey.querySelector('[data-how-current]');
+  var progressBar = journey.querySelector('[data-how-progress]');
+  var positionText = journey.querySelector('[data-how-position]');
+  var prevButton = journey.querySelector('[data-how-prev]');
+  var nextButton = journey.querySelector('[data-how-next]');
+  var activeIndex = 0;
+  if (!triggers.length || !panels.length) return;
 
-  // transform-origin dos cards para o finale (fora da timeline — estático)
-  gsap.set('.d3card--left',  { transformOrigin: 'top left' });
-  gsap.set('.d3card--right', { transformOrigin: 'bottom right' });
+  function activate(step, focusTab) {
+    var nextIndex = Math.max(0, triggers.findIndex(function (trigger) {
+      return trigger.getAttribute('data-how-target') === step;
+    }));
+    activeIndex = nextIndex;
 
-  var d3tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#dobra3-driver',
-      start: 'top top',
-      end: '+=5000',  // mais espaço → cena mais fluida
-      scrub: 1
+    triggers.forEach(function (trigger) {
+      var active = trigger.getAttribute('data-how-target') === step;
+      trigger.classList.toggle('is-active', active);
+      trigger.setAttribute('aria-selected', active ? 'true' : 'false');
+      trigger.setAttribute('tabindex', active ? '0' : '-1');
+      if (active && focusTab) trigger.focus({ preventScroll: true });
+    });
+
+    panels.forEach(function (panel) {
+      var active = panel.getAttribute('data-how-panel') === step;
+      panel.classList.toggle('is-active', active);
+      panel.setAttribute('aria-hidden', active ? 'false' : 'true');
+    });
+
+    if (currentNumber) currentNumber.textContent = String(activeIndex + 1).padStart(2, '0');
+    if (progressBar) progressBar.style.width = (((activeIndex + 1) / triggers.length) * 100) + '%';
+    if (positionText) positionText.textContent = 'Etapa ' + (activeIndex + 1) + ' de ' + triggers.length;
+    if (prevButton) prevButton.disabled = activeIndex === 0;
+    if (nextButton) {
+      var isLast = activeIndex === triggers.length - 1;
+      nextButton.querySelector('span').textContent = isLast ? 'Voltar ao início' : 'Próxima etapa';
+      nextButton.setAttribute('aria-label', isLast ? 'Voltar para a primeira etapa' : 'Avançar para a próxima etapa');
     }
-  });
-
-  // ── Título some, cards entram ──────────────────────────────
-  d3tl
-    .fromTo('#dobra3-title',
-      { opacity: 1, y: 0 },
-      { opacity: 0, y: -28, ease: 'none', duration: 2.2 }, 0);
-
-  if (!isMobile) {
-    // Desktop: os dois cards entram juntos (diagonal) e somem juntos
-    d3tl
-      .fromTo('.d3card--left',
-        { opacity: 0, x: -70 },
-        { opacity: 1, x: 0, ease: 'power2.out', duration: 4.3 }, 1.2)
-      .fromTo('.d3card--right',
-        { opacity: 0, x: 70 },
-        { opacity: 1, x: 0, ease: 'power2.out', duration: 4.3 }, 1.2)
-      .to(['.d3card--left', '.d3card--right'],
-        { opacity: 0, duration: 0.7 }, 5.5);
-  } else {
-    // Mobile: "o que você vê" e depois "o que você não vê", no mesmo ponto (só opacidade)
-    d3tl
-      .fromTo('.d3card--left',
-        { opacity: 0 }, { opacity: 1, ease: 'power2.out', duration: 1.4 }, 1.2)
-      .to('.d3card--left',
-        { opacity: 0, ease: 'power2.in', duration: 0.8 }, 3.2)
-      .fromTo('.d3card--right',
-        { opacity: 0 }, { opacity: 1, ease: 'power2.out', duration: 1.4 }, 3.8)
-      .to('.d3card--right',
-        { opacity: 0, ease: 'power2.in', duration: 0.7 }, 5.5);
   }
 
-  // ── Textos da Fase 2 ───────────────────────────────────────
-  d3tl
-    .to('#d3-tl-title',  { opacity: 1, duration: 0.1 }, 6.0)
-  .fromTo('#d3-txt1',  { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1.0 }, 6.1)
-  .fromTo('#d3-txt2',  { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1.0 }, 6.9)
-  .to(['#d3-txt1', '#d3-txt2'], { opacity: 0, duration: 0.5 }, 7.9)
-  .to('#d3-tl-title',  { opacity: 0, duration: 0.4 }, 8.2)
+  triggers.forEach(function (trigger, index) {
+    trigger.setAttribute('tabindex', trigger.classList.contains('is-active') ? '0' : '-1');
 
-  // ── Cena da timeline (permanece visível até o fim) ─────────
-  .fromTo('#d3-tl-scene',
-    { opacity: 0 }, { opacity: 1, duration: 0.4 }, 8.3)
-
-  // ── Linha vertical cresce suavemente ──────────────────────
-  .fromTo('#d3-tl-fill',
-    { height: '0%' }, { height: '100%', ease: 'none', duration: 2.2 }, 8.3);
-
-  // ── Dots + cards ativam sequencialmente (0.4s por dot = ~200px cada) ──
-  var DOT_START = 8.30;
-  var DOT_STEP  = 0.40;
-
-  dots.forEach(function (dot, i) {
-    var t       = DOT_START + i * DOT_STEP;
-    var card    = stageCards[i];
-    var isRight = card && card.classList.contains('tl-card--right');
-
-    d3tl.fromTo(dot,
-      { backgroundColor: rgbaVar('--gold-rgb', 0.12), borderColor: rgbaVar('--gold-rgb', 0.25), boxShadow: 'none' },
-      { backgroundColor: cssVar('--gold'), borderColor: rgbaVar('--gold-rgb', 0.55),
-        boxShadow: '0 0 0 6px ' + rgbaVar('--gold-rgb', 0.10) + ', 0 0 18px ' + rgbaVar('--gold-rgb', 0.24),
-        duration: 0.08 }, t);
-
-    if (card) {
-      d3tl.fromTo(card,
-        { opacity: 0, x: isRight ? 10 : -10 },
-        { opacity: 1, x: 0, duration: 0.12 }, t);
-    }
-  });
-
-  // ── Cena PERMANECE visível — finale aparece sobre ela ─────
-  d3tl
-    .fromTo('#d3-finale',
-      { opacity: 0 }, { opacity: 1, duration: 0.4 }, 10.6);
-})();
-
-/* ============================================================
-   DOBRA 4 — CARDS STICKY "CADA SINAL SE TORNA UM LEAD"
-   ============================================================ */
-(function () {
-  var section = document.getElementById('how');
-  if (!section) return;
-
-  var cards = gsap.utils.toArray('.how-step-card', section);
-  if (!cards.length) return;
-
-  var mm = gsap.matchMedia();
-
-  mm.add("(min-width: 769px)", function () {
-    gsap.set(cards, { clearProps: "transform" });
-
-    cards.forEach(function (card, index) {
-      if (index === cards.length - 1) return;
-
-      var targetScale = 1 - ((cards.length - 1 - index) * 0.025);
-
-      gsap.to(card, {
-        scale: targetScale,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: cards[index + 1],
-          start: 'top 78%',
-          end: 'top 104px',
-          scrub: true
-        }
-      });
+    trigger.addEventListener('click', function () {
+      activate(trigger.getAttribute('data-how-target'), false);
     });
 
-    return function () {
-      gsap.set(cards, { clearProps: "transform" });
-    };
+    trigger.addEventListener('keydown', function (event) {
+      var nextIndex = index;
+
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (index + 1) % triggers.length;
+      else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (index - 1 + triggers.length) % triggers.length;
+      else if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = triggers.length - 1;
+      else return;
+
+      event.preventDefault();
+      activate(triggers[nextIndex].getAttribute('data-how-target'), true);
+    });
   });
 
-  mm.add("(max-width: 768px)", function () {
-    gsap.set(cards, { clearProps: "transform" });
-
-    cards.forEach(function (card) {
-      gsap.fromTo(card,
-        { autoAlpha: 0.92, y: 18 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.45,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 86%',
-            once: true
-          }
-        });
+  if (prevButton) {
+    prevButton.addEventListener('click', function () {
+      if (activeIndex > 0) activate(triggers[activeIndex - 1].getAttribute('data-how-target'), false);
     });
+  }
 
-    return function () {
-      gsap.set(cards, { clearProps: "all" });
-    };
-  });
-
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    ScrollTrigger.getAll().forEach(function (st) {
-      if (st.trigger && section.contains(st.trigger)) st.kill();
+  if (nextButton) {
+    nextButton.addEventListener('click', function () {
+      var nextIndex = activeIndex === triggers.length - 1 ? 0 : activeIndex + 1;
+      activate(triggers[nextIndex].getAttribute('data-how-target'), false);
     });
-    gsap.set(cards, { clearProps: "all" });
   }
 })();
 
@@ -389,21 +324,218 @@ setTimeout(function () {
 })();
 
 /* ============================================================
-   BOTÕES FLUTUANTES — visibilidade sobre o hero (FAB stories + bubble "Bora conversar")
+   BOTÕES FLUTUANTES — visibilidade sobre o hero (FAB stories + bubble "Fale conosco")
    Liga a classe .hero-in-view no body enquanto o hero está em tela.
-   O CSS esconde os dois botões: no desktop só some sobre o hero;
-   durante os stories somem em qualquer viewport (via body.stories-lock).
+   O CSS esconde o contato sobre o hero em qualquer viewport e durante os stories.
    ============================================================ */
 (function () {
   var hero = document.getElementById('hero-scroll-driver');
   if (!hero) return;
   function sync(active) { document.body.classList.toggle('hero-in-view', active); }
-  var st = ScrollTrigger.create({
-    trigger: hero,
-    start: 'top top',
-    end: 'bottom top',
-    onToggle:  function (self) { sync(self.isActive); },
-    onRefresh: function (self) { sync(self.isActive); }
+  function isVisible() {
+    var rect = hero.getBoundingClientRect();
+    return rect.bottom > 0 && rect.top < window.innerHeight;
+  }
+  sync(isVisible());
+  var observer = new IntersectionObserver(function (entries) {
+    sync(entries[0].isIntersecting);
+  }, {
+    threshold: 0,
+    rootMargin: '0px'
   });
-  sync(st.isActive);
+  observer.observe(hero);
+})();
+
+/* ============================================================
+   PRICING — abre o conversacional de planos no widget lateral
+   ============================================================ */
+(function () {
+  var pricingPlansButton = document.querySelector('[data-cta="pricing-paid"]');
+  if (!pricingPlansButton) return;
+
+  function findWidgetButton() {
+    var buttons = Array.prototype.slice.call(document.querySelectorAll('button[aria-label="Abrir formulário de contato"]'));
+    return buttons.find(function (button) {
+      return button.getClientRects().length > 0;
+    });
+  }
+
+  function findWidgetIframe() {
+    return document.querySelector('iframe[data-word-forms-iframe]');
+  }
+
+  function waitForWidgetPart(getter, onReady, onTimeout) {
+    var startedAt = performance.now();
+    var timeout = 2500;
+
+    function check(now) {
+      var element = getter();
+      if (element) {
+        onReady(element);
+        return;
+      }
+      if (now - startedAt > timeout) {
+        if (onTimeout) onTimeout();
+        return;
+      }
+      window.requestAnimationFrame(check);
+    }
+
+    window.requestAnimationFrame(check);
+  }
+
+  function setPlansConversation(iframe, url) {
+    if (!iframe || iframe.src === url) return;
+    iframe.src = url;
+  }
+
+  pricingPlansButton.addEventListener('click', function (event) {
+    var plansConversationUrl = pricingPlansButton.href;
+    var iframe = findWidgetIframe();
+    event.preventDefault();
+
+    if (iframe) {
+      var visibleWidgetButton = findWidgetButton();
+      if (visibleWidgetButton) visibleWidgetButton.click();
+      setPlansConversation(iframe, plansConversationUrl);
+      return;
+    }
+
+    waitForWidgetPart(findWidgetButton, function (widgetButton) {
+      widgetButton.click();
+      waitForWidgetPart(findWidgetIframe, function (nextIframe) {
+        setPlansConversation(nextIframe, plansConversationUrl);
+      }, function () {
+        window.open(plansConversationUrl, '_blank', 'noopener');
+      });
+    }, function () {
+      window.open(plansConversationUrl, '_blank', 'noopener');
+    });
+  });
+})();
+
+/* ============================================================
+   CTA BAND — picareta pixel art acompanha o ponteiro
+   ============================================================ */
+(function () {
+  var section = document.querySelector('.cta-band');
+  if (!section) return;
+
+  var cursor = section.querySelector('.mining-cursor');
+  var particles = cursor && cursor.querySelector('.mining-particles');
+  var goldButton = section.querySelector('[data-cta="dobra3-reframe"]');
+  var desktopPointer = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 769px)');
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (!cursor || !particles || !goldButton || !desktopPointer.matches || reducedMotion.matches) return;
+
+  var x = -80;
+  var y = -80;
+  var active = false;
+  var gold = false;
+  var rafId = 0;
+  var cycleStart = 0;
+  var lastImpactCycle = -1;
+  var swingDuration = 720;
+  var impactPhase = 0.58;
+  var stoneColors = ['#343837', '#5d6361', '#858b88', '#4a4f4d'];
+  var goldColors = ['#f0b929', '#ffd34d', '#d89b0d', '#ffe17a'];
+  var stoneSound = new Audio('assets/batendo-na-pedra.mp3');
+  var goldSound = new Audio('assets/batendo-no-ouro.mp3');
+
+  stoneSound.preload = 'auto';
+  goldSound.preload = 'auto';
+  stoneSound.volume = 0.22;
+  goldSound.volume = 0.28;
+
+  function setGold(nextGold) {
+    if (gold === nextGold) return;
+    gold = nextGold;
+    cursor.classList.toggle('is-gold', gold);
+  }
+
+  function createParticle(index, isGold) {
+    var chip = document.createElement('i');
+    var directions = [
+      [-17, -17], [-7, -23], [9, -20], [17, -10], [-14, -7], [12, -3]
+    ];
+    var direction = directions[index % directions.length];
+    var palette = isGold ? goldColors : stoneColors;
+    chip.className = 'mining-particle';
+    chip.style.setProperty('--chip-x', direction[0] + 'px');
+    chip.style.setProperty('--chip-y', direction[1] + 'px');
+    chip.style.setProperty('--chip-rotate', ((index % 2 ? 1 : -1) * (45 + index * 15)) + 'deg');
+    chip.style.setProperty('--particle-color', palette[index % palette.length]);
+    chip.style.setProperty('--particle-size', (index % 3 === 0 ? 5 : 3) + 'px');
+    particles.appendChild(chip);
+    chip.addEventListener('animationend', function () { chip.remove(); }, { once: true });
+  }
+
+  function playImpactSound(isGold) {
+    var sound = isGold ? goldSound : stoneSound;
+    sound.currentTime = 0;
+    sound.play().catch(function () {});
+  }
+
+  function impact() {
+    var count = gold ? 5 : 4;
+    for (var i = 0; i < count; i += 1) createParticle(i, gold);
+    playImpactSound(gold);
+
+    if (gold) {
+      var spark = document.createElement('i');
+      spark.className = 'mining-spark';
+      particles.appendChild(spark);
+      spark.addEventListener('animationend', function () { spark.remove(); }, { once: true });
+
+      goldButton.classList.remove('is-mined');
+      void goldButton.offsetWidth;
+      goldButton.classList.add('is-mined');
+    }
+  }
+
+  function frame(now) {
+    cursor.style.setProperty('--cursor-x', (x - 11) + 'px');
+    cursor.style.setProperty('--cursor-y', (y - 56) + 'px');
+
+    if (active) {
+      var elapsed = now - cycleStart;
+      var cycle = Math.floor(elapsed / swingDuration);
+      var phase = (elapsed % swingDuration) / swingDuration;
+      if (phase >= impactPhase && cycle !== lastImpactCycle) {
+        lastImpactCycle = cycle;
+        impact();
+      }
+      rafId = window.requestAnimationFrame(frame);
+    }
+  }
+
+  section.classList.add('is-mining-enabled');
+
+  section.addEventListener('pointerenter', function (event) {
+    if (event.pointerType === 'touch') return;
+    active = true;
+    x = event.clientX;
+    y = event.clientY;
+    cycleStart = performance.now();
+    lastImpactCycle = -1;
+    setGold(goldButton.contains(event.target));
+    cursor.classList.add('is-visible');
+    if (!rafId) rafId = window.requestAnimationFrame(frame);
+  });
+
+  section.addEventListener('pointermove', function (event) {
+    if (!active || event.pointerType === 'touch') return;
+    x = event.clientX;
+    y = event.clientY;
+    setGold(goldButton.contains(event.target));
+  }, { passive: true });
+
+  section.addEventListener('pointerleave', function () {
+    active = false;
+    gold = false;
+    cursor.classList.remove('is-visible', 'is-gold');
+    goldButton.classList.remove('is-mined');
+    if (rafId) window.cancelAnimationFrame(rafId);
+    rafId = 0;
+  });
 })();

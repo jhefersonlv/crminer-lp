@@ -35,28 +35,21 @@
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function getDropDistance(card) {
-    var mainHeight = main.getBoundingClientRect().height;
-    var cardHeight = card.getBoundingClientRect().height;
-    return Math.max(0, mainHeight - cardHeight);
-  }
-
   if (reduceMotion || typeof ScrollTrigger === 'undefined') {
     cards.forEach(function (card) {
-      gsap.set(card, { y: getDropDistance(card), opacity: 1 });
+      gsap.set(card, { opacity: 1 });
     });
     return;
   }
 
   cards.forEach(function (card, index) {
     gsap.fromTo(card,
-      { y: 0, opacity: 0.94 },
+      { opacity: 0 },
       {
-        y: function () { return getDropDistance(card); },
         opacity: 1,
-        duration: 1.18,
-        delay: index * 0.08,
-        ease: 'power3.out',
+        duration: 0.72,
+        delay: index * 0.1,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: stage,
           start: 'top 78%',

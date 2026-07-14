@@ -3,15 +3,6 @@
    Casa com a identidade (global.css :root — ouro escuro, grafite).
    ============================================================ */
 
-/* Botão que abre as stories (reusa .btn .btn-primary; só espaçamento) */
-.stories-trigger {
-  margin-top: 22px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-.stories-trigger svg { width: 18px; height: 18px; }
-
 /* Overlay */
 .stories-overlay {
   position: fixed;
@@ -26,6 +17,23 @@
   opacity: 0;
   transition: opacity 0.25s var(--ease, ease);
 }
+
+body.stories-lock button[aria-label="Abrir formulário de contato"],
+body.stories-lock button[aria-label*="Fale conosco"],
+body.stories-lock [title*="Fale conosco"],
+body.stories-lock iframe[src*="linkminer.app"],
+body.stories-lock [style*="2147483646"] {
+  display: none !important;
+}
+
+body.hero-in-view button[aria-label="Abrir formulário de contato"],
+body.hero-in-view button[aria-label*="Fale conosco"],
+body.hero-in-view [title*="Fale conosco"],
+body.hero-in-view iframe[src*="linkminer.app"],
+body.hero-in-view [style*="2147483646"] {
+  display: none !important;
+}
+
 .stories-overlay.is-open { display: flex; opacity: 1; }
 
 .stories-backdrop { position: absolute; inset: 0; }
