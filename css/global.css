@@ -2218,8 +2218,9 @@ header.scrolled {
 #how .how-step-card {
   position: absolute;
   inset: 56px 10px 68px;
+  width: auto;
   display: grid;
-  grid-template-columns: minmax(280px, 0.42fr) minmax(0, 0.58fr);
+  grid-template-columns: minmax(300px, 0.48fr) minmax(0, 0.52fr);
   min-height: 0;
   height: auto;
   max-height: none;
@@ -2250,7 +2251,7 @@ header.scrolled {
 #how .how-card-copy {
   min-height: 0;
   height: auto;
-  padding: clamp(26px, 3vw, 40px);
+  padding: clamp(24px, 2.4vw, 32px);
   border-radius: 15px;
   background:
     linear-gradient(145deg, rgba(var(--gold-rgb), 0.08), transparent 38%),
@@ -2261,13 +2262,33 @@ header.scrolled {
   justify-content: flex-start;
 }
 
+#how .how-card-kicker span {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+}
+
 #how .how-card-main {
   max-width: 490px;
 }
 
 #how .how-card-copy h3 {
   max-width: 440px;
-  font-size: clamp(1.5rem, 2.35vw, 2.45rem);
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  text-wrap: balance;
+}
+
+#how .how-card-copy p {
+  text-wrap: pretty;
+}
+
+#how .how-tags {
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+
+#how .how-tags span {
+  min-height: 26px;
+  padding-inline: 8px;
+  font-size: 0.68rem;
 }
 
 #how .how-card-media {
@@ -2450,9 +2471,9 @@ header.scrolled {
   }
 
   #how .how-tags span {
-    min-height: 28px;
-    padding-inline: 10px;
-    font-size: 0.7rem;
+    min-height: 26px;
+    padding-inline: 8px;
+    font-size: 0.68rem;
   }
 
   .how-stage-controls {
@@ -2491,6 +2512,19 @@ header.scrolled {
     display: none;
   }
 
+  .how-journey {
+    grid-template-columns: minmax(220px, 0.26fr) minmax(0, 0.74fr);
+    gap: 20px;
+  }
+
+  #how .how-step-card {
+    grid-template-columns: minmax(280px, 0.44fr) minmax(0, 0.56fr);
+  }
+
+  #how .how-card-copy {
+    padding: 24px;
+  }
+
   .intent-bridge__compare {
     grid-template-columns: 1fr;
   }
@@ -2501,6 +2535,43 @@ header.scrolled {
 
   .intent-bridge__label {
     margin-bottom: 14px;
+  }
+}
+
+@media (min-width: 821px) and (max-width: 980px) {
+  .how-journey {
+    grid-template-columns: 1fr;
+  }
+
+  .how-step-nav {
+    flex-direction: row;
+    gap: 10px;
+    margin-inline: -24px;
+    padding: 0 24px 8px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .how-step-nav::before {
+    content: none;
+  }
+
+  .how-step-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .how-step-trigger {
+    min-width: 250px;
+    scroll-snap-align: start;
+  }
+
+  .how-step-trigger.is-active {
+    transform: none;
+  }
+
+  .how-stage {
+    min-height: 560px;
   }
 }
 
@@ -2559,6 +2630,16 @@ header.scrolled {
     grid-template-columns: 1fr;
     grid-template-rows: auto minmax(230px, 1fr);
   }
+
+  .how-stage-controls {
+    left: 16px;
+    right: auto;
+    justify-content: flex-start;
+  }
+
+  .how-stage-controls p {
+    display: none;
+  }
 }
 
 @media (max-width: 560px) {
@@ -2594,8 +2675,19 @@ header.scrolled {
   }
 
   #how .how-card-media {
-    min-height: 220px;
-    height: 58vw;
+    min-height: 214px;
+    height: clamp(214px, 56vw, 250px);
+    margin-bottom: 6px;
+  }
+
+  #how .how-tags {
+    gap: 4px;
+  }
+
+  #how .how-tags span {
+    min-height: 24px;
+    padding-inline: 5px;
+    font-size: 0.58rem;
   }
 
   .how-stage-progress {
@@ -2608,7 +2700,7 @@ header.scrolled {
 
   .how-stage-controls {
     left: 16px;
-    right: 14px;
+    right: auto;
   }
 
   .how-control--next {

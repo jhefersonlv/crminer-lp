@@ -165,7 +165,7 @@ if (reduceMotion) {
   var positionText = journey.querySelector('[data-how-position]');
   var prevButton = journey.querySelector('[data-how-prev]');
   var nextButton = journey.querySelector('[data-how-next]');
-  var mobileJourney = window.matchMedia('(max-width: 820px)');
+  var mobileJourney = window.matchMedia('(max-width: 980px)');
   var journeyReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   var activeIndex = 0;
   if (!triggers.length || !panels.length) return;
@@ -263,6 +263,41 @@ if (reduceMotion) {
   }
 })();
 
+/* Centraliza suavemente a jornada quando o card entra na tela. */
+(function () {
+  var stage = document.querySelector('#how .how-stage');
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var centering = false;
+
+  if (!stage || reducedMotion.matches || typeof ScrollTrigger === 'undefined') return;
+
+  function centerStage() {
+    if (centering) return;
+
+    var viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    var stageHeight = stage.getBoundingClientRect().height;
+    var visibleTop = Math.max(12, (viewportHeight - stageHeight) / 2);
+
+    centering = true;
+    lenis.scrollTo(stage, {
+      offset: -visibleTop,
+      duration: 0.72,
+      easing: function (t) { return 1 - Math.pow(1 - t, 4); },
+      onComplete: function () {
+        centering = false;
+      }
+    });
+  }
+
+  ScrollTrigger.create({
+    trigger: stage,
+    start: 'top 82%',
+    end: 'bottom 18%',
+    onEnter: centerStage,
+    onEnterBack: centerStage
+  });
+})();
+
 /* ============================================================
    TRACKING — cliques em CTA + profundidade de scroll
    Espelha cada evento em GA4 (gtag) E Microsoft Clarity.
@@ -354,9 +389,8 @@ if (reduceMotion) {
 })();
 
 /* ============================================================
-   BOTÕES FLUTUANTES — visibilidade sobre o hero (FAB stories + bubble "Fale conosco")
-   Liga a classe .hero-in-view no body enquanto o hero está em tela.
-   O CSS esconde o contato sobre o hero em qualquer viewport e durante os stories.
+   BOTÕES FLUTUANTES — visibilidade sobre o hero e a jornada "Como funciona"
+   O CSS esconde o contato nessas áreas em qualquer viewport e durante os stories.
    ============================================================ */
 (function () {
   var hero = document.getElementById('hero-scroll-driver');
@@ -374,6 +408,23 @@ if (reduceMotion) {
     rootMargin: '0px'
   });
   observer.observe(hero);
+
+  var how = document.getElementById('how');
+  if (how) {
+    function syncHow(active) { document.body.classList.toggle('how-in-view', active); }
+    function isHowVisible() {
+      var rect = how.getBoundingClientRect();
+      return rect.bottom > 0 && rect.top < window.innerHeight;
+    }
+    syncHow(isHowVisible());
+    var howObserver = new IntersectionObserver(function (entries) {
+      syncHow(entries[0].isIntersecting);
+    }, {
+      threshold: 0,
+      rootMargin: '0px'
+    });
+    howObserver.observe(how);
+  }
 })();
 
 /* ============================================================
@@ -446,7 +497,9 @@ if (reduceMotion) {
 
 /* ============================================================
    CTA BAND — picareta pixel art acompanha o ponteiro
+   Temporariamente desativada. Remova o comentário abaixo para reativar.
    ============================================================ */
+/*
 (function () {
   var section = document.querySelector('.cta-band');
   if (!section) return;
@@ -611,6 +664,7 @@ if (reduceMotion) {
   setupDesktopMining();
   setupTouchMining();
 })();
+*/
 
 /* Abas de preços no mobile; comparação lado a lado no desktop. */
 (function () {
