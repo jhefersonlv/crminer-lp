@@ -1133,6 +1133,7 @@
   background: transparent;
   border: 0;
   box-shadow: none;
+  cursor: pointer;
 }
 
 .client-logo img {
