@@ -81,9 +81,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: min(48vw, 590px);
+  width: calc(50% + 20px);
   margin: 0;
-  padding: clamp(132px, 16vh, 176px) 24px 90px clamp(28px, 7vw, 108px);
+  padding: clamp(132px, 16vh, 176px) 24px 90px max(24px, calc((100vw - var(--maxw)) / 2 + 24px));
   text-align: left;
   will-change: opacity, transform;
 }
@@ -158,9 +158,10 @@
 .hero-mockup-strip {
   position: absolute;
   top: clamp(136px, 17vh, 178px);
-  right: clamp(-560px, -26vw, -360px);
+  right: auto;
+  left: calc(50% + clamp(48px, 4vw, 64px));
   z-index: 3;
-  width: min(64vw, 1010px);
+  width: 760px;
   margin: 0;
   padding: 0;
   background: transparent;
@@ -172,6 +173,10 @@
   margin-top: 0;
   padding-top: 0;
   overflow: visible;
+}
+
+.client-logos + .interest-section {
+  padding-top: clamp(24px, 2.5vw, 36px);
 }
 
 .hero-mockup-strip .wrap {
@@ -206,7 +211,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  aspect-ratio: 1461 / 766;
+  aspect-ratio: 1461 / 820;
   min-height: 320px;
   overflow: hidden;
 }
@@ -578,8 +583,9 @@
 }
 
 .hero-pipeline-column {
-  width: 205px;
-  min-width: 205px;
+  width: 0;
+  min-width: 0;
+  flex: 1 1 0;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -1074,10 +1080,10 @@
 .hero-mockup-card {
   position: absolute;
   z-index: 4;
-  left: clamp(-76px, -5vw, -46px);
+  left: clamp(-42px, -3vw, -28px);
   right: auto;
   bottom: clamp(-24px, -1.8vw, -8px);
-  width: clamp(108px, 12.4vw, 158px);
+  width: 142px;
   height: auto;
   pointer-events: none;
   user-select: none;
@@ -1101,6 +1107,7 @@
 .client-logos__viewport {
   position: relative;
   width: 100%;
+  padding-block: 4px;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
@@ -1116,8 +1123,8 @@
 }
 
 .client-logo {
-  width: clamp(108px, 10vw, 144px);
-  min-height: 38px;
+  width: clamp(98px, 9vw, 130px);
+  min-height: 34px;
   flex: 0 0 auto;
   display: flex;
   align-items: center;
@@ -1130,14 +1137,23 @@
 
 .client-logo img {
   max-width: 100%;
-  max-height: 38px;
+  max-height: 34px;
   width: auto;
   height: auto;
   object-fit: contain;
+  scale: var(--client-logo-scale, 1);
   opacity: 0.78;
   filter: grayscale(1);
   transition: opacity 220ms var(--ease), filter 220ms var(--ease), transform 220ms var(--ease);
 }
+
+/* Equaliza a área visual dos logos usando o menor deles como referência. */
+.client-logo img[src$="55pbx.svg"] { --client-logo-scale: 0.72; }
+.client-logo img[src$="bcr.svg"] { --client-logo-scale: 0.76; }
+.client-logo img[src$="cub.svg"] { --client-logo-scale: 0.81; }
+.client-logo img[src$="Trackcash.svg"] { --client-logo-scale: 0.85; }
+.client-logo img[src$="yournext.webp"] { --client-logo-scale: 0.86; }
+.client-logo img[src$="vitrine.webp"] { --client-logo-scale: 0.76; }
 
 .client-logo img:hover {
   opacity: 1;
@@ -1238,7 +1254,6 @@
   }
 
   .hero-mockup-card {
-    width: clamp(96px, 17vw, 138px);
     left: -16px;
     right: auto;
     bottom: -18px;
@@ -1341,8 +1356,9 @@
   }
 
   .hero-pipeline-column {
-    width: 230px;
-    min-width: 230px;
+    width: 0;
+    min-width: 0;
+    flex: 1 1 0;
   }
 
   .hero-deal-card p {
@@ -1651,12 +1667,12 @@
   }
 
   .client-logo {
-    width: 104px;
-    min-height: 34px;
+    width: 94px;
+    min-height: 30px;
   }
 
   .client-logo img {
-    max-height: 34px;
+    max-height: 30px;
   }
 
   .hero-trial-cta {

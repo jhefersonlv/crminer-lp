@@ -34,6 +34,14 @@ body.hero-in-view [style*="2147483646"] {
   display: none !important;
 }
 
+body.how-in-view button[aria-label="Abrir formulário de contato"],
+body.how-in-view button[aria-label*="Fale conosco"],
+body.how-in-view [title*="Fale conosco"],
+body.how-in-view iframe[src*="linkminer.app"],
+body.how-in-view [style*="2147483646"] {
+  display: none !important;
+}
+
 .stories-overlay.is-open { display: flex; opacity: 1; }
 
 .stories-backdrop { position: absolute; inset: 0; }
