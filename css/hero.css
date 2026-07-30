@@ -1118,7 +1118,7 @@
   display: flex;
   align-items: center;
   gap: var(--client-logo-gap);
-  animation: client-logo-scroll 52s linear infinite;
+  animation: client-logo-scroll 65s linear infinite;
   will-change: transform;
 }
 
@@ -1149,12 +1149,14 @@
 }
 
 /* Equaliza a área visual dos logos usando o menor deles como referência. */
-.client-logo img[src$="55pbx.svg"] { --client-logo-scale: 0.72; }
+.client-logo img[src$="constance.png"] { --client-logo-scale: 0.78; }
 .client-logo img[src$="bcr.svg"] { --client-logo-scale: 0.76; }
 .client-logo img[src$="cub.svg"] { --client-logo-scale: 0.81; }
 .client-logo img[src$="Trackcash.svg"] { --client-logo-scale: 0.85; }
 .client-logo img[src$="yournext.webp"] { --client-logo-scale: 0.86; }
 .client-logo img[src$="vitrine.webp"] { --client-logo-scale: 0.76; }
+.client-logo img[src$="farmais-logo.png"] { --client-logo-scale: 0.92; }
+.client-logo img[src$="marina-carneiro-logo.png"] { --client-logo-scale: 1.12; }
 
 .client-logo img:hover {
   opacity: 1;
@@ -1664,7 +1666,7 @@
   }
 
   .client-logos__track {
-    animation-duration: 44s;
+    animation-duration: 55s;
   }
 
   .client-logo {
