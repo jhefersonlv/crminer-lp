@@ -6,30 +6,30 @@
 <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg" />
 <link rel="manifest" href="site.webmanifest" />
 <link rel="apple-touch-icon" href="assets/logo/logo_icon.svg" />
-<meta name="theme-color" content="#121417" />
+<meta name="theme-color" content="#FBFAF7" />
 <meta name="apple-mobile-web-app-title" content="crminer" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<title>crminer — Transforme visitantes em oportunidades</title>
-<meta name="description" content="O crminer captura leads antes da venda. Transforme cada pessoa que vê sua vitrine, escaneia um QR Code ou interage com seus canais em uma oportunidade de relacionamento." />
+<title>crminer — CRM de intenção para o varejo</title>
+<meta name="description" content="Conecte QR Code, LinkMiner, IA e WhatsApp ao CRM para transformar sinais de interesse em oportunidades de venda." />
 <link rel="canonical" href="https://crminer.com.br/" />
 <meta property="og:locale" content="pt_BR" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="crminer" />
-<meta property="og:title" content="crminer — Transforme visitantes em oportunidades" />
-<meta property="og:description" content="Capture leads antes da venda em vitrines, QR Codes e canais digitais." />
+<meta property="og:title" content="crminer — CRM de intenção para o varejo" />
+<meta property="og:description" content="Transforme sinais de interesse da loja física e dos canais digitais em oportunidades de venda." />
 <meta property="og:url" content="https://crminer.com.br/" />
 <meta property="og:image" content="https://crminer.com.br/assets/og-image.png" />
 <meta property="og:image:secure_url" content="https://crminer.com.br/assets/og-image.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="crminer — Transforme visitantes em oportunidades" />
+<meta property="og:image:alt" content="crminer — CRM de intenção para o varejo" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="crminer — Transforme visitantes em oportunidades" />
-<meta name="twitter:description" content="Capture leads antes da venda em vitrines, QR Codes e canais digitais." />
+<meta name="twitter:title" content="crminer — CRM de intenção para o varejo" />
+<meta name="twitter:description" content="Transforme sinais de interesse da loja física e dos canais digitais em oportunidades de venda." />
 <meta name="twitter:image" content="https://crminer.com.br/assets/og-image.png" />
-<meta name="twitter:image:alt" content="crminer — Transforme visitantes em oportunidades" />
+<meta name="twitter:image:alt" content="crminer — CRM de intenção para o varejo" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -73,11 +73,16 @@
 <header id="site-header">
   <div class="wrap nav">
     <a class="brand" href="#hero-scroll-driver" aria-label="crminer — início">
-      <img src="assets/logo/logo_white.png" alt="crminer" />
+      <img src="assets/logo/logo_black.png" alt="crminer" />
     </a>
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="#how">Como funciona</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#precos">Teste grátis</a>
+    </nav>
     <div class="nav-cta">
       <a class="btn btn-ghost" href="https://app.crminer.com.br/login" aria-label="Fazer login no crminer">Fazer login</a>
-      <a class="btn btn-primary" href="https://app.crminer.com.br/signup" target="_blank" rel="noopener" data-cta="header" aria-label="Começar gratuitamente com o crminer">Começar Gratuitamente</a>
+      <a class="btn btn-primary" href="https://app.crminer.com.br/signup" target="_blank" rel="noopener" data-cta="header" aria-label="Começar agora no crminer">Comece agora</a>
     </div>
   </div>
 </header>
@@ -94,653 +99,534 @@
       <!-- Cinematic depth mask -->
       <div class="hero-depth-mask" aria-hidden="true"></div>
 
-      <!-- Subtle logo silhouette -->
-      <div class="hero-logo-bg" aria-hidden="true">
-        <img src="assets/logo/logo_white_linha.png" alt="">
-      </div>
+      <img class="hero-logo-decor hero-logo-decor--bottom-left" src="assets/logo/logo_black_linha.png" alt="" aria-hidden="true" draggable="false" />
+      <img class="hero-logo-decor hero-logo-decor--top-right" src="assets/logo/logo_black_linha.png" alt="" aria-hidden="true" draggable="false" />
 
       <!-- Signal canvas (dots + connections + labels) -->
       <canvas id="hero-signals-canvas" aria-hidden="true"></canvas>
 
       <!-- Centered copy -->
       <div class="hero-content">
-        <span class="hc-badge"><span class="dot"></span>Uma nova categoria no varejo físico</span>
         <h1 id="hero-title">
-          Transforme visitantes em
-          <span class="gold-text">oportunidades.</span>
+          O CRM que transforma visitantes em <span class="gold-text">oportunidades.</span>
         </h1>
         <p class="hc-lead">
-          O movimento existe. O interesse também. <br/> O que falta é uma forma de transformar visitas em relacionamento.
+          Reúna todos os pontos onde o cliente demonstra interesse e acompanhe tudo em um só lugar. Saiba de onde ele veio, o que procura e qual é o próximo passo para transformar esse interesse em venda.
         </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#precos" data-cta="hero" aria-label="Ver planos do crminer">Quero capturar mais visitantes</a>
-          <a class="btn-link" href="https://app.crminer.com.br/login" aria-label="Fazer login no crminer">
-            Fazer login
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
+        <p class="hero-support">Crie sua primeira página de captura e comece já.</p>
+        <a class="btn btn-primary hero-trial-cta" href="https://app.crminer.com.br/signup" target="_blank" rel="noopener" data-cta="hero-trial" aria-label="Começar grátis">Criar minha página</a>
+        <p class="hero-proof">Sem cartão. Seu CRM pronto em poucos segundos.</p>
+
+        <div class="hero-mobile-mockups" aria-hidden="true">
+          <img class="hero-mobile-mockup hero-mobile-mockup--main" src="assets/mock01.png" alt="" width="1461" height="766" draggable="false" />
+          <img class="hero-mobile-mockup hero-mobile-mockup--phone" src="assets/mock03.png" alt="" width="291" height="582" draggable="false" />
         </div>
       </div>
 
-      <!-- Overlay mobile: escurece o hero quando os cards sobem ao centro -->
-      <div class="hero-mobile-overlay" aria-hidden="true"></div>
+      <!-- ============ HERO MOCKUP ============ -->
+      <section class="hero-mockup-strip" aria-label="Prévia do crminer">
+    <div class="wrap">
+      <div class="hero-mockup-stage" data-hero-mockup-stage>
+        <div class="hero-mockup-main hero-crm-mockup" role="img" aria-label="Prévia da plataforma crminer com funil Kanban de leads">
+          <div class="hero-crm-browser">
+            <div class="hero-app-shell">
 
-      <!-- Scroll-driven metric cards (full width, one at a time) -->
-      <div class="hero-cards" aria-live="polite">
-        <div class="hero-card" data-step="1">
-          <div class="hero-card-number">47</div>
-          <div class="hero-card-divider"></div>
-          <div class="hero-card-label">passaram pela vitrine</div>
+
+              <div class="hero-app-body">
+                <aside class="hero-app-sidebar" aria-hidden="true">
+                  <div class="hero-nav-item is-active">
+                    <span class="hero-nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg></span>
+                    <em>CRM</em>
+                  </div>
+                  <div class="hero-nav-item">
+                    <span class="hero-nav-icon"><svg viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3Z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span>
+                    <em>Canais</em>
+                  </div>
+                  <div class="hero-nav-item">
+                    <span class="hero-nav-icon"><svg viewBox="0 0 24 24"><path d="M3 7.5V6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v1.5"/><path d="M3 8h18l-1.3 10.4a2 2 0 0 1-2 1.6H6.3a2 2 0 0 1-2-1.6L3 8Z"/></svg></span>
+                    <em>Cadastros</em>
+                  </div>
+                  <div class="hero-nav-item">
+                    <span class="hero-nav-icon"><svg viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg></span>
+                    <em>Agenda</em>
+                  </div>
+                </aside>
+
+                <main class="hero-crm-page">
+                  <div class="hero-page-head">
+                    <div>
+                      <strong>CRM <span>(12)</span></strong>
+                      <small>CRM</small>
+                    </div>
+                    <button class="hero-new-deal" type="button" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                      Nova negociação
+                    </button>
+                  </div>
+
+                  <div class="hero-crm-toolbar">
+                    <div class="hero-view-toggle" aria-hidden="true">
+                      <span class="is-active"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg> Board</span>
+                      <span><svg viewBox="0 0 24 24"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg> Lista</span>
+                    </div>
+                    <div class="hero-crm-total">
+                      <span>Projeção de ganho:</span>
+                      <strong>R$ 24.780,00</strong>
+                      <i></i>
+                      <span>12 negociações</span>
+                    </div>
+                    <div class="hero-crm-tools" aria-hidden="true">
+                      <span class="hero-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Buscar negociações...</span>
+                      <span class="hero-filter"><svg viewBox="0 0 24 24"><path d="M3 5h18"/><path d="M6 12h12"/><path d="M10 19h4"/></svg>Filtros</span>
+                    </div>
+                  </div>
+
+                  <div class="hero-pipeline-board" aria-hidden="true">
+                    <section class="hero-pipeline-column" style="--stage-color:#3B82F6;">
+                      <div class="hero-pipeline-head">
+                        <div class="hero-pipeline-title"><span></span><strong>Novo lead</strong></div>
+                        <div class="hero-pipeline-meta"><strong>R$ 8.540,00</strong><em>|</em><span>4 negociações</span></div>
+                      </div>
+                      <article class="hero-deal-card is-featured">
+                        <span class="hero-origin-pill">Oferta QR Code</span>
+                        <div class="hero-deal-title">Interesse em vitrine</div>
+                        <p>Cliente escaneou o QR Code da campanha.</p>
+                        <div class="hero-deal-footer">
+                          <span class="hero-avatar">AM</span><span class="hero-customer">Ana Martins</span><strong>R$ 1.250</strong>
+                        </div>
+                        <div class="hero-deal-icons">
+                          <span><svg viewBox="0 0 24 24"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>1/2</span>
+                          <span><svg viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></svg>1</span>
+                          <span><svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>2</span>
+                        </div>
+                      </article>
+                      <article class="hero-deal-card">
+                        <span class="hero-origin-pill">Landing page</span>
+                        <div class="hero-deal-title">Coleção verão</div>
+                        <p>Entrou pelo LinkMiner e pediu opções.</p>
+                        <div class="hero-deal-footer">
+                          <span class="hero-avatar">BL</span><span class="hero-customer">Bruno Lima</span><strong>R$ 890</strong>
+                        </div>
+                      </article>
+                      <button class="hero-add-deal">+ Adicionar</button>
+                    </section>
+
+                    <section class="hero-pipeline-column" style="--stage-color:#F59E0B;">
+                      <div class="hero-pipeline-head">
+                        <div class="hero-pipeline-title"><span></span><strong>Em contato</strong></div>
+                        <div class="hero-pipeline-meta"><strong>R$ 10.120,00</strong><em>|</em><span>5 negociações</span></div>
+                      </div>
+                      <article class="hero-deal-card">
+                        <span class="hero-origin-pill">Widget / embed</span>
+                        <div class="hero-deal-title">Voltou 3 vezes</div>
+                        <p>Alta intenção detectada pela IA.</p>
+                        <div class="hero-deal-footer">
+                          <span class="hero-avatar">CR</span><span class="hero-customer">Camila Rocha</span><strong>R$ 2.480</strong>
+                        </div>
+                        <div class="hero-deal-icons">
+                          <span><svg viewBox="0 0 24 24"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>2/2</span>
+                          <span><svg viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></svg>1</span>
+                        </div>
+                      </article>
+                      <article class="hero-deal-card">
+                        <div class="hero-deal-title">Atendimento iniciado</div>
+                        <p>Pediu recomendação pelo WhatsApp.</p>
+                        <div class="hero-deal-footer">
+                          <span class="hero-avatar">DS</span><span class="hero-customer">Diego Santos</span><strong>R$ 1.760</strong>
+                        </div>
+                      </article>
+                      <button class="hero-add-deal">+ Adicionar</button>
+                    </section>
+
+                    <section class="hero-pipeline-column" style="--stage-color:#8B5CF6;">
+                      <div class="hero-pipeline-head">
+                        <div class="hero-pipeline-title"><span></span><strong>Proposta</strong></div>
+                        <div class="hero-pipeline-meta"><strong>R$ 6.120,00</strong><em>|</em><span>3 negociações</span></div>
+                      </div>
+                      <article class="hero-deal-card">
+                        <span class="hero-origin-pill">Manual</span>
+                        <div class="hero-deal-title">Oferta enviada</div>
+                        <p>Próxima ação agendada para hoje.</p>
+                        <div class="hero-deal-footer">
+                          <span class="hero-avatar">FA</span><span class="hero-customer">Fernanda Alves</span><strong>R$ 3.200</strong>
+                        </div>
+                        <div class="hero-deal-icons">
+                          <span><svg viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></svg>2</span>
+                          <span><svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>1</span>
+                        </div>
+                      </article>
+                      <div class="hero-empty-slot">Sem negociações</div>
+                      <button class="hero-add-deal">+ Adicionar</button>
+                    </section>
+
+                    <section class="hero-pipeline-column" style="--stage-color:#22C55E;">
+                      <div class="hero-pipeline-head">
+                        <div class="hero-pipeline-title"><span></span><strong>Ganho</strong></div>
+                        <div class="hero-pipeline-meta"><strong>R$ 3.200,00</strong><em>|</em><span>1 negociação</span></div>
+                      </div>
+                      <article class="hero-deal-card">
+                        <span class="hero-origin-pill">Conversão</span>
+                        <div class="hero-deal-title">Venda concluída</div>
+                        <p>Oportunidade marcada como ganha.</p>
+                        <div class="hero-deal-footer">
+                          <span class="hero-avatar">FA</span><span class="hero-customer">Fernanda Alves</span><strong>R$ 3.200</strong>
+                        </div>
+                        <div class="hero-deal-icons">
+                          <span><svg viewBox="0 0 24 24"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Concluída</span>
+                        </div>
+                      </article>
+                      <div class="hero-empty-slot">Sem negociações</div>
+                      <button class="hero-add-deal">+ Adicionar</button>
+                    </section>
+                  </div>
+                </main>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="hero-card" data-step="2">
-          <div class="hero-card-number">200</div>
-          <div class="hero-card-divider"></div>
-          <div class="hero-card-label">clicaram no Instagram</div>
+
+        <img class="hero-mockup-card hero-mockup-card--phone" src="assets/mock03.png" alt="" width="291" height="582" aria-hidden="true" loading="eager" data-hero-mockup-card />
+
+      </div>
+    </div>
+      </section>
+
+    </div>
+  </section>
+
+  <!-- ============ CLIENTES ============ -->
+  <section class="client-logos" aria-label="Clientes crminer">
+    <div class="wrap">
+      <div class="client-logos__viewport">
+        <div class="client-logos__track" aria-label="Logos de clientes crminer">
+          <div class="client-logo">
+            <img src="assets/clients/constance.png" alt="Constance" width="952" height="108" loading="lazy" />
+          </div>
+          <div class="client-logo">
+            <img src="assets/clients/abioptica.png" alt="ABI Óptica" width="239" height="115" loading="lazy" />
+          </div>
+          <div class="client-logo">
+            <img src="assets/clients/bcr.svg" alt="BCR.CX" width="148" height="41" loading="lazy" />
+          </div>
+          <div class="client-logo client-logo--inverse">
+            <img src="assets/clients/cub.svg" alt="CUB" width="180" height="57" loading="lazy" />
+          </div>
+          <div class="client-logo">
+            <img src="assets/clients/Trackcash.svg" alt="TrackCash" width="164" height="57" loading="lazy" />
+          </div>
+          <div class="client-logo">
+            <img src="assets/clients/yournext.webp" alt="YourNext" width="256" height="49" loading="lazy" />
+          </div>
+          <div class="client-logo client-logo--inverse">
+            <img src="assets/clients/vitrine.webp" alt="Vitrine" width="176" height="49" loading="lazy" />
+          </div>
+          <div class="client-logo">
+            <img src="assets/clients/constance.png" alt="Constance" width="952" height="108" loading="lazy" />
+          </div>
+          <div class="client-logo">
+            <img src="assets/clients/farmais-logo.png" alt="Farmais" width="560" height="190" loading="lazy" />
+          </div>
+          <div class="client-logo">
+            <img src="assets/clients/marina-carneiro-logo.png" alt="Marina Carneiro" width="880" height="360" loading="lazy" />
+          </div>
+          <div class="client-logo" aria-hidden="true">
+            <img src="assets/clients/constance.png" alt="" width="952" height="108" loading="lazy" />
+          </div>
+          <div class="client-logo" aria-hidden="true">
+            <img src="assets/clients/abioptica.png" alt="" width="239" height="115" loading="lazy" />
+          </div>
+          <div class="client-logo" aria-hidden="true">
+            <img src="assets/clients/bcr.svg" alt="" width="148" height="41" loading="lazy" />
+          </div>
+          <div class="client-logo client-logo--inverse" aria-hidden="true">
+            <img src="assets/clients/cub.svg" alt="" width="180" height="57" loading="lazy" />
+          </div>
+          <div class="client-logo" aria-hidden="true">
+            <img src="assets/clients/Trackcash.svg" alt="" width="164" height="57" loading="lazy" />
+          </div>
+          <div class="client-logo" aria-hidden="true">
+            <img src="assets/clients/yournext.webp" alt="" width="256" height="49" loading="lazy" />
+          </div>
+          <div class="client-logo client-logo--inverse" aria-hidden="true">
+            <img src="assets/clients/vitrine.webp" alt="" width="176" height="49" loading="lazy" />
+          </div>
+          <div class="client-logo" aria-hidden="true">
+            <img src="assets/clients/constance.png" alt="" width="952" height="108" loading="lazy" />
+          </div>
+          <div class="client-logo" aria-hidden="true">
+            <img src="assets/clients/farmais-logo.png" alt="" width="560" height="190" loading="lazy" />
+          </div>
+          <div class="client-logo" aria-hidden="true">
+            <img src="assets/clients/marina-carneiro-logo.png" alt="" width="880" height="360" loading="lazy" />
+          </div>
         </div>
-        <div class="hero-card" data-step="3">
-          <div class="hero-card-number">89</div>
-          <div class="hero-card-divider"></div>
-          <div class="hero-card-label">visitaram a loja</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOBRA 2 — SINAIS DE INTENCAO ============ -->
+  <section class="dobra interest-section" aria-labelledby="sig-title">
+    <div class="wrap interest-layout">
+      <div class="interest-copy">
+        <div class="section-head interest-head">
+          <span class="eyebrow reveal">O problema</span>
+          <h2 id="sig-title" class="reveal" style="transition-delay:.04s">
+            <span>No e&#8209;commerce, cada clique conta.</span>
+            <span>Na loja física, quase tudo se perde.</span>
+          </h2>
         </div>
-        <div class="hero-card" data-step="4">
-          <div class="hero-card-number">23</div>
-          <div class="hero-card-divider"></div>
-          <div class="hero-card-label">escanearam QR Code</div>
-        </div>
-        <div class="hero-card" data-step="5">
-          <div class="hero-card-number">12</div>
-          <div class="hero-card-divider"></div>
-          <div class="hero-card-label">abriram o WhatsApp</div>
+
+        <div class="interest-support">
+          <p class="lead reveal" style="transition-delay:.08s">Clientes olham vitrines, entram na loja, fazem perguntas e demonstram interesse. Mas, sem contato e contexto, eles desaparecem quando não compram.</p>
+
+          <div class="signals-close reveal" style="transition-delay:.12s">
+            <div class="q">Quantos desses interessados você consegue contatar amanhã?</div>
+          </div>
+
         </div>
       </div>
 
-      <!-- Finale overlay -->
-      <div class="hero-finale" aria-hidden="true">
-        <p class="finale-line finale-line-1">O problema não é tráfego.</p>
-        <p class="finale-line finale-line-2">É <span class="gold-finale">captura.</span></p>
+      <div class="interest-gallery reveal" style="transition-delay:.04s" aria-label="Sinais de interesse que acontecem em diferentes pontos da jornada">
+        <article class="intent-card">
+          <img src="assets/intent/intent-vitrine.webp" alt="Mão segurando celular em uma loja, representando sinais digitais de interesse" width="941" height="1672" loading="lazy">
+        </article>
 
-        <button class="finale-scroll-cta" aria-label="Ver como o crminer resolve">
-          <span class="finale-scroll-label">Veja como resolver</span>
-          <span class="finale-scroll-arrow" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 5v14M5 15l7 7 7-7"/>
-            </svg>
-          </span>
+        <article class="intent-card">
+          <img src="assets/intent/intent-qr.webp" alt="Pessoa olhando uma vitrine de loja e demonstrando interesse" width="941" height="1672" loading="lazy">
+        </article>
+
+        <article class="intent-card">
+          <img src="assets/intent/intent-loja.webp" alt="Pessoa escaneando um QR Code em uma loja física elegante" width="941" height="1672" loading="lazy">
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ COMO FUNCIONA ============ -->
+  <section id="how" aria-labelledby="how-title">
+    <div class="wrap how-content">
+      <div class="how-head">
+        <div>
+          <p class="how-eyebrow">Como funciona</p>
+          <h2 id="how-title" class="how-heading">Do primeiro sinal à <span class="gold-text">próxima ação.</span></h2>
+          <p class="how-subhead">O crminer conecta o ponto de entrada, a experiência do visitante e o atendimento comercial em uma jornada contínua.</p>
+        </div>
+        <button type="button" class="btn btn-ghost how-video-cta" data-stories-open data-cta="video-how" aria-label="Ver o crminer em funcionamento">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></svg>
+          Ver em funcionamento
         </button>
       </div>
 
+      <div class="how-journey reveal" data-how-journey>
+        <div class="how-step-nav" role="tablist" aria-label="Etapas da captura de intenção">
+          <button type="button" class="how-step-trigger is-active" role="tab" id="how-tab-1" aria-selected="true" aria-controls="how-panel-1" data-how-target="1">
+            <span>01</span>
+            <strong>Capture o interesse</strong>
+            <small>Na vitrine ou no link da bio.</small>
+          </button>
+          <button type="button" class="how-step-trigger" role="tab" id="how-tab-2" aria-selected="false" aria-controls="how-panel-2" data-how-target="2">
+            <span>02</span>
+            <strong>Entregue valor</strong>
+            <small>Produto, campanha, oferta ou cupom.</small>
+          </button>
+          <button type="button" class="how-step-trigger" role="tab" id="how-tab-3" aria-selected="false" aria-controls="how-panel-3" data-how-target="3">
+            <span>03</span>
+            <strong>Qualifique com IA</strong>
+            <small>Contexto antes do atendimento.</small>
+          </button>
+          <button type="button" class="how-step-trigger" role="tab" id="how-tab-4" aria-selected="false" aria-controls="how-panel-4" data-how-target="4">
+            <span>04</span>
+            <strong>Receba a próxima ação</strong>
+            <small>CRM e WhatsApp com histórico.</small>
+          </button>
+          <button type="button" class="how-step-trigger" role="tab" id="how-tab-5" aria-selected="false" aria-controls="how-panel-5" data-how-target="5">
+            <span>05</span>
+            <strong>Continue o relacionamento</strong>
+            <small>Base própria para recompra.</small>
+          </button>
+        </div>
+
+        <div class="how-stage">
+          <div class="how-stage-progress" aria-hidden="true">
+            <span class="how-stage-progress__label">Jornada crminer</span>
+            <span class="how-stage-progress__current" data-how-current>01</span>
+            <span class="how-stage-progress__line"><i data-how-progress></i></span>
+            <span class="how-stage-progress__total">05</span>
+          </div>
+
+          <article class="how-step-card is-active" id="how-panel-1" role="tabpanel" aria-labelledby="how-tab-1" data-how-panel="1">
+            <div class="how-card-copy">
+              <div class="how-card-kicker"><span>01</span><small>Capture o interesse</small></div>
+              <div class="how-card-main">
+                <h3>O interesse nasce onde a jornada começa.</h3>
+                <p> Na loja física ou nas redes sociais, o visitante interage, inicia uma experiência conversacional e o crminer captura o primeiro sinal de interesse.</p>
+              </div>
+              <div class="how-tags"><span>Loja física</span><span>Rede Social</span><span>Campanhas</span></div>
+            </div>
+            <div class="how-card-media">
+              <img src="assets/how/step-01.webp" alt="Cliente demonstrando interesse em uma loja física" width="1043" height="1086" loading="lazy" />
+              <div class="how-overlay-pill">Interesse capturado</div>
+            </div>
+          </article>
+
+          <article class="how-step-card" id="how-panel-2" role="tabpanel" aria-labelledby="how-tab-2" data-how-panel="2" aria-hidden="true">
+            <div class="how-card-copy">
+              <div class="how-card-kicker"><span>02</span><small>Entregue valor</small></div>
+              <div class="how-card-main">
+                <h3>O visitante encontra um motivo para continuar.</h3>
+                <p>Apresente um produto, catálogo, campanha, cupom ou atendimento em uma página LinkMiner criada para aquela intenção.</p>
+              </div>
+              <div class="how-tags"><span>Produto</span><span>Oferta</span><span>LinkMiner</span></div>
+            </div>
+            <div class="how-card-media">
+              <img src="assets/how/step-02.webp" alt="Cliente acessando uma campanha por QR Code" width="1039" height="1086" loading="lazy" />
+              <div class="how-overlay-pill">Experiência relevante</div>
+            </div>
+          </article>
+
+          <article class="how-step-card" id="how-panel-3" role="tabpanel" aria-labelledby="how-tab-3" data-how-panel="3" aria-hidden="true">
+            <div class="how-card-copy">
+              <div class="how-card-kicker"><span>03</span><small>Identifique e qualifique</small></div>
+              <div class="how-card-main">
+                <h3>A IA conduz a conversa com contexto.</h3>
+                <p>Ela responde dúvidas, entende o interesse e conduz o visitante à identificação antes do atendimento comercial.</p>
+              </div>
+              <div class="how-tags"><span>IA</span><span>Interesse</span><span>Contato</span></div>
+            </div>
+            <div class="how-card-media">
+              <img src="assets/how/step-03.webp" alt="Perfil de lead enriquecido com origem e interesse" width="1158" height="1087" loading="lazy" />
+              <div class="how-overlay-pill">Lead qualificado</div>
+            </div>
+          </article>
+
+          <article class="how-step-card" id="how-panel-4" role="tabpanel" aria-labelledby="how-tab-4" data-how-panel="4" aria-hidden="true">
+            <div class="how-card-copy">
+              <div class="how-card-kicker"><span>04</span><small>Continue a jornada</small></div>
+              <div class="how-card-main">
+                <h3>Seu time recebe a próxima ação pronta.</h3>
+                <p>O lead chega ao CRM e ao WhatsApp com origem, interesse e histórico para um atendimento mais relevante.</p>
+              </div>
+              <div class="how-tags"><span>CRM</span><span>WhatsApp</span><span>Próxima ação</span></div>
+            </div>
+            <div class="how-card-media">
+              <img src="assets/how/step-04.webp" alt="Vendedor entrando em contato com um lead qualificado" width="1448" height="1086" loading="lazy" />
+              <div class="how-overlay-pill">Contexto preservado</div>
+            </div>
+          </article>
+
+          <article class="how-step-card" id="how-panel-5" role="tabpanel" aria-labelledby="how-tab-5" data-how-panel="5" aria-hidden="true">
+            <div class="how-card-copy">
+              <div class="how-card-kicker"><span>05</span><small>Relacionamento</small></div>
+              <div class="how-card-main">
+                <h3>O interesse vira relacionamento contínuo.</h3>
+                <p>O histórico fica salvo para campanhas, recompra e atendimentos mais personalizados em cada novo contato.</p>
+              </div>
+              <div class="how-tags"><span>Base própria</span><span>Recompra</span><span>Campanhas</span></div>
+            </div>
+            <div class="how-card-media">
+              <img src="assets/how/step-05.png" alt="Equipe usando dados para relacionamento e recompra" width="1536" height="1024" loading="lazy" />
+              <div class="how-overlay-pill">Jornada preservada</div>
+            </div>
+          </article>
+
+          <div class="how-stage-controls">
+            <p aria-live="polite"><span data-how-position>Etapa 1 de 5</span></p>
+            <div>
+              <button type="button" class="how-control" data-how-prev aria-label="Voltar para a etapa anterior" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg>
+              </button>
+              <button type="button" class="how-control how-control--next" data-how-next aria-label="Avançar para a próxima etapa">
+                <span>Próxima etapa</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ============ DOBRA 2 — SINAIS PERDIDOS ============ -->
-  <section class="dobra dobra-white" aria-labelledby="sig-title">
-    <div class="wrap dobra2-grid">
+  <!-- ============ O QUE VOCE RECEBE ============ -->
+  <section id="recursos" class="receive-section" aria-labelledby="receive-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow reveal">O que você recebe</span>
+        <h2 id="receive-title" class="reveal" style="transition-delay:.06s">Tudo para transformar interesse em venda.</h2>
+        <p class="lead reveal" style="transition-delay:.12s">Pontos de captura, páginas inteligentes e atendimento conectados ao mesmo histórico comercial.</p>
+      </div>
 
-      <!-- COLUNA ESQUERDA: Rede de sinais -->
-      <div class="dobra2-left">
-      <div class="network-wrap reveal" style="transition-delay:.04s">
+      <div class="receive-feature-grid" aria-label="Principais recursos incluídos no crminer">
+        <article class="receive-feature-card reveal" style="transition-delay:.04s">
+          <div class="receive-feature-copy">
+            <span class="receive-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3"/><path d="M21 21v-3"/><path d="M17 21h-1"/></svg>
+            </span>
+            <h3>Pontos inteligentes</h3>
+            <p>Transforme QR Codes e links em pontos de entrada para campanhas e atendimento.</p>
+          </div>
+          <figure class="receive-feature-media">
+            <img src="assets/qr-code-scan.webp" alt="Pessoa escaneando um QR Code em uma loja física sofisticada" width="1089" height="992" loading="lazy" />
+          </figure>
+        </article>
 
-        <!-- SVG: linhas conectoras + pontos de luz animados -->
-        <svg class="network-svg" viewBox="0 0 800 560" preserveAspectRatio="xMidYMid meet"
-             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <filter id="glow-line" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
-              <feMerge>
-                <feMergeNode in="blur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-            <!-- Máscara que apaga linhas e pontos na borda do hub central -->
-            <!-- Hub CSS top:44% → SVG y = 44%×560 = 246 | raio CSS 60px → ~76 SVG units -->
-            <radialGradient id="hub-grad" cx="400" cy="246" r="82" gradientUnits="userSpaceOnUse">
-              <stop offset="0%"   stop-color="black"/>
-              <stop offset="87%"  stop-color="black"/>
-              <stop offset="100%" stop-color="white"/>
-            </radialGradient>
-            <mask id="hub-mask">
-              <rect width="800" height="560" fill="white"/>
-              <circle cx="400" cy="246" r="82" fill="url(#hub-grad)"/>
-            </mask>
-          </defs>
-          <!-- 7 linhas + dots agrupados com máscara do hub -->
-          <g mask="url(#hub-mask)">
-          <path class="net-line" id="nl-instagram" d="M 400 246 C 240 246 280 130 120 130"/>
-          <path class="net-line" id="nl-tiktok"    d="M 400 246 Q 240 246  80 280"/>
-          <path class="net-line" id="nl-google"    d="M 400 246 C 240 246 280 430 120 430"/>
-          <path class="net-line" id="nl-vitrine"   d="M 400 246 L 400  60"/>
-          <path class="net-line" id="nl-qr"        d="M 400 246 C 560 246 520 130 680 130"/>
-          <path class="net-line" id="nl-loja"      d="M 400 246 Q 560 246 720 280"/>
-          <path class="net-line" id="nl-whatsapp"  d="M 400 246 C 560 246 520 430 680 430"/>
-          <!-- Pontos de luz: saem do ícone → morrem no centro (fade-out) -->
-          <circle class="light-dot" r="4">
-            <animateMotion dur="3s"   repeatCount="indefinite" begin="0s"   keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#nl-instagram"/></animateMotion>
-            <animate attributeName="opacity" values="1;0" dur="3s"   repeatCount="indefinite" begin="0s"  />
-          </circle>
-          <circle class="light-dot" r="4">
-            <animateMotion dur="3.5s" repeatCount="indefinite" begin="0.5s" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#nl-tiktok"   /></animateMotion>
-            <animate attributeName="opacity" values="1;0" dur="3.5s" repeatCount="indefinite" begin="0.5s"/>
-          </circle>
-          <circle class="light-dot" r="4">
-            <animateMotion dur="4s"   repeatCount="indefinite" begin="1s"   keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#nl-google"   /></animateMotion>
-            <animate attributeName="opacity" values="1;0" dur="4s"   repeatCount="indefinite" begin="1s"  />
-          </circle>
-          <circle class="light-dot" r="4">
-            <animateMotion dur="2.5s" repeatCount="indefinite" begin="1.5s" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#nl-vitrine"  /></animateMotion>
-            <animate attributeName="opacity" values="1;0" dur="2.5s" repeatCount="indefinite" begin="1.5s"/>
-          </circle>
-          <circle class="light-dot" r="4">
-            <animateMotion dur="3.2s" repeatCount="indefinite" begin="0.8s" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#nl-qr"       /></animateMotion>
-            <animate attributeName="opacity" values="1;0" dur="3.2s" repeatCount="indefinite" begin="0.8s"/>
-          </circle>
-          <circle class="light-dot" r="4">
-            <animateMotion dur="3.8s" repeatCount="indefinite" begin="0.3s" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#nl-loja"     /></animateMotion>
-            <animate attributeName="opacity" values="1;0" dur="3.8s" repeatCount="indefinite" begin="0.3s"/>
-          </circle>
-          <circle class="light-dot" r="4">
-            <animateMotion dur="3.3s" repeatCount="indefinite" begin="1.2s" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#nl-whatsapp" /></animateMotion>
-            <animate attributeName="opacity" values="1;0" dur="3.3s" repeatCount="indefinite" begin="1.2s"/>
-          </circle>
-          </g>
-        </svg>
+        <article class="receive-feature-card reveal" style="transition-delay:.08s">
+          <div class="receive-feature-copy">
+            <span class="receive-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.1 0l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1"/><path d="M14 11a5 5 0 0 0-7.1 0l-2 2a5 5 0 0 0 7.1 7.1l1.1-1.1"/></svg>
+            </span>
+            <h3>LinkMiner personalizado</h3>
+            <p>Crie páginas inteligentes para produtos, campanhas, ofertas, cupons e captação de leads.</p>
+          </div>
+          <figure class="receive-feature-media">
+            <img src="assets/card-linkminer.webp" alt="Mockup de smartphone exibindo uma página LinkMiner personalizada" width="1089" height="1024" loading="lazy" />
+          </figure>
+        </article>
+      </div>
 
-        <!-- Centro: imagem circular -->
-        <div class="net-center">
-          <img src="assets/section_2.jpeg" alt="Visitante olhando vitrine de loja">
-        </div>
-        <div class="net-hub"></div>
+      <div class="receive-support-grid" aria-label="Recursos de apoio incluídos no crminer">
+        <article class="receive-card reveal" style="transition-delay:.12s">
+          <span class="receive-icon" aria-hidden="true">
+            <img src="assets/ia.svg" alt="" loading="lazy" />
+          </span>
+          <h3>IA que atende e identifica</h3>
+          <p>Responda dúvidas, entenda o interesse e conduza visitantes à identificação antes do contato comercial.</p>
+        </article>
 
-        <!-- Nodos — Esquerda -->
-        <div class="net-node net-node--left net-node--instagram">
-          <div class="net-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.3" fill="currentColor" stroke="none"/></svg></div>
-          <div class="net-node__label"><strong>Instagram</strong><span>200 clicaram</span></div>
-        </div>
-        <div class="net-node net-node--left net-node--tiktok">
-          <div class="net-node__icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .52.04.77.11V9.66a5.7 5.7 0 0 0-.77-.05 5.69 5.69 0 1 0 5.69 5.69V8.99a7.33 7.33 0 0 0 4.3 1.38V7.28a4.3 4.3 0 0 1-3.25-1.46Z"/></svg></div>
-          <div class="net-node__label"><strong>TikTok</strong><span>Assistiu seu vídeo</span></div>
-        </div>
-        <div class="net-node net-node--left net-node--google">
-          <div class="net-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.686 2 6 4.686 6 8c0 5.25 6 14 6 14s6-8.75 6-14c0-3.314-2.686-6-6-6z"/><circle cx="12" cy="8" r="2"/></svg></div>
-          <div class="net-node__label"><strong>Google Maps</strong><span>Pesquisou sua loja</span></div>
-        </div>
+        <article class="receive-card reveal" style="transition-delay:.16s">
+          <span class="receive-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 8h.01"/><path d="M12 8h.01"/><path d="M16 8h.01"/><path d="M7 13h4"/><path d="M13 13h4"/><path d="M7 17h2"/><path d="M13 17h2"/></svg>
+          </span>
+          <h3>CRM para transformar interesse em venda</h3>
+          <p>Organize cada lead por estágio, origem, interesse, valor e próxima ação.</p>
+        </article>
 
-        <!-- Nodo — Topo -->
-        <div class="net-node net-node--top net-node--vitrine">
-          <div class="net-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l2.45-6h13.1L21 9M3 9h18M3 9v1a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0V9M5 21V11M19 21V11M5 21h14M9 21v-6h6v6"/></svg></div>
-          <div class="net-node__label"><strong>Vitrine</strong><span>47 passaram</span></div>
-        </div>
-
-        <!-- Nodos — Direita -->
-        <div class="net-node net-node--right net-node--qr">
-          <div class="net-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 21v-3M17 21h-1"/></svg></div>
-          <div class="net-node__label"><strong>QR Code</strong><span>23 escanearam</span></div>
-        </div>
-        <div class="net-node net-node--right net-node--loja">
-          <div class="net-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg></div>
-          <div class="net-node__label"><strong>Loja física</strong><span>89 visitaram</span></div>
-        </div>
-        <div class="net-node net-node--right net-node--whatsapp">
-          <div class="net-node__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div>
-          <div class="net-node__label"><strong>WhatsApp</strong><span>12 iniciaram</span></div>
-        </div>
+        <article class="receive-card reveal" style="transition-delay:.2s">
+          <span class="receive-icon" aria-hidden="true">
+            <img src="assets/client.svg" alt="" loading="lazy" />
+          </span>
+          <h3>Conheça cada cliente</h3>
+          <p>Entenda de onde ele veio, o que procurou, quantas vezes interagiu e como se relaciona com sua marca.</p>
+        </article>
 
       </div>
-      </div><!-- /dobra2-left -->
-
-      <!-- COLUNA DIREITA: Cabeçalho + fechamento -->
-      <div class="dobra2-right">
-        <div class="section-head">
-          <h2 id="sig-title" class="reveal">Sua loja recebe mais sinais do que vendas.</h2>
-          <p class="lead reveal" style="transition-delay:.08s">Clientes demonstram interesse antes de comprar. <br/> A maioria deles nunca entra no seu CRM.</p>
-        </div>
-
-        <div class="signals-close reveal">
-          
-          <div class="q">Quantos desses interessados você consegue contatar amanhã?</div>
-        </div>
-
-        <div class="section-cta reveal">
-          <a class="btn btn-primary" href="https://app.crminer.com.br/signup" target="_blank" rel="noopener" data-cta="dobra2-sinais" aria-label="Começar a capturar sinais com o crminer">Quero capturar esses sinais</a>
-        </div>
-      </div><!-- /dobra2-right -->
 
     </div>
   </section>
-
-  <!-- ============ DOBRA 3 — ICEBERG REDESIGN ============ -->
-  <div id="dobra3-driver" aria-labelledby="prob-title">
-  <div id="dobra3-sticky">
-
-    <!-- BG fixo -->
-    <div class="dobra3-bg" aria-hidden="true"></div>
-    <div class="dobra3-overlay" aria-hidden="true"></div>
-
-    <!-- SVG linhas (aparecem com os cards) -->
-    <svg class="dobra3-lines" id="dobra3-lines" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true">
-      <!-- Esquerda: card topo-esquerdo → centro do iceberg -->
-      <path class="d3line d3line--left"  d="M 340 230 L 590 295"/>
-      <!-- Direita: centro do iceberg → card fundo-direito -->
-      <path class="d3line d3line--right" d="M 615 305 L 860 380"/>
-    </svg>
-
-    <!-- Título (some com o scroll) -->
-    <div class="dobra3-title-wrap" id="dobra3-title">
-      <div class="wrap">
-        <span class="eyebrow">O problema</span>
-        <h2 id="prob-title">O problema não é falta de tráfego.<br><span class="gold">É falta de captura.</span></h2>
-        <p class="lead">Seu CRM registra quem comprou. Mas ignora quem demonstrou intenção.</p>
-      </div>
-    </div>
-
-    <!-- Cards (sobem com o scroll) -->
-    <div class="dobra3-cards-outer" id="dobra3-cards">
-      <div class="wrap dobra3-cards">
-
-        <!-- Card esquerdo: O que você vê -->
-        <div class="d3card d3card--left">
-          <div class="d3card-head">
-            <div class="d3card-icon d3card-icon--green">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            </div>
-            <div class="d3card-title">O QUE<br><span class="d3green">VOCÊ VÊ</span></div>
-          </div>
-          <div class="d3card-rows">
-            <div class="d3row">
-              <span class="d3check">✓</span>
-              <span class="d3row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg></span>
-              <div class="d3row-text"><strong>Venda realizada</strong><span>R$ 1.256,00</span></div>
-            </div>
-            <div class="d3row">
-              <span class="d3check">✓</span>
-              <span class="d3row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-              <div class="d3row-text"><strong>Cliente cadastrado</strong><span>João Silva</span></div>
-            </div>
-            <div class="d3row">
-              <span class="d3check">✓</span>
-              <span class="d3row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
-              <div class="d3row-text"><strong>Receita registrada</strong><span>+ 1 venda</span></div>
-            </div>
-          </div>
-          <div class="d3card-footer d3footer--green">Isso é apenas a ponta<br>do iceberg.</div>
-        </div>
-
-        <!-- Card direito: O que você não vê -->
-        <div class="d3card d3card--right">
-          <div class="d3card-head">
-            <div class="d3card-icon d3card-icon--red">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-            </div>
-            <div class="d3card-title">O QUE<br><span class="d3red">VOCÊ NÃO VÊ</span></div>
-          </div>
-          <div class="d3card-rows">
-            <div class="d3row">
-              <span class="d3row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4v4M9 20l-5-5 5-5M19 10v10H5"/></svg></span>
-              <span class="d3row-label">Passou pela vitrine</span>
-              <span class="d3not">Seguiu em frente</span>
-            </div>
-            <div class="d3row">
-              <span class="d3row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 21v-3M17 21h-1"/></svg></span>
-              <span class="d3row-label">Escaneou QR Code</span>
-              <span class="d3not">Você não sabe quem foi</span>
-            </div>
-            <div class="d3row">
-              <span class="d3row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.3" fill="currentColor" stroke="none"/></svg></span>
-              <span class="d3row-label">Veio do Instagram</span>
-              <span class="d3not">Visitou. Desapareceu.</span>
-            </div>
-            <div class="d3row">
-              <span class="d3row-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .52.04.77.11V9.66a5.7 5.7 0 0 0-.77-.05 5.69 5.69 0 1 0 5.69 5.69V8.99a7.33 7.33 0 0 0 4.3 1.38V7.28a4.3 4.3 0 0 1-3.25-1.46Z"/></svg></span>
-              <span class="d3row-label">Veio do TikTok</span>
-              <span class="d3not">Engajou, mas sumiu</span>
-            </div>
-            <div class="d3row">
-              <span class="d3row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l2.45-6h13.1L21 9M3 9h18M3 9v1a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0V9M5 21V11M19 21V11M5 21h14M9 21v-6h6v6"/></svg></span>
-              <span class="d3row-label">Entrou na loja</span>
-              <span class="d3not">Nunca foi identificado</span>
-            </div>
-            <div class="d3row">
-              <span class="d3row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-              <span class="d3row-label">Voltou 3 vezes</span>
-              <span class="d3not">Pronto para comprar</span>
-            </div>
-            <div class="d3row">
-              <span class="d3row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.95-1.57l1.65-8.43H6"/></svg></span>
-              <span class="d3row-label">Quase comprou</span>
-              <span class="d3not">Oportunidade perdida</span>
-            </div>
-            <div class="d3row">
-              <span class="d3row-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
-              <span class="d3row-label">Demonstrou interesse</span>
-              <span class="d3not">Sem segunda chance</span>
-            </div>
-          </div>
-          <div class="d3card-footer d3footer--red">Sinais reais. Pessoas reais.<br>Oportunidades perdidas.</div>
-        </div>
-
-      </div>
-    </div><!-- /dobra3-cards-outer -->
-
-    <!-- ── FASE 2: Timeline vertical (aparece depois dos cards) ── -->
-
-    <!-- Fase 2: textos sequenciais (JS controla cada um) -->
-    <div class="tl-title-wrap" id="d3-tl-title">
-      <div class="wrap">
-        <h2 id="d3-txt1" class="d3-p2-text">
-          A venda é só a ponta.<br>
-          <span class="gold">o crminer minera tudo que vem antes.</span>
-        </h2>
-        <p id="d3-txt2" class="d3-p2-text d3-p2-text--sub">
-          Cada interação deixa uma pista. Nós coletamos todas.
-        </p>
-      </div>
-    </div>
-
-    <!-- Cena da timeline vertical -->
-    <div class="tl-scene" id="d3-tl-scene">
-      <div class="wrap tl-scene-inner">
-
-        <div class="tl-crm-badge" aria-hidden="true">
-          <span>CRM TRADICIONAL</span>
-          <span class="tl-crm-sub">só começa aqui ↑</span>
-        </div>
-
-        <div class="tl-crm-badge-crminer" aria-hidden="true">
-          <span>crminer</span>
-          <span class="tl-crm-sub">começa aqui ↑</span>
-        </div>
-
-        <div class="tl-vline-wrap">
-          <div class="tl-vline-bg" aria-hidden="true"></div>
-          <div id="d3-tl-fill" aria-hidden="true"></div>
-
-          <div class="tl-waterline" aria-hidden="true">
-            <!-- <span class="tl-waterline-label"></span>-->
-          </div>
-
-          <div class="tl-waterline-bottom" aria-hidden="true">
-          </div>
-
-          <div class="tl-stage" data-i="0">
-            <div class="tl-dot"></div>
-            <div class="tl-stage-card tl-card--right">
-              <strong>Interesse</strong>
-              <p>Identificamos de onde o lead veio e o que buscou antes de qualquer formulário.</p>
-            </div>
-          </div>
-
-          <div class="tl-stage" data-i="1">
-            <div class="tl-dot"></div>
-            <div class="tl-stage-card tl-card--left">
-              <strong>Visita</strong>
-              <p>Mapeamos o comportamento no ponto de venda e no WhatsApp em uma base unificada.</p>
-            </div>
-          </div>
-
-          <div class="tl-stage" data-i="2">
-            <div class="tl-dot"></div>
-            <div class="tl-stage-card tl-card--right">
-              <strong>Engajamento</strong>
-              <p>Acompanhamos padrões de comportamento, frequência e canais de origem.</p>
-            </div>
-          </div>
-
-          <div class="tl-stage" data-i="3">
-            <div class="tl-dot"></div>
-            <div class="tl-stage-card tl-card--left">
-              <strong>Intenção</strong>
-              <p>Avisamos seu time no momento exato em que o lead demonstra comportamento de compra.</p>
-            </div>
-          </div>
-
-          <div class="tl-stage" data-i="4">
-            <div class="tl-dot tl-dot--surface"></div>
-            <div class="tl-stage-card tl-card--right">
-              <strong class="tl-label-gold">Compra</strong>
-              <p>Onde os outros CRMs acordam — nós já entregamos o histórico completo da jornada.</p>
-            </div>
-          </div>
-
-          <div class="tl-stage" data-i="5">
-            <div class="tl-dot tl-dot--surface"></div>
-            <div class="tl-stage-card tl-card--left">
-              <strong>Cliente</strong>
-              <p>Relacionamento contínuo com dados enriquecidos desde o primeiro contato.</p>
-            </div>
-          </div>
-
-        </div><!-- /tl-vline-wrap -->
-      </div>
-    </div><!-- /d3-tl-scene -->
-
-    <!-- Fase 2: finale — H2 no topo + cards menores (via classe no sticky) -->
-    <div id="d3-finale">
-      <h2 class="d3-finale-h2">
-        A venda é só a ponta.<br>
-        <span class="gold">o crminer minera tudo que vem antes.</span>
-      </h2>
-    </div>
-
-  </div><!-- /dobra3-sticky -->
-  </div><!-- /dobra3-driver -->
 
   <!-- ============ CTA BAND — após a reframe da timeline ============ -->
   <section class="cta-band">
     <div class="wrap">
-      <p class="cta-band-line">Pare de registrar só a ponta. <span class="gold">Comece a minerar a jornada inteira.</span></p>
-      <a class="btn btn-primary" href="https://app.crminer.com.br/signup" target="_blank" rel="noopener" data-cta="dobra3-reframe" aria-label="Começar a capturar com o crminer">Começar a capturar agora</a>
-      <p class="cta-band-micro">14 dias grátis <span class="sep">·</span> Sem cartão <span class="sep">·</span> Sem hardware</p>
+      <p class="cta-band-line">Todo sinal bruto pode virar oportunidade. <span class="gold">Comece a minerar seus melhores leads.</span></p>
+      <a class="btn btn-primary" href="https://app.crminer.com.br/signup" target="_blank" rel="noopener" data-cta="dobra3-reframe" aria-label="Começar a minerar leads grátis no crminer">Criar conta no crminer</a>
+      <p class="cta-band-micro">Sem compromisso <span class="sep">·</span> Sem cartão <span class="sep">·</span> Sem equipamentos complexos</p>
     </div>
-  </section>
 
-  <!-- ============ DOBRA 4 — CADA SINAL SE TORNA UM LEAD (SCROLL-DRIVEN PIN) ============ -->
-  <section id="how" aria-labelledby="how-title">
-    <div class="how-content">
-
-      <!-- ESQUERDA: headline + lista de títulos + descrição -->
-      <div class="how-left">
-
-        <div class="how-left-top">
-          <span class="eyebrow">Como funciona</span>
-          <h2 id="how-title" class="how-heading">
-            Cada sinal<br>se torna<br>um <span class="gold">lead.</span>
-          </h2>
-          <button type="button" class="btn btn-primary stories-trigger" data-stories-open data-cta="how-video" aria-label="Ver como funciona em vídeo">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            Ver como funciona
-          </button>
-        </div>
-
-        <div class="how-list-wrap">
-          <!-- Trilha vertical que cresce conforme o scroll -->
-          <div class="how-fill-track" aria-hidden="true">
-            <div class="how-fill" id="how-fill"></div>
-          </div>
-
-          <!-- Lista de etapas -->
-          <ul class="how-list" role="list" aria-label="Etapas da jornada">
-            <li class="how-list-item" data-index="0">
-              <span class="how-list-num">01</span>
-              <span class="how-list-title">O sinal acontece</span>
-            </li>
-            <li class="how-list-item" data-index="1">
-              <span class="how-list-num">02</span>
-              <span class="how-list-title">O visitante recebe valor</span>
-            </li>
-            <li class="how-list-item" data-index="2">
-              <span class="how-list-num">03</span>
-              <span class="how-list-title">O crminer conecta a interação</span>
-            </li>
-            <li class="how-list-item" data-index="3">
-              <span class="how-list-num">04</span>
-              <span class="how-list-title">O visitante deixa de ser anônimo</span>
-            </li>
-            <li class="how-list-item" data-index="4">
-              <span class="how-list-num">05</span>
-              <span class="how-list-title">O relacionamento começa</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Área de descrição — um por slide, trocam com fade -->
-        <div class="how-desc-area" aria-live="polite">
-          <div class="how-desc-item" data-index="0">
-            <p class="how-desc-text">Pessoas demonstram interesse todos os dias.</p>
-            <p class="how-desc-destaque">O crminer identifica esses sinais em tempo real.</p>
-          </div>
-          <div class="how-desc-item" data-index="1">
-            <p class="how-desc-text">Cupons, benefícios e experiências exclusivas.</p>
-            <p class="how-desc-destaque">Tudo começa em uma troca justa.</p>
-          </div>
-          <div class="how-desc-item" data-index="2">
-            <p class="how-desc-text">Cada interação gera contexto.</p>
-            <p class="how-desc-destaque">O interesse começa a ganhar forma.</p>
-          </div>
-          <div class="how-desc-item" data-index="3">
-            <p class="how-desc-text">Agora existe contexto.</p>
-            <p class="how-desc-destaque">Você sabe quem demonstrou interesse.</p>
-          </div>
-          <div class="how-desc-item" data-index="4">
-            <p class="how-desc-text">O que antes era apenas movimento virou oportunidade.</p>
-            <p class="how-desc-destaque">Agora sua equipe pode agir.</p>
-          </div>
-        </div>
-
+    <div class="mining-cursor" aria-hidden="true">
+      <div class="mining-pickaxe">
+        <img src="assets/picareta.png" alt="" width="64" height="64" draggable="false">
       </div>
-
-      <!-- DIREITA: imagens empilhadas, uma por slide -->
-      <div class="how-right" aria-hidden="true">
-        <div class="how-slide" data-index="0">
-          <img src="assets/journey/slide_1.png" alt="Passou pela vitrine" />
-        </div>
-        <div class="how-slide" data-index="1">
-          <img src="assets/journey/slide_2.png" alt="Escaneou o QR Code" />
-        </div>
-        <div class="how-slide" data-index="2">
-          <img src="assets/journey/slide_3.png" alt="Veio do Instagram" />
-        </div>
-        <div class="how-slide" data-index="3">
-          <img src="assets/journey/slide_4.png" alt="Entrou na loja" />
-        </div>
-        <div class="how-slide" data-index="4">
-          <img src="assets/journey/slide_5.png" alt="Lead identificado" />
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ============ DOBRA 6 — IMPACTO FINANCEIRO ============ -->
-  <section class="dobra dobra-impact" aria-labelledby="imp-title">
-    <div class="wrap">
-
-      <!-- Título + subtítulo -->
-      <div class="imp-head">
-        <h2 id="imp-title" class="reveal">Quanto vale um visitante <span class="gold">perdido?</span></h2>
-        <p class="lead reveal" style="transition-delay:.05s">
-          A maioria dos visitantes demonstra interesse.<br>
-          Mas <strong class="imp-highlight">quase ninguém</strong> deixa rastros.
-        </p>
-      </div>
-
-      <!-- Painéis de fluxo -->
-      <div class="imp-flow reveal" style="transition-delay:.1s">
-
-        <!-- Card + pessoas abaixo -->
-        <div class="imp-panel-group">
-          <div class="imp-panel">
-            <div class="imp-panel-stat">200</div>
-            <div class="imp-panel-label">visitantes</div>
-          </div>
-          <div class="imp-persons" data-total="48" data-active="0"></div>
-        </div>
-
-        <div class="imp-arrow">→</div>
-
-        <div class="imp-panel-group">
-          <div class="imp-panel">
-            <div class="imp-panel-stat">20</div>
-            <div class="imp-panel-label">demonstraram<br>interesse</div>
-          </div>
-          <div class="imp-persons" data-total="20" data-active="20"></div>
-        </div>
-
-        <div class="imp-arrow">→</div>
-
-        <div class="imp-panel-group">
-          <div class="imp-panel">
-            <div class="imp-panel-stat">3</div>
-            <div class="imp-panel-label">compraram</div>
-          </div>
-          <div class="imp-persons" data-total="3" data-active="3"></div>
-        </div>
-
-        <div class="imp-panel-group">
-          <div class="imp-panel imp-panel--lost">
-            <div class="imp-panel-question">E os outros</div>
-            <div class="imp-panel-stat imp-panel-stat--gold">17</div>
-            <div class="imp-panel-label">interessados?</div>
-          </div>
-          <div class="imp-persons imp-persons--glow" data-total="17" data-active="17"></div>
-          <p class="imp-lost-note">Não deixaram rastros.<br><span class="gold">Oportunidades perdidas.</span></p>
-        </div>
-
-      </div>
-
-      <!-- Cards de comparação 
-      <div class="imp-compare reveal" style="transition-delay:.15s">
-
-        <!-- CRM Tradicional 
-        <div class="imp-card imp-card--dim">
-          <div class="imp-card-kicker">CRM TRADICIONAL</div>
-          <p class="imp-card-main">3 clientes registrados.</p>
-          <p class="imp-card-desc">As outras 17 intenções de compra desaparecem sem deixar rastro.</p>
-
-          <img src="assets/crm_tradicional.png" alt="CRM Tradicional" class="imp-card-image">
-
-          <div class="imp-card-foot">
-            Não vê o que não foi registrado.
-          </div>
-        </div>
-
-        <!-- crminer 
-        <div class="imp-card imp-card--hi">
-          <div class="imp-card-kicker">crminer</div>
-          <p class="imp-card-main">3 clientes registrados +<br><span class="gold">17</span> oportunidades futuras identificadas.</p>
-          <p class="imp-card-desc">Transformamos sinais em oportunidades reais.</p>
-          <div class="imp-visual">
-            <img src="assets/crminer.png" alt="crminer" class="imp-card-image">
-            <div class="imp-channels">
-              <span class="imp-ch-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Vitrine"><path d="M3 9l2.45-6h13.1L21 9M3 9h18M3 9v1a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0V9M5 21V11M19 21V11M5 21h14M9 21v-6h6v6"/></svg></span>
-              <span class="imp-ch-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Instagram"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.3" fill="currentColor" stroke="none"/></svg></span>
-              <span class="imp-ch-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-label="QR Code"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 21v-3M17 21h-1"/></svg></span>
-              <span class="imp-ch-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-label="WhatsApp"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></span>
-              <span class="imp-ch-item"><svg viewBox="0 0 24 24" fill="currentColor" aria-label="TikTok"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .52.04.77.11V9.66a5.7 5.7 0 0 0-.77-.05 5.69 5.69 0 1 0 5.69 5.69V8.99a7.33 7.33 0 0 0 4.3 1.38V7.28a4.3 4.3 0 0 1-3.25-1.46Z"/></svg></span>
-              <span class="imp-ch-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Perfil"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-              <span class="imp-ch-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-label="Carrinho"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.95-1.57l1.65-8.43H6"/></svg></span>
-            </div>
-          </div>
-
-          <div class="imp-card-foot imp-card-foot--gold">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            Vê o que os outros perdem.
-          </div>
-        </div>
-
-      </div>
-      -->
-      <!-- /imp-compare -->
-
-      <!-- Fechamento -->
-      <div class="imp-close reveal" style="transition-delay:.2s">
-        <div class="imp-close-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-        </div>
-        <p>Não é sobre ter mais tráfego.<br><span class="gold">É sobre não perder oportunidades.</span></p>
-      </div>
-
-      <div class="section-cta reveal" style="transition-delay:.25s">
-        <a class="btn btn-primary" href="https://app.crminer.com.br/signup" target="_blank" rel="noopener" data-cta="impacto-perda" aria-label="Começar a usar o crminer gratuitamente">Parar de perder oportunidades</a>
-      </div>
-
+      <div class="mining-particles"></div>
     </div>
   </section>
 
@@ -750,30 +636,65 @@
 
       <div class="section-head">
         <span class="eyebrow reveal">Comece agora</span>
-        <h2 id="precos-title" class="reveal" style="transition-delay:.06s">Experimente tudo. <span class="gold">Grátis por 14 dias.</span></h2>
-        <p class="lead reveal" style="transition-delay:.12s">Acesso completo a todos os recursos do crminer. Sem cartão, sem compromisso.</p>
+        <h2 id="precos-title" class="reveal" style="transition-delay:.06s">Comece minerando sinais. <span class="gold">E evolua quando precisar de IA.</span></h2>
+        <p class="lead reveal" style="transition-delay:.12s">Use o LinkMiner gratuito para validar sua captura. Os planos completos liberam a jornada com IA, widget, CRM e inteligência comercial.</p>
       </div>
 
-      <div class="trial-wrap">
-        <article class="price-card price-card--featured trial-card reveal" style="transition-delay:.08s" aria-label="Teste grátis de 14 dias">
-          <div class="price-flag">14 dias grátis</div>
-          <div class="price-plan">Acesso total</div>
-          <p class="price-tagline">Tudo que o crminer faz, liberado — sem limites durante o teste.</p>
-          <ul class="price-features price-features--2col" role="list">
-            <li>Landing page personalizada</li>
-            <li>QR Codes rastreáveis ilimitados</li>
-            <li>Leads ilimitados no CRM</li>
-            <li>Origem de cada lead (vitrine, Instagram, QR…)</li>
-            <li>Widget de captura no seu site</li>
-            <li>Funil de vendas completo</li>
-            <li>Agenda de atendimentos</li>
-            <li>Catálogo de produtos, serviços e cupons</li>
+      <div class="pricing-tabs" role="tablist" aria-label="Escolha um plano">
+        <button class="pricing-tab is-active" type="button" role="tab" id="pricing-tab-free" aria-selected="true" aria-controls="pricing-panel-free" data-pricing-tab="free">Gratuito</button>
+        <button class="pricing-tab" type="button" role="tab" id="pricing-tab-complete" aria-selected="false" aria-controls="pricing-panel-complete" data-pricing-tab="complete" tabindex="-1">Planos completos</button>
+      </div>
+
+      <div class="pricing-grid" aria-label="Planos do crminer">
+        <article class="price-card pricing-plan reveal is-mobile-active" id="pricing-panel-free" role="tabpanel" aria-labelledby="pricing-tab-free" data-pricing-panel="free" style="transition-delay:.08s" aria-label="Plano gratuito LinkMiner">
+          <div class="price-plan-head">
+            <div>
+              <div class="price-plan">Gratuito</div>
+              <p class="price-tagline">LinkMiner limitado para começar a capturar intenção.</p>
+            </div>
+            <div class="price-value">R$ 0</div>
+          </div>
+
+          <ul class="price-features" role="list">
+            <li><strong>LinkMiner</strong> para páginas de captura</li>
+            <li>Cadastro de até <strong>5 produtos, serviços ou cupons</strong></li>
+            <li><strong>LinkMiner</strong> ativo</li>
+            <li><strong>QR Code</strong> para promoções</li>
+            <li><strong>Kanban comercial</strong> para tratar leads</li>
+            <li class="is-muted">Sem IA RAG conversacional</li>
+            <li class="is-muted">Sem widget inteligente para site</li>
+            <li class="is-muted">Sem captura avançada de intenção via IA</li>
           </ul>
-          <a class="btn btn-primary price-cta" href="https://app.crminer.com.br/signup" target="_blank" rel="noopener" data-cta="trial" aria-label="Começar o teste grátis de 14 dias">Começar 14 dias grátis</a>
+
+          <a class="btn btn-ghost price-cta" href="https://app.crminer.com.br/signup" target="_blank" rel="noopener" data-cta="pricing-free" aria-label="Começar Grátis no plano gratuito do crminer">Comece Grátis</a>
+        </article>
+
+        <article class="price-card price-card--featured pricing-plan reveal" id="pricing-panel-complete" role="tabpanel" aria-labelledby="pricing-tab-complete" data-pricing-panel="complete" style="transition-delay:.14s" aria-label="Planos completos do crminer">
+          <div class="price-flag">Mais completo</div>
+          <div class="price-plan-head">
+            <div>
+              <div class="price-plan">Planos completos</div>
+              <p class="price-tagline">Para empresas que querem capturar, qualificar e vender com inteligência.</p>
+            </div>
+            <div class="price-value"><small>a partir de</small>R$ 199</div>
+          </div>
+
+          <ul class="price-features" role="list">
+            <li><strong>Tudo do gratuito</strong>, com limites ampliados</li>
+            <li><strong>IA RAG conversacional</strong> sobre produto e empresa</li>
+            <li><strong>Widget para o site</strong> que captura intenção do visitante</li>
+            <li>QR Codes e LinkMiners para campanhas e pontos de contato</li>
+            <li>CRM com Kanban comercial, origem, interesse e próxima ação</li>
+            <li>Histórico completo da jornada do lead</li>
+            <li>Catálogo completo de produtos, serviços e cupons</li>
+            <li>Qualificação automática para o time comercial agir melhor</li>
+          </ul>
+
+          <a class="btn btn-primary price-cta" href="https://www.linkminer.app/embed/crminer?fill=true&amp;t=1784045608265&amp;serviceId=860f37f2-0240-4381-b496-ea13a52f4081&amp;product=Consultar%20Planos&amp;productImage=https%3A%2F%2Fcdn.wordvirtua.com%2F8be174ba-09ce-467f-af1c-f82c7449951b%2Fproducts%2Febd1ca5c-74f4-475e-b79f-c99e098cd2a9.webp&amp;crmOrigin=LANDING_PAGE" target="_blank" rel="noopener" data-cta="pricing-paid" aria-label="Conhecer os planos completos do crminer a partir de R$ 199">Conhecer planos completos</a>
         </article>
       </div>
 
-      <p class="pricing-note reveal" style="transition-delay:.2s">Sem cartão <span class="sep">·</span> Sem fidelidade <span class="sep">·</span> Cancele quando quiser <span class="sep">·</span> Planos e valores em breve</p>
+      <p class="pricing-note reveal" style="transition-delay:.2s">Sem compromisso <span class="sep">·</span> Evolua quando precisar de IA <span class="sep">·</span> Planos a partir de R$ 199</p>
 
     </div>
   </section>
@@ -783,14 +704,14 @@
     <div class="wrap">
       <div class="cta-grid">
         <div class="cta-img-wrap reveal">
-          <img src="assets/cta.png" alt="Loja física com clientes">
+          <img src="assets/cta.webp" alt="Loja física com clientes" width="1448" height="1086" loading="lazy">
         </div>
         <div class="cta-content reveal" style="transition-delay:.08s">
           <h2 id="cta-title">O próximo cliente da sua loja já passou por ela.</h2>
-          <p class="lead">A questão é: <strong style="color:var(--text);font-weight:700">Você conseguiu identificá-lo?</strong></p>
+          <p class="lead">A questão é: <strong style="color:var(--text);font-weight:700">você conseguiu identificá-lo?</strong></p>
           <div class="cta-actions">
-            <a class="btn btn-primary" href="https://app.crminer.com.br/signup" target="_blank" rel="noopener" data-cta="cta-final" aria-label="Começar gratuitamente com o crminer">Começar Gratuitamente</a>
-            <div class="micro">14 dias grátis <span class="sep">·</span> Sem cartão <span class="sep">·</span> Sem hardware</div>
+            <a class="btn btn-primary" href="https://app.crminer.com.br/signup" target="_blank" rel="noopener" data-cta="cta-final" aria-label="Começar agora no crminer">Comece agora</a>
+            <div class="micro">sem compromisso <span class="sep">·</span> Sem cartão <span class="sep">·</span> Sem equipamentos complexos</div>
             <!-- "Ver demonstração" oculto até termos uma demo real. Restaurar quando houver vídeo/demo. -->
             <!--
             <a class="btn-link" href="#" aria-label="Ver demonstração do crminer">
@@ -803,29 +724,8 @@
         </div>
       </div>
 
-      <div class="benefits">
-        <div class="benefit reveal">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-          <span>Em minutos</span>
-        </div>
-        <div class="benefit reveal" style="transition-delay:.06s">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.3" fill="currentColor" stroke="none"/></svg></div>
-          <span>Instagram</span>
-        </div>
-        <div class="benefit reveal" style="transition-delay:.12s">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 21v-3M17 21h-1"/></svg></div>
-          <span>QR Code</span>
-        </div>
-        <div class="benefit reveal" style="transition-delay:.18s">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="11" rx="2"/><path d="M8 21h8M12 14v7"/></svg></div>
-          <span>Sem hardware</span>
-        </div>
-        <div class="benefit reveal" style="transition-delay:.24s">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/><path d="M3 12h.01" opacity="0"/></svg></div>
-          <span>Sem fidelidade</span>
-        </div>
-      </div>
     </div>
+
   </section>
 
 </main>
@@ -866,39 +766,10 @@
   </div>
 </footer>
 
-<!-- ── Botão flutuante: ver como funciona (stories) — vídeo dentro do círculo ── -->
-<button type="button" class="stories-fab" data-stories-open data-cta="fab-video" aria-label="Ver como funciona em vídeo" title="Ver como funciona">
-  <img class="stories-fab__video" src="assets/stories/CapturaReels-poster.jpg" alt="" />
-  <span class="stories-fab__play" aria-hidden="true">
-    <svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5Z" fill="currentColor"/></svg>
-  </span>
-</button>
-<style>
-  .stories-fab{ position:fixed; right:22px; bottom:94px; width:66px; height:66px; border-radius:50%; border:2.5px solid #ffe450; box-sizing:border-box; padding:0; cursor:pointer; overflow:hidden; background:#121417; z-index:9998; -webkit-tap-highlight-color:transparent; transition:transform .2s cubic-bezier(.22,.61,.36,1); animation:storiesFabPulse 2.6s ease-out infinite; }
-  .stories-fab__video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
-  .stories-fab__play{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.18); }
-  .stories-fab__play svg{ width:22px; height:22px; color:#fff; filter:drop-shadow(0 1px 2px rgba(0,0,0,.55)); margin-left:2px; }
-  @keyframes storiesFabPulse{ 0%{ box-shadow:0 8px 24px rgba(0,0,0,.28), 0 0 0 0 rgba(255,228,80,.45); } 70%,100%{ box-shadow:0 8px 24px rgba(0,0,0,.28), 0 0 0 14px rgba(255,228,80,0); } }
-  .stories-fab:hover{ transform:scale(1.07); }
-  .stories-fab:active{ transform:scale(.96); }
-  @media (max-width:560px){ .stories-fab{ right:16px; bottom:86px; width:60px; height:60px; } }
-
-  /* ── Visibilidade dos botões flutuantes: FAB de stories + bubble "Bora conversar" ── */
-  /* Durante os stories (qualquer viewport): o overlay (z-index 1000) fica abaixo deles, então somem */
-  body.stories-lock .stories-fab,
-  body.stories-lock button[aria-label="Abrir formulário de contato"]{ display:none !important; }
-  /* No desktop, não aparecem sobre o hero — só depois dele */
-  @media (min-width:768px){
-    body.hero-in-view .stories-fab,
-    body.hero-in-view button[aria-label="Abrir formulário de contato"]{ display:none !important; }
-  }
-</style>
-
 <!-- ── Vendors: Lenis + GSAP ── -->
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js"></script>
 <!-- ── App ── -->
 <script src="js/consent.js" defer></script>
 <script src="js/main.js" defer></script>
@@ -906,12 +777,12 @@
 <script src="js/stories.js" defer></script>
 
 <!-- ── Widget crminer (formulário/contato) ── -->
-<script src="https://forms.crminer.com.br/embed.js" data-form="crminer" data-mode="bubble" data-position="bottom-right" data-color="#1DA851" data-label="Bora conversar?" async></script>
+<script src="https://linkminer.app/embed.js" data-form="crminer" data-mode="bubble" data-position="bottom-right" data-color="#2A2F35" data-label="Fale conosco" async></script>
 
 <!-- ── Page transition overlay ── -->
 <div id="page-transition" aria-hidden="true">
   <svg id="pt-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMin slice">
-    <path id="pt-path" fill="#ffffff" d="M 0 100 V 100 Q 50 100 100 100 V 100 z"/>
+    <path id="pt-path" fill="var(--white)" d="M 0 100 V 100 Q 50 100 100 100 V 100 z"/>
   </svg>
 </div>
 

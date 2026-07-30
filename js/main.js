@@ -3,18 +3,118 @@
    (var lenis é global — hero.js também usa)
    ============================================================ */
 var lenis = new Lenis({ duration: 1.2, smoothTouch: false });
-gsap.registerPlugin(ScrollTrigger, Draggable);
+gsap.registerPlugin(ScrollTrigger);
 gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
 gsap.ticker.lagSmoothing(0);
 lenis.on('scroll', ScrollTrigger.update);
 
 /* ============================================================
-   STICKY HEADER — aparece após 100px de scroll
+   NAVEGAÇÃO POR ÂNCORAS — scroll suave com offset do header
+   ============================================================ */
+(function () {
+  var header = document.getElementById('site-header');
+  var anchorLinks = Array.prototype.slice.call(document.querySelectorAll('a[href^="#"]'));
+  var menuLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
+
+  function setCurrentMenu(hash) {
+    menuLinks.forEach(function (link) {
+      var isCurrent = link.getAttribute('href') === hash;
+      link.classList.toggle('is-current', isCurrent);
+      if (isCurrent) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  }
+
+  function getOffset() {
+    return -((header ? header.offsetHeight : 0) + 18);
+  }
+
+  anchorLinks.forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      var hash = link.getAttribute('href');
+      if (!hash || hash === '#') return;
+
+      var target = document.querySelector(hash);
+      if (!target) return;
+
+      event.preventDefault();
+      if (header) header.classList.remove('nav-hidden');
+      setCurrentMenu(hash);
+      window.crmAnchorScrolling = true;
+
+      var anchorScrollFallback = window.setTimeout(function () {
+        window.crmAnchorScrolling = false;
+      }, 1800);
+
+      lenis.scrollTo(target, {
+        offset: getOffset(),
+        duration: 1.15,
+        easing: function (t) { return 1 - Math.pow(1 - t, 4); },
+        onComplete: function () {
+          window.clearTimeout(anchorScrollFallback);
+          window.crmAnchorScrolling = false;
+          if (window.location.hash !== hash) history.pushState(null, '', hash);
+        }
+      });
+    });
+  });
+
+  menuLinks.forEach(function (link) {
+    var hash = link.getAttribute('href');
+    var section = document.querySelector(hash);
+    if (!section) return;
+
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top 48%',
+      end: 'bottom 48%',
+      onEnter: function () { setCurrentMenu(hash); },
+      onEnterBack: function () { setCurrentMenu(hash); }
+    });
+  });
+
+  ScrollTrigger.create({
+    trigger: '#hero-scroll-driver',
+    start: 'top top',
+    end: 'bottom 52%',
+    onEnter: function () { setCurrentMenu(''); },
+    onEnterBack: function () { setCurrentMenu(''); }
+  });
+})();
+
+/* ============================================================
+   STICKY HEADER — some ao rolar para baixo e volta ao rolar para cima
    ============================================================ */
 (function () {
   var header = document.getElementById('site-header');
   if (!header) return;
-  function onScroll() { header.classList.toggle('scrolled', window.scrollY > 100); }
+
+  var lastY = window.scrollY || 0;
+  var threshold = 12;
+
+  function onScroll() {
+    var currentY = window.scrollY || 0;
+    var delta = currentY - lastY;
+
+    header.classList.toggle('scrolled', currentY > 100);
+
+    if (window.crmAnchorScrolling) {
+      header.classList.remove('nav-hidden');
+      lastY = currentY;
+      return;
+    }
+
+    if (currentY <= 80) {
+      header.classList.remove('nav-hidden');
+    } else if (Math.abs(delta) > threshold) {
+      header.classList.toggle('nav-hidden', delta > 0);
+      lastY = currentY;
+      return;
+    }
+
+    lastY = currentY;
+  }
+
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 })();
@@ -22,212 +122,179 @@ lenis.on('scroll', ScrollTrigger.update);
 /* ============================================================
    SCROLL REVEAL — adiciona .in quando entra na viewport
    ============================================================ */
-ScrollTrigger.batch('.reveal', {
-  onEnter: function (els) {
-    els.forEach(function (el) { el.classList.add('in'); });
-  },
-  start: 'top 90%',
-  once: true
-});
-// Safety net: garante visibilidade mesmo sem scroll
-setTimeout(function () {
-  document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
-}, 2500);
+var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var revealElements = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
 
-/* ── Grades de pessoas — Dobra 6 ── */
-(function () {
-  document.querySelectorAll('.imp-persons').forEach(function (el) {
-    var total  = parseInt(el.dataset.total, 10) || 0;
-    var active = parseInt(el.dataset.active, 10) || 0;
-    for (var i = 0; i < total; i++) {
-      var p = document.createElement('span');
-      p.className = 'person-icon' + (i < active ? ' person-icon--active' : '');
-      el.appendChild(p);
-    }
+if (reduceMotion) {
+  revealElements.forEach(function (el) { el.classList.add('in'); });
+} else {
+  ScrollTrigger.batch('.reveal', {
+    interval: 0.1,
+    batchMax: 4,
+    onEnter: function (els) {
+      els.forEach(function (el, index) {
+        el.style.setProperty('--reveal-delay', (index * 75) + 'ms');
+        el.classList.add('in');
+      });
+    },
+    start: 'top 88%',
+    once: true
   });
-})();
+
+  // Safety net apenas para conteúdo já visível, sem revelar o restante da página.
+  setTimeout(function () {
+    revealElements.forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.94 && rect.bottom > 0) el.classList.add('in');
+    });
+  }, 1400);
+}
 
 /* ============================================================
-   DOBRA 3 — Timeline scroll-driven completa (GSAP scrub)
+   COMO FUNCIONA — troca interativa dos 5 passos
    ============================================================ */
 (function () {
-  var driver = document.getElementById('dobra3-driver');
-  if (!driver) return;
+  var journey = document.querySelector('[data-how-journey]');
+  if (!journey) return;
 
-  var isMobile   = window.innerWidth < 768;
-  var dots       = gsap.utils.toArray('#d3-tl-scene .tl-dot');
-  var stageCards = gsap.utils.toArray('#d3-tl-scene .tl-stage-card');
+  var stepNav = journey.querySelector('.how-step-nav');
+  var triggers = Array.prototype.slice.call(journey.querySelectorAll('[data-how-target]'));
+  var panels = Array.prototype.slice.call(journey.querySelectorAll('[data-how-panel]'));
+  var currentNumber = journey.querySelector('[data-how-current]');
+  var progressBar = journey.querySelector('[data-how-progress]');
+  var positionText = journey.querySelector('[data-how-position]');
+  var prevButton = journey.querySelector('[data-how-prev]');
+  var nextButton = journey.querySelector('[data-how-next]');
+  var mobileJourney = window.matchMedia('(max-width: 980px)');
+  var journeyReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var activeIndex = 0;
+  if (!triggers.length || !panels.length) return;
 
-  // transform-origin dos cards para o finale (fora da timeline — estático)
-  gsap.set('.d3card--left',  { transformOrigin: 'top left' });
-  gsap.set('.d3card--right', { transformOrigin: 'bottom right' });
+  function alignMobileTrigger(trigger, immediate) {
+    if (!stepNav || !trigger || !mobileJourney.matches) return;
 
-  var d3tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#dobra3-driver',
-      start: 'top top',
-      end: '+=5000',  // mais espaço → cena mais fluida
-      scrub: 1
-    }
-  });
-
-  // ── Título some, cards entram ──────────────────────────────
-  d3tl
-    .fromTo('#dobra3-title',
-      { opacity: 1, y: 0 },
-      { opacity: 0, y: -28, ease: 'none', duration: 2.2 }, 0);
-
-  if (!isMobile) {
-    // Desktop: os dois cards entram juntos (diagonal) e somem juntos
-    d3tl
-      .fromTo('.d3card--left',
-        { opacity: 0, x: -70 },
-        { opacity: 1, x: 0, ease: 'power2.out', duration: 4.3 }, 1.2)
-      .fromTo('.d3card--right',
-        { opacity: 0, x: 70 },
-        { opacity: 1, x: 0, ease: 'power2.out', duration: 4.3 }, 1.2)
-      .to(['.d3card--left', '.d3card--right'],
-        { opacity: 0, duration: 0.7 }, 5.5);
-  } else {
-    // Mobile: "o que você vê" e depois "o que você não vê", no mesmo ponto (só opacidade)
-    d3tl
-      .fromTo('.d3card--left',
-        { opacity: 0 }, { opacity: 1, ease: 'power2.out', duration: 1.4 }, 1.2)
-      .to('.d3card--left',
-        { opacity: 0, ease: 'power2.in', duration: 0.8 }, 3.2)
-      .fromTo('.d3card--right',
-        { opacity: 0 }, { opacity: 1, ease: 'power2.out', duration: 1.4 }, 3.8)
-      .to('.d3card--right',
-        { opacity: 0, ease: 'power2.in', duration: 0.7 }, 5.5);
+    var paddingLeft = parseFloat(window.getComputedStyle(stepNav).paddingLeft) || 0;
+    var targetLeft = Math.max(0, trigger.offsetLeft - paddingLeft);
+    stepNav.scrollTo({
+      left: targetLeft,
+      behavior: immediate || journeyReducedMotion.matches ? 'auto' : 'smooth'
+    });
   }
 
-  // ── Textos da Fase 2 ───────────────────────────────────────
-  d3tl
-    .to('#d3-tl-title',  { opacity: 1, duration: 0.1 }, 6.0)
-  .fromTo('#d3-txt1',  { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1.0 }, 6.1)
-  .fromTo('#d3-txt2',  { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 1.0 }, 6.9)
-  .to(['#d3-txt1', '#d3-txt2'], { opacity: 0, duration: 0.5 }, 7.9)
-  .to('#d3-tl-title',  { opacity: 0, duration: 0.4 }, 8.2)
+  function resetMobileJourney() {
+    if (!stepNav || !mobileJourney.matches) return;
+    activeIndex = 0;
+    activate(triggers[0].getAttribute('data-how-target'), false, true);
+  }
 
-  // ── Cena da timeline (permanece visível até o fim) ─────────
-  .fromTo('#d3-tl-scene',
-    { opacity: 0 }, { opacity: 1, duration: 0.4 }, 8.3)
+  function activate(step, focusTab, immediateScroll) {
+    var nextIndex = Math.max(0, triggers.findIndex(function (trigger) {
+      return trigger.getAttribute('data-how-target') === step;
+    }));
+    activeIndex = nextIndex;
 
-  // ── Linha vertical cresce suavemente ──────────────────────
-  .fromTo('#d3-tl-fill',
-    { height: '0%' }, { height: '100%', ease: 'none', duration: 2.2 }, 8.3);
-
-  // ── Dots + cards ativam sequencialmente (0.4s por dot = ~200px cada) ──
-  var DOT_START = 8.30;
-  var DOT_STEP  = 0.40;
-
-  dots.forEach(function (dot, i) {
-    var t       = DOT_START + i * DOT_STEP;
-    var card    = stageCards[i];
-    var isRight = card && card.classList.contains('tl-card--right');
-
-    d3tl.fromTo(dot,
-      { backgroundColor: 'rgba(255,200,0,0.12)', borderColor: 'rgba(255,200,0,0.25)', boxShadow: 'none' },
-      { backgroundColor: '#FFC800', borderColor: 'rgba(255,200,0,0.60)',
-        boxShadow: '0 0 0 6px rgba(255,200,0,0.12), 0 0 18px rgba(255,200,0,0.55)',
-        duration: 0.08 }, t);
-
-    if (card) {
-      d3tl.fromTo(card,
-        { opacity: 0, x: isRight ? 10 : -10 },
-        { opacity: 1, x: 0, duration: 0.12 }, t);
-    }
-  });
-
-  // ── Cena PERMANECE visível — finale aparece sobre ela ─────
-  d3tl
-    .fromTo('#d3-finale',
-      { opacity: 0 }, { opacity: 1, duration: 0.4 }, 10.6);
-})();
-
-/* ============================================================
-   DOBRA 4 — SCROLL-DRIVEN PIN "CADA SINAL SE TORNA UM LEAD"
-   Inspirado na referência GSAP: pin + scrub + lista progressiva
-   ============================================================ */
-(function () {
-  var section    = document.getElementById('how');
-  if (!section) return;
-
-  var listItems  = gsap.utils.toArray('.how-list-item',  section);
-  var slides     = gsap.utils.toArray('.how-slide',      section);
-  var descs      = gsap.utils.toArray('.how-desc-item',  section);
-  var fill       = section.querySelector('.how-fill');
-
-  if (!listItems.length || !slides.length) return;
-
-  var total       = listItems.length;
-  var GOLD        = '#ffe450';
-  var MUTED       = 'rgba(182,186,198,0.28)';
-
-  var mm = gsap.matchMedia();
-
-  // Scroll-driven pin layout em todas as larguras (desktop e mobile)
-  mm.add("(min-width: 1px)", function () {
-    // Reset any layout props from mobile
-    gsap.set(listItems, { clearProps: "all" });
-    gsap.set(slides, { clearProps: "all" });
-    gsap.set(descs, { clearProps: "all" });
-    gsap.set(fill, { clearProps: "all" });
-
-    // Initial state
-    gsap.set(fill, { scaleY: 1 / total, transformOrigin: 'top left' });
-    gsap.set(slides, { autoAlpha: 0, scale: 1.04 });
-    gsap.set(descs,  { autoAlpha: 0, y: 8 });
-
-    gsap.set(slides[0], { autoAlpha: 1, scale: 1 });
-    gsap.set(descs[0],  { autoAlpha: 1, y: 0 });
-
-    gsap.set(listItems, { color: MUTED });
-    gsap.set(listItems[0], { color: GOLD });
-
-    var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start:   'top top',
-        end:     '+=' + (total * 90) + '%', /* 90% viewport per slide */
-        pin:     true,
-        scrub:   1,
-        anticipatePin: 1
-      }
+    triggers.forEach(function (trigger) {
+      var active = trigger.getAttribute('data-how-target') === step;
+      trigger.classList.toggle('is-active', active);
+      trigger.setAttribute('aria-selected', active ? 'true' : 'false');
+      trigger.setAttribute('tabindex', active ? '0' : '-1');
+      if (active && focusTab) trigger.focus({ preventScroll: true });
     });
 
-    // Fill line grows
-    tl.to(fill, {
-      scaleY: 1,
-      ease: 'none',
-      duration: total - 1
-    }, 0);
+    panels.forEach(function (panel) {
+      var active = panel.getAttribute('data-how-panel') === step;
+      panel.classList.toggle('is-active', active);
+      panel.setAttribute('aria-hidden', active ? 'false' : 'true');
+    });
 
-    // Transitions
-    for (var i = 1; i < total; i++) {
-      var prev      = listItems[i - 1];
-      var curr      = listItems[i];
-      var prevSlide = slides[i - 1];
-      var currSlide = slides[i];
-      var prevDesc  = descs[i - 1];
-      var currDesc  = descs[i];
-
-      var startTime = i - 0.5;
-
-      tl.to(prev, { color: MUTED, duration: 0.3 }, startTime)
-        .to(curr, { color: GOLD, duration: 0.3 }, startTime)
-        .to(prevSlide, { autoAlpha: 0, scale: 1.04, duration: 0.3 }, startTime)
-        .fromTo(currSlide, { autoAlpha: 0, scale: 1.04 }, { autoAlpha: 1, scale: 1, duration: 0.3 }, startTime)
-        .to(prevDesc,  { autoAlpha: 0, y: -8, duration: 0.3 }, startTime)
-        .fromTo(currDesc,  { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.3 }, startTime);
+    if (currentNumber) currentNumber.textContent = String(activeIndex + 1).padStart(2, '0');
+    if (progressBar) progressBar.style.width = (((activeIndex + 1) / triggers.length) * 100) + '%';
+    if (positionText) positionText.textContent = 'Etapa ' + (activeIndex + 1) + ' de ' + triggers.length;
+    if (prevButton) prevButton.disabled = activeIndex === 0;
+    if (nextButton) {
+      var isLast = activeIndex === triggers.length - 1;
+      nextButton.querySelector('span').textContent = isLast ? 'Voltar ao início' : 'Próxima etapa';
+      nextButton.setAttribute('aria-label', isLast ? 'Voltar para a primeira etapa' : 'Avançar para a próxima etapa');
     }
 
-    // Add brief pause at the end
-    tl.to({}, { duration: 0.5 });
+    alignMobileTrigger(triggers[activeIndex], immediateScroll);
+  }
 
-    return function() {
-      // Cleanup
-    };
+  triggers.forEach(function (trigger, index) {
+    trigger.setAttribute('tabindex', trigger.classList.contains('is-active') ? '0' : '-1');
+
+    trigger.addEventListener('click', function () {
+      activate(trigger.getAttribute('data-how-target'), false);
+    });
+
+    trigger.addEventListener('keydown', function (event) {
+      var nextIndex = index;
+
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (index + 1) % triggers.length;
+      else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (index - 1 + triggers.length) % triggers.length;
+      else if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = triggers.length - 1;
+      else return;
+
+      event.preventDefault();
+      activate(triggers[nextIndex].getAttribute('data-how-target'), true);
+    });
+  });
+
+  if (prevButton) {
+    prevButton.addEventListener('click', function () {
+      if (activeIndex > 0) activate(triggers[activeIndex - 1].getAttribute('data-how-target'), false);
+    });
+  }
+
+  if (nextButton) {
+    nextButton.addEventListener('click', function () {
+      var nextIndex = activeIndex === triggers.length - 1 ? 0 : activeIndex + 1;
+      activate(triggers[nextIndex].getAttribute('data-how-target'), false);
+    });
+  }
+
+  window.requestAnimationFrame(resetMobileJourney);
+  window.addEventListener('pageshow', resetMobileJourney);
+  if (typeof mobileJourney.addEventListener === 'function') {
+    mobileJourney.addEventListener('change', function (event) {
+      if (event.matches) resetMobileJourney();
+    });
+  }
+})();
+
+/* Centraliza suavemente a jornada quando o card entra na tela. */
+(function () {
+  var stage = document.querySelector('#how .how-stage');
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var centering = false;
+
+  if (!stage || reducedMotion.matches || typeof ScrollTrigger === 'undefined') return;
+
+  function centerStage() {
+    if (centering) return;
+
+    var viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    var stageHeight = stage.getBoundingClientRect().height;
+    var visibleTop = Math.max(12, (viewportHeight - stageHeight) / 2);
+
+    centering = true;
+    lenis.scrollTo(stage, {
+      offset: -visibleTop,
+      duration: 0.72,
+      easing: function (t) { return 1 - Math.pow(1 - t, 4); },
+      onComplete: function () {
+        centering = false;
+      }
+    });
+  }
+
+  ScrollTrigger.create({
+    trigger: stage,
+    start: 'top 82%',
+    end: 'bottom 18%',
+    onEnter: centerStage,
+    onEnterBack: centerStage
   });
 })();
 
@@ -283,7 +350,7 @@ setTimeout(function () {
     var type = 'other';
     if (loc.indexOf('social-') === 0)      type = 'social';
     else if (loc.indexOf('video') !== -1)  type = 'video';
-    else if (dest.indexOf('signup') !== -1) type = 'signup';
+    else if (dest.indexOf('signup') !== -1 || loc.indexOf('linkminer') !== -1) type = 'signup';
 
     track('cta_click', {
       cta_location:    loc,
@@ -322,23 +389,334 @@ setTimeout(function () {
 })();
 
 /* ============================================================
-   BOTÕES FLUTUANTES — visibilidade sobre o hero (FAB stories + bubble "Bora conversar")
-   Liga a classe .hero-in-view no body enquanto o hero está em tela.
-   O CSS esconde os dois botões: no desktop só some sobre o hero;
-   durante os stories somem em qualquer viewport (via body.stories-lock).
+   BOTÕES FLUTUANTES — visibilidade sobre o hero e a jornada "Como funciona"
+   O CSS esconde o contato nessas áreas em qualquer viewport e durante os stories.
    ============================================================ */
 (function () {
   var hero = document.getElementById('hero-scroll-driver');
   if (!hero) return;
   function sync(active) { document.body.classList.toggle('hero-in-view', active); }
-  var st = ScrollTrigger.create({
-    trigger: hero,
-    start: 'top top',
-    end: 'bottom top',
-    onToggle:  function (self) { sync(self.isActive); },
-    onRefresh: function (self) { sync(self.isActive); }
+  function isVisible() {
+    var rect = hero.getBoundingClientRect();
+    return rect.bottom > 0 && rect.top < window.innerHeight;
+  }
+  sync(isVisible());
+  var observer = new IntersectionObserver(function (entries) {
+    sync(entries[0].isIntersecting);
+  }, {
+    threshold: 0,
+    rootMargin: '0px'
   });
-  sync(st.isActive);
+  observer.observe(hero);
+
+  var how = document.getElementById('how');
+  if (how) {
+    function syncHow(active) { document.body.classList.toggle('how-in-view', active); }
+    function isHowVisible() {
+      var rect = how.getBoundingClientRect();
+      return rect.bottom > 0 && rect.top < window.innerHeight;
+    }
+    syncHow(isHowVisible());
+    var howObserver = new IntersectionObserver(function (entries) {
+      syncHow(entries[0].isIntersecting);
+    }, {
+      threshold: 0,
+      rootMargin: '0px'
+    });
+    howObserver.observe(how);
+  }
 })();
 
+/* ============================================================
+   PRICING — abre o conversacional de planos no widget lateral
+   ============================================================ */
+(function () {
+  var pricingPlansButton = document.querySelector('[data-cta="pricing-paid"]');
+  if (!pricingPlansButton) return;
 
+  function findWidgetButton() {
+    var buttons = Array.prototype.slice.call(document.querySelectorAll('button[aria-label="Abrir formulário de contato"]'));
+    return buttons.find(function (button) {
+      return button.getClientRects().length > 0;
+    });
+  }
+
+  function findWidgetIframe() {
+    return document.querySelector('iframe[data-word-forms-iframe]');
+  }
+
+  function waitForWidgetPart(getter, onReady, onTimeout) {
+    var startedAt = performance.now();
+    var timeout = 2500;
+
+    function check(now) {
+      var element = getter();
+      if (element) {
+        onReady(element);
+        return;
+      }
+      if (now - startedAt > timeout) {
+        if (onTimeout) onTimeout();
+        return;
+      }
+      window.requestAnimationFrame(check);
+    }
+
+    window.requestAnimationFrame(check);
+  }
+
+  function setPlansConversation(iframe, url) {
+    if (!iframe || iframe.src === url) return;
+    iframe.src = url;
+  }
+
+  pricingPlansButton.addEventListener('click', function (event) {
+    var plansConversationUrl = pricingPlansButton.href;
+    var iframe = findWidgetIframe();
+    event.preventDefault();
+
+    if (iframe) {
+      var visibleWidgetButton = findWidgetButton();
+      if (visibleWidgetButton) visibleWidgetButton.click();
+      setPlansConversation(iframe, plansConversationUrl);
+      return;
+    }
+
+    waitForWidgetPart(findWidgetButton, function (widgetButton) {
+      widgetButton.click();
+      waitForWidgetPart(findWidgetIframe, function (nextIframe) {
+        setPlansConversation(nextIframe, plansConversationUrl);
+      }, function () {
+        window.open(plansConversationUrl, '_blank', 'noopener');
+      });
+    }, function () {
+      window.open(plansConversationUrl, '_blank', 'noopener');
+    });
+  });
+})();
+
+/* ============================================================
+   CTA BAND — picareta pixel art acompanha o ponteiro
+   Temporariamente desativada. Remova o comentário abaixo para reativar.
+   ============================================================ */
+/*
+(function () {
+  var section = document.querySelector('.cta-band');
+  if (!section) return;
+
+  var cursor = section.querySelector('.mining-cursor');
+  var particles = cursor && cursor.querySelector('.mining-particles');
+  var goldButton = section.querySelector('[data-cta="dobra3-reframe"]');
+  var desktopPointer = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 769px)');
+  var touchPointer = window.matchMedia('(max-width: 768px) and (pointer: coarse)');
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (!cursor || !particles || !goldButton || reducedMotion.matches) return;
+
+  var x = -80;
+  var y = -80;
+  var active = false;
+  var gold = false;
+  var rafId = 0;
+  var cycleStart = 0;
+  var lastImpactCycle = -1;
+  var touchImpactTimer = 0;
+  var touchCleanupTimer = 0;
+  var swingDuration = 720;
+  var impactPhase = 0.58;
+  var stoneColors = ['#343837', '#5d6361', '#858b88', '#4a4f4d'];
+  var goldColors = ['#f0b929', '#ffd34d', '#d89b0d', '#ffe17a'];
+  var stoneSound = new Audio('assets/batendo-na-pedra.mp3');
+  var goldSound = new Audio('assets/batendo-no-ouro.mp3');
+
+  stoneSound.preload = 'auto';
+  goldSound.preload = 'auto';
+  stoneSound.volume = 0.22;
+  goldSound.volume = 0.28;
+
+  function setGold(nextGold) {
+    if (gold === nextGold) return;
+    gold = nextGold;
+    cursor.classList.toggle('is-gold', gold);
+  }
+
+  function createParticle(index, isGold) {
+    var chip = document.createElement('i');
+    var directions = [
+      [-17, -17], [-7, -23], [9, -20], [17, -10], [-14, -7], [12, -3]
+    ];
+    var direction = directions[index % directions.length];
+    var palette = isGold ? goldColors : stoneColors;
+    chip.className = 'mining-particle';
+    chip.style.setProperty('--chip-x', direction[0] + 'px');
+    chip.style.setProperty('--chip-y', direction[1] + 'px');
+    chip.style.setProperty('--chip-rotate', ((index % 2 ? 1 : -1) * (45 + index * 15)) + 'deg');
+    chip.style.setProperty('--particle-color', palette[index % palette.length]);
+    chip.style.setProperty('--particle-size', (index % 3 === 0 ? 5 : 3) + 'px');
+    particles.appendChild(chip);
+    chip.addEventListener('animationend', function () { chip.remove(); }, { once: true });
+  }
+
+  function playImpactSound(isGold) {
+    var sound = isGold ? goldSound : stoneSound;
+    sound.currentTime = 0;
+    sound.play().catch(function () {});
+  }
+
+  function impact() {
+    var count = gold ? 5 : 4;
+    for (var i = 0; i < count; i += 1) createParticle(i, gold);
+    playImpactSound(gold);
+
+    if (gold) {
+      var spark = document.createElement('i');
+      spark.className = 'mining-spark';
+      particles.appendChild(spark);
+      spark.addEventListener('animationend', function () { spark.remove(); }, { once: true });
+
+      goldButton.classList.remove('is-mined');
+      void goldButton.offsetWidth;
+      goldButton.classList.add('is-mined');
+    }
+  }
+
+  function frame(now) {
+    cursor.style.setProperty('--cursor-x', (x - 11) + 'px');
+    cursor.style.setProperty('--cursor-y', (y - 56) + 'px');
+
+    if (active) {
+      var elapsed = now - cycleStart;
+      var cycle = Math.floor(elapsed / swingDuration);
+      var phase = (elapsed % swingDuration) / swingDuration;
+      if (phase >= impactPhase && cycle !== lastImpactCycle) {
+        lastImpactCycle = cycle;
+        impact();
+      }
+      rafId = window.requestAnimationFrame(frame);
+    }
+  }
+
+  function setupDesktopMining() {
+    if (!desktopPointer.matches) return;
+    section.classList.add('is-mining-enabled');
+
+    section.addEventListener('pointerenter', function (event) {
+      if (event.pointerType === 'touch') return;
+      active = true;
+      x = event.clientX;
+      y = event.clientY;
+      cycleStart = performance.now();
+      lastImpactCycle = -1;
+      setGold(goldButton.contains(event.target));
+      cursor.classList.add('is-visible');
+      if (!rafId) rafId = window.requestAnimationFrame(frame);
+    });
+
+    section.addEventListener('pointermove', function (event) {
+      if (!active || event.pointerType === 'touch') return;
+      x = event.clientX;
+      y = event.clientY;
+      setGold(goldButton.contains(event.target));
+    }, { passive: true });
+
+    section.addEventListener('pointerleave', function () {
+      active = false;
+      gold = false;
+      cursor.classList.remove('is-visible', 'is-gold');
+      goldButton.classList.remove('is-mined');
+      if (rafId) window.cancelAnimationFrame(rafId);
+      rafId = 0;
+    });
+  }
+
+  function setupTouchMining() {
+    if (!touchPointer.matches) return;
+
+    section.addEventListener('pointerdown', function (event) {
+      if (event.pointerType !== 'touch') return;
+
+      window.clearTimeout(touchImpactTimer);
+      window.clearTimeout(touchCleanupTimer);
+      cursor.classList.remove('is-touch-impact', 'is-visible');
+      goldButton.classList.remove('is-mined');
+
+      x = Math.max(34, Math.min(window.innerWidth - 34, event.clientX));
+      y = Math.max(62, Math.min(window.innerHeight - 24, event.clientY));
+      cursor.style.setProperty('--cursor-x', (x - 11) + 'px');
+      cursor.style.setProperty('--cursor-y', (y - 56) + 'px');
+      setGold(goldButton.contains(event.target));
+
+      // Reinicia a animação a cada novo toque, inclusive em toques consecutivos.
+      void cursor.offsetWidth;
+      cursor.classList.add('is-touch-impact');
+
+      touchImpactTimer = window.setTimeout(function () {
+        impact();
+      }, swingDuration * impactPhase);
+
+      touchCleanupTimer = window.setTimeout(function () {
+        gold = false;
+        cursor.classList.remove('is-touch-impact', 'is-gold');
+        goldButton.classList.remove('is-mined');
+      }, swingDuration + 160);
+    }, { passive: true });
+  }
+
+  setupDesktopMining();
+  setupTouchMining();
+})();
+*/
+
+/* Abas de preços no mobile; comparação lado a lado no desktop. */
+(function () {
+  var pricingTabs = Array.prototype.slice.call(document.querySelectorAll('[data-pricing-tab]'));
+  var pricingPanels = Array.prototype.slice.call(document.querySelectorAll('[data-pricing-panel]'));
+  var mobilePricing = window.matchMedia('(max-width: 768px)');
+  var activePlan = 'free';
+  if (!pricingTabs.length || !pricingPanels.length) return;
+
+  function activatePricing(plan, focusTab) {
+    activePlan = plan;
+
+    pricingTabs.forEach(function (tab) {
+      var active = tab.getAttribute('data-pricing-tab') === plan;
+      tab.classList.toggle('is-active', active);
+      tab.setAttribute('aria-selected', active ? 'true' : 'false');
+      tab.setAttribute('tabindex', active ? '0' : '-1');
+      if (active && focusTab) tab.focus({ preventScroll: true });
+    });
+
+    pricingPanels.forEach(function (panel) {
+      var active = panel.getAttribute('data-pricing-panel') === plan;
+      panel.classList.toggle('is-mobile-active', active);
+      panel.classList.add('in');
+      if (mobilePricing.matches) panel.setAttribute('aria-hidden', active ? 'false' : 'true');
+      else panel.removeAttribute('aria-hidden');
+    });
+  }
+
+  pricingTabs.forEach(function (tab, index) {
+    tab.addEventListener('click', function () {
+      activatePricing(tab.getAttribute('data-pricing-tab'), false);
+    });
+
+    tab.addEventListener('keydown', function (event) {
+      var nextIndex = index;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (index + 1) % pricingTabs.length;
+      else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (index - 1 + pricingTabs.length) % pricingTabs.length;
+      else if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = pricingTabs.length - 1;
+      else return;
+
+      event.preventDefault();
+      activatePricing(pricingTabs[nextIndex].getAttribute('data-pricing-tab'), true);
+    });
+  });
+
+  window.requestAnimationFrame(function () { activatePricing('free', false); });
+  window.addEventListener('pageshow', function () { activatePricing('free', false); });
+  if (typeof mobilePricing.addEventListener === 'function') {
+    mobilePricing.addEventListener('change', function () {
+      activatePricing(activePlan, false);
+    });
+  }
+})();

@@ -9,10 +9,10 @@
   // ── Config: adicione os próximos vídeos aqui conforme renderizar ──
   var STORIES = [
     {
-      id: "captura",
-      src: "assets/stories/CapturaReels.mp4",
-      poster: "assets/stories/CapturaReels-poster.jpg",
-      label: "Captura · Canais",
+      id: "crm-video",
+      src: "assets/stories/CRMiner_01_letters_v3_editorial.mp4",
+      poster: "",
+      label: "CRMiner · Demonstração",
     },
     // { id: "crm", src: "assets/stories/crm.mp4", poster: "assets/stories/crm-poster.jpg", label: "CRM · Funil de vendas" },
     // { id: "catalogo",  src: "assets/stories/catalogo.mp4",  poster: "assets/stories/catalogo-poster.jpg",  label: "Catálogo · Produtos" },

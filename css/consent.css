@@ -1,13 +1,13 @@
 /* ============================================================
    Banner de consentimento LGPD — tokens do Design System crminer
-   Grafite #121417 (palco) · Ouro #ffe450 (CTA) · Plus Jakarta Sans
+   Grafite #121417 (palco) · Ouro escuro (CTA) · Plus Jakarta Sans
    ============================================================ */
 .crm-consent {
   position: fixed;
   left: 16px;
   right: 16px;
   bottom: 22px;
-  z-index: 2147483647;          /* máximo: acima do FAB de stories (9998) e do bubble "Bora conversar" (2147483646) */
+  z-index: 2147483647;          /* máximo: acima do FAB de stories (9998) e do bubble "Fale conosco" (2147483646) */
   max-width: 680px;
   margin-inline: auto;
   display: flex;
@@ -15,11 +15,11 @@
   align-items: center;
   gap: 16px 28px;
   padding: 24px 28px;
-  background: #121417;
-  color: #f2f3f5;
-  border: 1px solid rgba(255, 228, 80, .38);
+  background: var(--dark);
+  color: var(--dark-text);
+  border: 1px solid rgba(var(--gold-rgb), .30);
   border-radius: 18px;
-  box-shadow: 0 18px 60px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 228, 80, .06);
+  box-shadow: 0 18px 60px rgba(var(--shadow-rgb), .55), 0 0 0 1px rgba(var(--gold-rgb), .08);
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   /* estado inicial (escondido) para animar a entrada */
   transform: translateY(18px);
@@ -41,18 +41,18 @@
   font-size: 16.5px;
   font-weight: 700;
   letter-spacing: -0.01em;
-  color: #fff;
+  color: var(--white);
 }
 
 .crm-consent__text {
   margin: 0;
   font-size: 14.5px;
   line-height: 1.55;
-  color: #c9ccd2;
+  color: var(--dark-muted);
 }
 
 .crm-consent__text a {
-  color: #ffe450;
+  color: var(--gold);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -78,20 +78,20 @@
 .crm-consent__btn:active { transform: scale(.96); }
 
 .crm-consent__btn--primary {
-  background: #ffe450;
-  color: #121417;
-  box-shadow: 0 6px 18px rgba(255, 228, 80, .28);
+  background: var(--gold);
+  color: var(--dark);
+  box-shadow: 0 6px 18px rgba(var(--gold-rgb), .22);
 }
-.crm-consent__btn--primary:hover { background: #ffec79; transform: translateY(-1px); }
+.crm-consent__btn--primary:hover { background: var(--gold-dark); transform: translateY(-1px); }
 
 .crm-consent__btn--ghost {
   background: transparent;
-  color: #c9ccd2;
-  border-color: rgba(255, 255, 255, .22);
+  color: var(--dark-muted);
+  border-color: rgba(var(--white-rgb), .22);
 }
 .crm-consent__btn--ghost:hover {
-  color: #fff;
-  border-color: rgba(255, 255, 255, .4);
+  color: var(--white);
+  border-color: rgba(var(--white-rgb), .4);
 }
 
 @media (max-width: 480px) {
