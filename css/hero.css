@@ -1155,6 +1155,8 @@
 .client-logo img[src$="Trackcash.svg"] { --client-logo-scale: 0.85; }
 .client-logo img[src$="yournext.webp"] { --client-logo-scale: 0.86; }
 .client-logo img[src$="vitrine.webp"] { --client-logo-scale: 0.76; }
+.client-logo img[src$="checkcommerce.webp"] { --client-logo-scale: 0.9; }
+.client-logo img[src$="upwards.png"] { --client-logo-scale: 0.9; }
 .client-logo img[src$="farmais-logo.png"] { --client-logo-scale: 0.92; }
 .client-logo img[src$="marina-carneiro-logo.png"] { --client-logo-scale: 1.12; }
 
