@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#121417" />
+  <meta name="description" content="Crie uma página LinkMiner para reunir produtos, serviços, cupons, redes sociais e canais de contato em um único link." />
+  <link rel="canonical" href="https://crminer.com.br/linkminer.html" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="LinkMiner — seu negócio em um link" />
+  <meta property="og:description" content="Transforme a bio, QR Codes e campanhas em pontos de contato para o seu negócio." />
+  <meta property="og:image" content="https://crminer.com.br/assets/card-linkminer.png" />
+  <title>LinkMiner — seu negócio em um link | crminer</title>
+  <link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/linkminer.css" />
+  <link rel="stylesheet" href="css/consent.css" />
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('consent', 'default', { ad_storage: 'denied', analytics_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K0L43XN3Q3"></script>
+  <script>gtag('js', new Date()); gtag('config', 'G-K0L43XN3Q3');</script>
+</head>
+<body>
+  <header id="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="crminer — início"><img src="assets/logo/logo_black.png" alt="crminer" /></a>
+      <nav class="nav-links" aria-label="Navegação principal">
+        <a href="#possibilidades">Possibilidades</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#demonstracao">Demonstração</a>
+        <a href="#como-criar">Como criar</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" href="https://app.crminer.com.br/login">Fazer login</a>
+        <a class="btn btn-primary" href="#linkminer-slug" data-cta="linkminer-header">Criar grátis</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu">
+          <span></span><span></span>
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <nav aria-label="Navegação para celular">
+          <a href="#possibilidades">Possibilidades <span aria-hidden="true">↘</span></a>
+          <a href="#recursos">Recursos <span aria-hidden="true">↘</span></a>
+          <a href="#demonstracao">Demonstração <span aria-hidden="true">↘</span></a>
+          <a href="#como-criar">Como criar <span aria-hidden="true">↘</span></a>
+        </nav>
+        <a class="mobile-menu__login" href="https://app.crminer.com.br/login">Já tenho conta — fazer login</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="lm-hero" aria-labelledby="lm-hero-title">
+      <div class="lm-hero__glow" aria-hidden="true"></div>
+      <div class="wrap lm-hero__grid">
+        <div class="lm-hero__copy reveal">
+          <span class="eyebrow">Seu espaço na internet</span>
+          <h1 id="lm-hero-title">Tudo do seu negócio em <span class="gold">um link só seu.</span></h1>
+          <p class="lead">Mostre produtos, serviços, cupons, redes sociais e canais de atendimento em uma página fácil de criar e compartilhar.</p>
+          <form class="lm-claim" action="https://app.crminer.com.br/signup" method="get" data-claim-form>
+            <label class="sr-only" for="linkminer-slug">Escolha o endereço do seu LinkMiner</label>
+            <div class="lm-claim__field" data-claim-field>
+              <span aria-hidden="true">linkminer.app/</span>
+              <input id="linkminer-slug" name="linkminerSlug" type="text" minlength="3" maxlength="60" pattern="[a-z0-9][a-z0-9-]{1,58}[a-z0-9]" placeholder="seunegocio" autocomplete="off" autocapitalize="none" spellcheck="false" inputmode="url" aria-describedby="linkminer-slug-help linkminer-slug-error" required />
+            </div>
+            <input type="hidden" name="utm_source" value="crminer_site" />
+            <input type="hidden" name="utm_medium" value="landing_page" />
+            <input type="hidden" name="utm_campaign" value="linkminer_claim" />
+            <button class="btn btn-primary" type="submit" data-cta="linkminer-claim">Reservar meu link</button>
+            <p class="lm-claim__error" id="linkminer-slug-error" data-claim-error aria-live="polite"></p>
+          </form>
+          <p class="lm-hero__proof" id="linkminer-slug-help">Grátis e sem cartão. A reserva é concluída na criação da conta.</p>
+          <ul class="lm-hero__highlights" aria-label="Vantagens do LinkMiner">
+            <li>Personalizável</li><li>Pronto para o celular</li><li>Fácil de atualizar</li>
+          </ul>
+        </div>
+        <div class="lm-showreel reveal" style="transition-delay:.12s" aria-label="Do painel de criação à página LinkMiner publicada">
+          <div class="lm-showreel__glow" aria-hidden="true"></div>
+          <figure class="lm-showreel__laptop">
+            <img src="assets/mock01.png" alt="CRMiner aberto em um notebook com oportunidades organizadas no CRM" width="1461" height="766" fetchpriority="high" />
+            <figcaption>Gerencie cada oportunidade</figcaption>
+          </figure>
+          <figure class="lm-showreel__phone lm-showreel__phone--editor">
+            <img src="assets/mock02.png" alt="Editor do LinkMiner exibido em um celular" width="291" height="582" fetchpriority="high" />
+            <figcaption>Crie</figcaption>
+          </figure>
+          <figure class="lm-showreel__phone lm-showreel__phone--page">
+            <img src="assets/mock03.png" alt="Página LinkMiner publicada com produtos e botão de contato" width="291" height="582" fetchpriority="high" />
+            <figcaption>Compartilhe</figcaption>
+          </figure>
+          <span class="lm-showreel__badge lm-showreel__badge--top" aria-hidden="true"><i></i> Página no ar</span>
+          <span class="lm-showreel__badge lm-showreel__badge--bottom" aria-hidden="true">linkminer.app/suamarca ↗</span>
+        </div>
+        <div class="lm-real-reel reveal" style="transition-delay:.18s" aria-label="Exemplos reais publicados com LinkMiner">
+          <div class="lm-real-reel__intro">
+            <span class="eyebrow">Feitos com LinkMiner</span>
+            <strong>Páginas reais.<br />Negócios reais.</strong>
+            <p>Abra e veja como cada marca criou seu próprio espaço.</p>
+          </div>
+          <div class="lm-real-reel__track">
+            <a class="lm-real-card" href="https://www.linkminer.app/crminer" target="_blank" rel="noopener" aria-label="Abrir o LinkMiner real da CRMiner" data-cta="real-linkminer-crminer">
+              <img src="assets/linkminer-real/crminer.webp" alt="Página LinkMiner real da CRMiner" width="390" height="844" loading="eager" />
+              <span><strong>CRMiner</strong><small>Ver página ↗</small></span>
+            </a>
+            <a class="lm-real-card" href="https://www.linkminer.app/marina-carneiro" target="_blank" rel="noopener" aria-label="Abrir o LinkMiner real de Marina Carneiro" data-cta="real-linkminer-marina">
+              <img src="assets/linkminer-real/marina-carneiro.webp" alt="Página LinkMiner real de Marina Carneiro" width="390" height="844" loading="eager" />
+              <span><strong>Marina Carneiro</strong><small>Ver página ↗</small></span>
+            </a>
+            <a class="lm-real-card" href="https://www.linkminer.app/yournext" target="_blank" rel="noopener" aria-label="Abrir o LinkMiner real da YourNext" data-cta="real-linkminer-yournext">
+              <img src="assets/linkminer-real/yournext.webp" alt="Página LinkMiner real da YourNext" width="390" height="844" loading="eager" />
+              <span><strong>YourNext</strong><small>Ver página ↗</small></span>
+            </a>
+            <a class="lm-real-card" href="https://www.linkminer.app/abioptica" target="_blank" rel="noopener" aria-label="Abrir o LinkMiner real da Abióptica" data-cta="real-linkminer-abioptica">
+              <img src="assets/linkminer-real/abioptica.webp" alt="Página LinkMiner real da Abióptica" width="390" height="844" loading="eager" />
+              <span><strong>Abióptica</strong><small>Ver página ↗</small></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lm-intro" aria-labelledby="intro-title">
+      <div class="wrap lm-intro__inner reveal">
+        <span class="lm-intro__mark" aria-hidden="true">↗</span>
+        <div>
+          <p class="eyebrow">Uma porta de entrada</p>
+          <h2 id="intro-title">Onde sua marca aparece, o LinkMiner acompanha.</h2>
+        </div>
+        <p>Em vez de espalhar links e informações, entregue uma experiência única para quem quer conhecer, comprar ou falar com a sua empresa.</p>
+      </div>
+    </section>
+
+    <section id="possibilidades" class="lm-section lm-uses" aria-labelledby="uses-title">
+      <div class="wrap">
+        <div class="lm-section-head reveal">
+          <span class="eyebrow">Possibilidades</span>
+          <h2 id="uses-title">Um link que trabalha em vários <span class="gold">momentos da jornada.</span></h2>
+        </div>
+        <div class="lm-uses__grid">
+          <article class="lm-use lm-use--wide reveal">
+            <span class="lm-use__number">01</span>
+            <div><span class="lm-icon" aria-hidden="true">@</span><h3>Bio que vira vitrine</h3><p>Leve quem chega pelo Instagram ou TikTok direto para produtos, serviços e formas de contato.</p></div>
+            <span class="lm-use__tag">Redes sociais</span>
+          </article>
+          <article class="lm-use reveal" style="transition-delay:.06s">
+            <span class="lm-use__number">02</span>
+            <span class="lm-icon" aria-hidden="true">▦</span><h3>QR Codes na loja</h3><p>Transforme a vitrine, a etiqueta ou o balcão em uma experiência que continua no celular.</p>
+          </article>
+          <article class="lm-use reveal" style="transition-delay:.12s">
+            <span class="lm-use__number">03</span>
+            <span class="lm-icon" aria-hidden="true">%</span><h3>Ofertas e cupons</h3><p>Dê um motivo claro para agir agora e concentre campanhas em um endereço próprio.</p>
+          </article>
+          <article class="lm-use reveal" style="transition-delay:.18s">
+            <span class="lm-use__number">04</span>
+            <span class="lm-icon" aria-hidden="true">↗</span><h3>Links de campanha</h3><p>Divulgue coleções, lançamentos e ações sazonais sem depender de um novo site.</p>
+          </article>
+          <article class="lm-use lm-use--dark reveal" style="transition-delay:.24s">
+            <span class="lm-use__number">05</span>
+            <span class="lm-icon" aria-hidden="true">◌</span><h3>Atendimento em um toque</h3><p>Deixe WhatsApp, endereço e seus canais favoritos sempre fáceis de encontrar.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="recursos" class="lm-section lm-features" aria-labelledby="features-title">
+      <div class="wrap lm-features__layout">
+        <div class="lm-features__copy reveal">
+          <span class="eyebrow">Feito para o seu negócio</span>
+          <h2 id="features-title">Não é só um link. É a sua <span class="gold">vitrine digital.</span></h2>
+          <p class="lead">Personalize o que importa para que cada pessoa encontre o próximo passo sem se perder.</p>
+          <a class="btn btn-primary" href="https://app.crminer.com.br/signup" target="_blank" rel="noopener" data-cta="linkminer-features">Começar grátis</a>
+        </div>
+        <ul class="lm-feature-list" role="list">
+          <li class="reveal"><strong>Identidade da sua marca</strong><span>Foto, descrição e aparência para deixar a página com a sua cara.</span></li>
+          <li class="reveal"><strong>Redes e canais de contato</strong><span>Organize Instagram, WhatsApp e os canais que fazem sentido para o cliente.</span></li>
+          <li class="reveal"><strong>Links úteis e campanhas</strong><span>Destaque lançamentos, catálogos, eventos ou qualquer destino importante.</span></li>
+          <li class="reveal"><strong>Produtos e serviços</strong><span>Apresente o que você vende sem obrigar a pessoa a procurar.</span></li>
+          <li class="reveal"><strong>Cupons para estimular a ação</strong><span>Transforme a curiosidade em uma próxima visita, conversa ou compra.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="demonstracao" class="lm-section lm-demo" aria-labelledby="demo-title">
+      <div class="wrap lm-demo__layout">
+        <div class="lm-demo__stage reveal">
+          <div class="lm-demo__halo" aria-hidden="true"></div>
+          <div class="lm-demo__phone">
+            <div class="lm-demo__phone-top" aria-hidden="true"></div>
+            <video controls playsinline preload="metadata" poster="assets/tutorial/linkminer-step-08.webp" aria-label="Demonstração em vídeo da criação de uma página LinkMiner">
+              <source src="assets/tutorial/tutorial-01-linkminer.mp4" type="video/mp4" />
+              Seu navegador não oferece suporte a vídeo HTML5.
+            </video>
+          </div>
+          <span class="lm-demo__note lm-demo__note--top" aria-hidden="true">01:16 de demonstração</span>
+          <span class="lm-demo__note lm-demo__note--bottom" aria-hidden="true">Aperte o play</span>
+        </div>
+        <div class="lm-demo__copy reveal" style="transition-delay:.1s">
+          <span class="eyebrow">Veja na prática</span>
+          <h2 id="demo-title">Uma página completa, criada de um jeito <span class="gold">simples e visual.</span></h2>
+          <p class="lead">Acompanhe o fluxo de criação e veja como as informações do seu negócio se transformam em um LinkMiner pronto para divulgar.</p>
+          <ul class="lm-demo__points" role="list">
+            <li><span>01</span><div><strong>Organize sem complicação</strong><p>Edite cada parte da página em uma sequência fácil de acompanhar.</p></div></li>
+            <li><span>02</span><div><strong>Veja enquanto constrói</strong><p>Deixe a apresentação coerente com o que sua marca quer comunicar.</p></div></li>
+            <li><span>03</span><div><strong>Atualize quando precisar</strong><p>Mantenha links, ofertas e canais sempre prontos para a próxima campanha.</p></div></li>
+          </ul>
+          <a class="btn btn-primary" href="https://app.crminer.com.br/signup" target="_blank" rel="noopener" data-cta="linkminer-demo">Criar meu LinkMiner</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-criar" class="lm-section lm-build" aria-labelledby="build-title">
+      <div class="wrap">
+        <div class="lm-section-head lm-section-head--split reveal">
+          <div><span class="eyebrow">Como criar</span><h2 id="build-title">Do seu perfil ao link pronto <span class="gold">para compartilhar.</span></h2></div>
+          <p>Você monta a página por etapas simples. Depois, é só copiar o endereço e usar onde sua marca já conversa com clientes.</p>
+        </div>
+        <ol class="lm-steps" role="list">
+          <li class="reveal"><span>01</span><img src="assets/tutorial/linkminer-step-01.webp" alt="Tela de início da criação de um LinkMiner" width="540" height="960" loading="lazy" decoding="async" /><div><h3>Escolha seu endereço</h3><p>Crie um link público e fácil de reconhecer.</p></div></li>
+          <li class="reveal"><span>02</span><img src="assets/tutorial/linkminer-step-03.webp" alt="Tela para configurar informações do negócio" width="540" height="960" loading="lazy" decoding="async" /><div><h3>Conte sobre sua marca</h3><p>Inclua o que ajuda o visitante a entender o seu negócio.</p></div></li>
+          <li class="reveal"><span>03</span><img src="assets/tutorial/linkminer-step-05.webp" alt="Tela para adicionar canais e conteúdo ao LinkMiner" width="540" height="960" loading="lazy" decoding="async" /><div><h3>Adicione o que quer destacar</h3><p>Produtos, serviços, cupons, links e canais de contato.</p></div></li>
+          <li class="reveal"><span>04</span><img src="assets/tutorial/linkminer-step-08.webp" alt="Tela final de uma página LinkMiner pronta" width="540" height="960" loading="lazy" decoding="async" /><div><h3>Publique e compartilhe</h3><p>Use na bio, em QR Codes e em qualquer campanha.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="lm-section lm-faq" aria-labelledby="faq-title">
+      <div class="wrap lm-faq__layout">
+        <div class="lm-faq__head reveal">
+          <span class="eyebrow">Dúvidas frequentes</span>
+          <h2 id="faq-title">Antes de publicar seu <span class="gold">primeiro link.</span></h2>
+          <p>O essencial para começar com segurança e colocar sua página no ar.</p>
+        </div>
+        <div class="lm-faq__list reveal" style="transition-delay:.1s">
+          <details open><summary>O LinkMiner é gratuito?<span aria-hidden="true"></span></summary><p>Sim. Você pode criar sua página e começar a compartilhar sem informar cartão de crédito.</p></details>
+          <details><summary>Preciso ter um site?<span aria-hidden="true"></span></summary><p>Não. O LinkMiner funciona como uma página própria para reunir as informações e os destinos mais importantes do seu negócio.</p></details>
+          <details><summary>Onde posso divulgar meu link?<span aria-hidden="true"></span></summary><p>Na bio das redes sociais, em QR Codes, materiais impressos, mensagens e campanhas digitais.</p></details>
+          <details><summary>Posso alterar a página depois?<span aria-hidden="true"></span></summary><p>Sim. Você pode manter seus conteúdos, canais e destaques atualizados conforme o seu negócio muda.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="lm-final" aria-labelledby="final-title">
+      <div class="wrap lm-final__card reveal">
+        <div><span class="eyebrow">Comece hoje</span><h2 id="final-title">Sua próxima oportunidade pode começar <span class="gold">em um link.</span></h2><p>Crie seu LinkMiner gratuito e dê ao seu cliente um caminho simples para chegar até você.</p></div>
+        <div class="lm-final__action"><a class="btn btn-primary" href="#linkminer-slug" data-cta="linkminer-final">Escolher meu endereço</a><small>Grátis e sem cartão.</small></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p class="foot-quote">Capturamos intenção.<br><span class="gold">Geramos resultado.</span></p>
+      <div class="foot-bar"><div class="foot-brand"><img src="assets/logo/logo_white.png" alt="crminer" /></div><div class="foot-social"><a href="https://www.instagram.com/crminer.app" target="_blank" rel="noopener" aria-label="crminer no Instagram" data-cta="social-instagram">Instagram</a><a href="https://www.tiktok.com/@crminer.br" target="_blank" rel="noopener" aria-label="crminer no TikTok" data-cta="social-tiktok">TikTok</a></div></div>
+      <div class="foot-legal"><div class="foot-legal-links"><a href="termos.html" target="_blank" rel="noopener">Termos de Uso</a><span>·</span><a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a><span>·</span><a href="exclusao-de-dados.html" target="_blank" rel="noopener">Exclusão de Dados</a><span>·</span><a href="dpa.html" target="_blank" rel="noopener">Anexo de Dados</a><span>·</span><button type="button" class="foot-cookies" data-consent-open>Preferências de cookies</button></div><span>© 2026 crminer</span></div>
+    </div>
+  </footer>
+  <script src="js/consent.js" defer></script>
+  <script src="js/linkminer.js" defer></script>
+</body>
+</html>
