@@ -83,6 +83,94 @@ lenis.on('scroll', ScrollTrigger.update);
 })();
 
 /* ============================================================
+   DEMONSTRAÇÃO — abre o formulário no widget nativo LinkMiner
+   ============================================================ */
+(function () {
+  var openers = Array.prototype.slice.call(document.querySelectorAll('[data-demo-open]'));
+  if (!openers.length) return;
+
+  var demoEmbedUrl = 'https://www.linkminer.app/embed/crminer?fill=true&t=1789240482256&crmOrigin=LANDING_PAGE&skippable=true';
+  var openingWidget = false;
+
+  function getWidgetToggle() {
+    var buttons = Array.prototype.slice.call(document.querySelectorAll(
+      'body > button[aria-label="Abrir formulário de contato"], body > button[aria-label="Fechar formulário"]'
+    ));
+    return buttons[0] || null;
+  }
+
+  function isWidgetOpen() {
+    var toggle = getWidgetToggle();
+    return Boolean(toggle && toggle.getAttribute('aria-label') === 'Fechar formulário');
+  }
+
+  function getWidgetFrame() {
+    return document.querySelector('iframe[data-word-forms-iframe]');
+  }
+
+  function setWidgetOpen(open) {
+    document.body.classList.toggle('widget-offer-open', open);
+  }
+
+  function loadDemoForm(frame) {
+    if (frame.src !== demoEmbedUrl) frame.src = demoEmbedUrl;
+    openingWidget = false;
+    setWidgetOpen(true);
+  }
+
+  function openWidget() {
+    if (openingWidget) return;
+
+    openingWidget = true;
+    setWidgetOpen(true);
+    var startedAt = performance.now();
+
+    function attempt() {
+      var toggle = getWidgetToggle();
+      if (toggle && toggle.getAttribute('aria-label') === 'Abrir formulário de contato') {
+        toggle.click();
+      }
+
+      var frame = getWidgetFrame();
+      if (frame && isWidgetOpen()) {
+        loadDemoForm(frame);
+        return;
+      }
+
+      if (performance.now() - startedAt >= 5000) {
+        openingWidget = false;
+        setWidgetOpen(false);
+        window.location.assign(demoEmbedUrl);
+        return;
+      }
+
+      window.requestAnimationFrame(attempt);
+    }
+
+    attempt();
+  }
+
+  openers.forEach(function (opener) {
+    opener.removeAttribute('target');
+    opener.removeAttribute('rel');
+    opener.addEventListener('click', function (event) {
+      event.preventDefault();
+      openWidget();
+    });
+  });
+
+  new MutationObserver(function () {
+    if (isWidgetOpen() || openingWidget) setWidgetOpen(true);
+    else setWidgetOpen(false);
+  }).observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['aria-label']
+  });
+})();
+
+/* ============================================================
    STICKY HEADER — some ao rolar para baixo e volta ao rolar para cima
    ============================================================ */
 (function () {
@@ -350,6 +438,7 @@ if (reduceMotion) {
     var type = 'other';
     if (loc.indexOf('social-') === 0)      type = 'social';
     else if (loc.indexOf('video') !== -1)  type = 'video';
+    else if (loc.indexOf('demo') !== -1 || dest.indexOf('/qrcode/') !== -1) type = 'demo';
     else if (dest.indexOf('signup') !== -1 || loc.indexOf('linkminer') !== -1) type = 'signup';
 
     track('cta_click', {
@@ -425,74 +514,6 @@ if (reduceMotion) {
     });
     howObserver.observe(how);
   }
-})();
-
-/* ============================================================
-   PRICING — abre o conversacional de planos no widget lateral
-   ============================================================ */
-(function () {
-  var pricingPlansButton = document.querySelector('[data-cta="pricing-paid"]');
-  if (!pricingPlansButton) return;
-
-  function findWidgetButton() {
-    var buttons = Array.prototype.slice.call(document.querySelectorAll('button[aria-label="Abrir formulário de contato"]'));
-    return buttons.find(function (button) {
-      return button.getClientRects().length > 0;
-    });
-  }
-
-  function findWidgetIframe() {
-    return document.querySelector('iframe[data-word-forms-iframe]');
-  }
-
-  function waitForWidgetPart(getter, onReady, onTimeout) {
-    var startedAt = performance.now();
-    var timeout = 2500;
-
-    function check(now) {
-      var element = getter();
-      if (element) {
-        onReady(element);
-        return;
-      }
-      if (now - startedAt > timeout) {
-        if (onTimeout) onTimeout();
-        return;
-      }
-      window.requestAnimationFrame(check);
-    }
-
-    window.requestAnimationFrame(check);
-  }
-
-  function setPlansConversation(iframe, url) {
-    if (!iframe || iframe.src === url) return;
-    iframe.src = url;
-  }
-
-  pricingPlansButton.addEventListener('click', function (event) {
-    var plansConversationUrl = pricingPlansButton.href;
-    var iframe = findWidgetIframe();
-    event.preventDefault();
-
-    if (iframe) {
-      var visibleWidgetButton = findWidgetButton();
-      if (visibleWidgetButton) visibleWidgetButton.click();
-      setPlansConversation(iframe, plansConversationUrl);
-      return;
-    }
-
-    waitForWidgetPart(findWidgetButton, function (widgetButton) {
-      widgetButton.click();
-      waitForWidgetPart(findWidgetIframe, function (nextIframe) {
-        setPlansConversation(nextIframe, plansConversationUrl);
-      }, function () {
-        window.open(plansConversationUrl, '_blank', 'noopener');
-      });
-    }, function () {
-      window.open(plansConversationUrl, '_blank', 'noopener');
-    });
-  });
 })();
 
 /* ============================================================
@@ -665,58 +686,3 @@ if (reduceMotion) {
   setupTouchMining();
 })();
 */
-
-/* Abas de preços no mobile; comparação lado a lado no desktop. */
-(function () {
-  var pricingTabs = Array.prototype.slice.call(document.querySelectorAll('[data-pricing-tab]'));
-  var pricingPanels = Array.prototype.slice.call(document.querySelectorAll('[data-pricing-panel]'));
-  var mobilePricing = window.matchMedia('(max-width: 768px)');
-  var activePlan = 'free';
-  if (!pricingTabs.length || !pricingPanels.length) return;
-
-  function activatePricing(plan, focusTab) {
-    activePlan = plan;
-
-    pricingTabs.forEach(function (tab) {
-      var active = tab.getAttribute('data-pricing-tab') === plan;
-      tab.classList.toggle('is-active', active);
-      tab.setAttribute('aria-selected', active ? 'true' : 'false');
-      tab.setAttribute('tabindex', active ? '0' : '-1');
-      if (active && focusTab) tab.focus({ preventScroll: true });
-    });
-
-    pricingPanels.forEach(function (panel) {
-      var active = panel.getAttribute('data-pricing-panel') === plan;
-      panel.classList.toggle('is-mobile-active', active);
-      panel.classList.add('in');
-      if (mobilePricing.matches) panel.setAttribute('aria-hidden', active ? 'false' : 'true');
-      else panel.removeAttribute('aria-hidden');
-    });
-  }
-
-  pricingTabs.forEach(function (tab, index) {
-    tab.addEventListener('click', function () {
-      activatePricing(tab.getAttribute('data-pricing-tab'), false);
-    });
-
-    tab.addEventListener('keydown', function (event) {
-      var nextIndex = index;
-      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (index + 1) % pricingTabs.length;
-      else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (index - 1 + pricingTabs.length) % pricingTabs.length;
-      else if (event.key === 'Home') nextIndex = 0;
-      else if (event.key === 'End') nextIndex = pricingTabs.length - 1;
-      else return;
-
-      event.preventDefault();
-      activatePricing(pricingTabs[nextIndex].getAttribute('data-pricing-tab'), true);
-    });
-  });
-
-  window.requestAnimationFrame(function () { activatePricing('free', false); });
-  window.addEventListener('pageshow', function () { activatePricing('free', false); });
-  if (typeof mobilePricing.addEventListener === 'function') {
-    mobilePricing.addEventListener('change', function () {
-      activatePricing(activePlan, false);
-    });
-  }
-})();

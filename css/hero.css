@@ -1099,6 +1099,16 @@
   overflow: hidden;
 }
 
+.client-logos__intro {
+  margin: 0 auto 22px;
+  padding-inline: 18px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
 .client-logos .wrap {
   max-width: none;
   padding-inline: 0;

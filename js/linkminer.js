@@ -87,12 +87,141 @@
     });
   });
 
+  document.querySelectorAll('[data-linkminer-showcase]').forEach(function (showcase) {
+    var stage = showcase.querySelector('.lm-showcase__stage');
+    var slides = Array.prototype.slice.call(showcase.querySelectorAll('[data-showcase-slide]'));
+    var dots = Array.prototype.slice.call(showcase.querySelectorAll('[data-showcase-dot]'));
+    var caption = showcase.querySelector('[data-showcase-caption]');
+    var previous = showcase.querySelector('[data-showcase-prev]');
+    var next = showcase.querySelector('[data-showcase-next]');
+    var active = 0;
+    var interval;
+    var startX = null;
+
+    if (!stage || !slides.length || !caption) return;
+
+    function positionFor(index) {
+      var distance = (index - active + slides.length) % slides.length;
+      if (distance === 0) return 'active';
+      if (distance === 1) return 'next';
+      if (distance === slides.length - 1) return 'prev';
+      return 'far';
+    }
+
+    function render(index) {
+      active = (index + slides.length) % slides.length;
+      slides.forEach(function (slide, slideIndex) {
+        var isActive = slideIndex === active;
+        slide.dataset.position = positionFor(slideIndex);
+        slide.classList.toggle('is-active', isActive);
+        slide.setAttribute('aria-hidden', String(!isActive));
+      });
+      dots.forEach(function (dot, dotIndex) {
+        dot.setAttribute('aria-selected', String(dotIndex === active));
+        dot.tabIndex = dotIndex === active ? 0 : -1;
+      });
+      caption.textContent = slides[active].dataset.name;
+    }
+
+    function stop() { window.clearInterval(interval); }
+    function start() {
+      stop();
+      if (!reduceMotion) interval = window.setInterval(function () { render(active + 1); }, 3800);
+    }
+    function move(step) { render(active + step); start(); }
+
+    if (previous) previous.addEventListener('click', function () { move(-1); });
+    if (next) next.addEventListener('click', function () { move(1); });
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () { render(Number(dot.dataset.showcaseDot)); start(); });
+    });
+    stage.addEventListener('keydown', function (event) {
+      if (event.key === 'ArrowLeft') { event.preventDefault(); move(-1); }
+      if (event.key === 'ArrowRight') { event.preventDefault(); move(1); }
+    });
+    stage.addEventListener('pointerdown', function (event) { startX = event.clientX; });
+    stage.addEventListener('pointerup', function (event) {
+      if (startX === null) return;
+      var distance = event.clientX - startX;
+      startX = null;
+      if (Math.abs(distance) > 35) move(distance > 0 ? -1 : 1);
+    });
+    stage.addEventListener('pointercancel', function () { startX = null; });
+    showcase.addEventListener('mouseenter', stop);
+    showcase.addEventListener('mouseleave', start);
+    showcase.addEventListener('focusin', stop);
+    showcase.addEventListener('focusout', function (event) {
+      if (!showcase.contains(event.relatedTarget)) start();
+    });
+
+    render(0);
+    start();
+  });
+
+  document.querySelectorAll('video[data-loop-to]').forEach(function (video) {
+    var loopTo = Number(video.dataset.loopTo);
+    if (!Number.isFinite(loopTo) || loopTo <= 0) return;
+
+    video.addEventListener('timeupdate', function () {
+      if (video.currentTime < loopTo) return;
+      video.currentTime = 0;
+      video.play().catch(function () {});
+    });
+  });
+
+  var personalizeTrigger = document.querySelector('[data-personalize-open]');
+  var personalizeModal = document.getElementById('personalize-video-modal');
+  var personalizeVideo = personalizeModal && personalizeModal.querySelector('video');
+  var personalizeClose = personalizeModal && personalizeModal.querySelector('.lm-video-modal__close');
+  var lastPersonalizeFocus = null;
+
+  function closePersonalizeVideo() {
+    if (!personalizeModal || !personalizeModal.classList.contains('is-open')) return;
+    personalizeModal.classList.remove('is-open');
+    personalizeModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('lm-video-open');
+    if (personalizeVideo) {
+      personalizeVideo.pause();
+      personalizeVideo.currentTime = 0;
+    }
+    if (lastPersonalizeFocus) lastPersonalizeFocus.focus();
+  }
+
+  function openPersonalizeVideo() {
+    if (!personalizeModal || !personalizeVideo) return;
+    lastPersonalizeFocus = document.activeElement;
+    personalizeModal.classList.add('is-open');
+    personalizeModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lm-video-open');
+    personalizeVideo.currentTime = 0;
+    personalizeVideo.muted = false;
+    personalizeVideo.play().catch(function () {});
+    if (personalizeClose) personalizeClose.focus();
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'video_play', { video_id: 'linkminer_empresarios_da_moda', video_location: 'personalize_section' });
+    }
+  }
+
+  if (personalizeTrigger) personalizeTrigger.addEventListener('click', openPersonalizeVideo);
+  if (personalizeModal) {
+    personalizeModal.querySelectorAll('[data-personalize-close]').forEach(function (closeButton) {
+      closeButton.addEventListener('click', closePersonalizeVideo);
+    });
+  }
+  if (personalizeVideo) personalizeVideo.addEventListener('ended', closePersonalizeVideo);
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') closePersonalizeVideo();
+  });
+
   document.querySelectorAll('a[href^="#"]').forEach(function (link) {
     link.addEventListener('click', function (event) {
       var target = document.querySelector(link.getAttribute('href'));
       if (!target) return;
       event.preventDefault();
+      if (target.tagName === 'DETAILS') target.open = true;
+      setMenu(false);
       target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      if (target.matches('input')) target.focus({ preventScroll: true });
     });
   });
 

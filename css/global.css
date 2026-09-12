@@ -1585,6 +1585,14 @@ footer .foot-social a:hover {
   color: var(--muted);
 }
 
+.price-description {
+  min-height: 3.2em;
+  margin: 30px 0 28px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
 .price-features {
   list-style: none;
   margin: 22px 0 28px;
@@ -1670,6 +1678,11 @@ footer .foot-social a:hover {
   align-items: stretch;
   max-width: 980px;
   margin: 0 auto;
+}
+
+.pricing-grid--single {
+  max-width: 520px;
+  grid-template-columns: 1fr;
 }
 
 .pricing-plan {
@@ -3009,7 +3022,104 @@ header {
 }
 
 .receive-feature-card .receive-icon {
-  box-shadow: 0 10px 24px rgba(var(--gold-rgb), 0.2), inset 0 1px 0 rgba(var(--white-rgb), 0.5);
+  background: transparent;
+  box-shadow: none;
+}
+
+.receive-feature-card .receive-icon img {
+  width: 42px;
+  height: 42px;
+}
+
+.receive-support-grid {
+  gap: 18px;
+}
+
+.receive-support-grid .receive-card {
+  min-height: 264px;
+  position: relative;
+  padding: 26px 22px 24px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: var(--shadow-soft);
+  transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+}
+
+.receive-support-grid .receive-card::after {
+  top: auto;
+  right: -28px;
+  bottom: -28px;
+  left: auto;
+  width: 106px;
+  height: 106px;
+  border-radius: 50%;
+  background: rgba(var(--gold-rgb), 0.16);
+  opacity: 1;
+}
+
+.receive-support-grid .receive-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(var(--gold-rgb), 0.6);
+  box-shadow: 0 22px 38px rgba(var(--shadow-rgb), 0.15);
+}
+
+.receive-support-grid .receive-icon {
+  position: relative;
+  z-index: 1;
+  width: 76px;
+  height: 76px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(var(--gold-rgb), 0.3);
+  border-radius: 22px;
+  background: var(--cream);
+  box-shadow: 0 10px 22px rgba(var(--shadow-rgb), 0.1);
+}
+
+.receive-support-grid .receive-icon img {
+  width: 58px;
+  height: 58px;
+}
+
+.receive-support-grid .receive-card h3,
+.receive-support-grid .receive-card p {
+  position: relative;
+  z-index: 1;
+}
+
+.receive-support-grid .receive-card h3 {
+  font-size: 1.05rem;
+}
+
+.receive-support-grid .receive-card p {
+  margin-top: 10px;
+  font-size: 0.87rem;
+  line-height: 1.6;
+}
+
+.receive-support-note {
+  max-width: 760px;
+  margin: 28px auto 0;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .receive-support-grid .receive-card {
+    min-height: 0;
+    padding: 22px;
+  }
+
+  .receive-support-grid .receive-icon {
+    width: 66px;
+    height: 66px;
+    margin-bottom: 19px;
+    border-radius: 19px;
+  }
+
+  .receive-support-grid .receive-icon img {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 .how-step-trigger.is-active {
