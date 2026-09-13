@@ -1,8 +1,47 @@
 {
+  "redirects": [
+    {
+      "source": "/linkminer.html",
+      "destination": "/linkminer",
+      "permanent": true
+    },
+    {
+      "source": "/termos.html",
+      "destination": "/termos",
+      "permanent": true
+    },
+    {
+      "source": "/privacidade.html",
+      "destination": "/privacidade",
+      "permanent": true
+    },
+    {
+      "source": "/dpa.html",
+      "destination": "/anexo-de-dados",
+      "permanent": true
+    },
+    {
+      "source": "/exclusao-de-dados.html",
+      "destination": "/exclusao-de-dados",
+      "permanent": true
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/linkminer",
+      "destination": "/linkminer.html"
+    },
+    {
+      "source": "/termos",
+      "destination": "/termos.html"
+    },
     {
       "source": "/privacidade",
       "destination": "/privacidade.html"
+    },
+    {
+      "source": "/anexo-de-dados",
+      "destination": "/dpa.html"
     },
     {
       "source": "/exclusao-de-dados",
