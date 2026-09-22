@@ -37,56 +37,6 @@
     if (window.innerWidth > 940) setMenu(false);
   }, { passive: true });
 
-  function normalizeClaim(value, trimEnd) {
-    var normalized = value
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-      .replace(/[^a-z0-9-]+/g, '-')
-      .replace(/-{2,}/g, '-')
-      .replace(/^-+/, '');
-    return trimEnd ? normalized.replace(/-+$/, '') : normalized;
-  }
-
-  document.querySelectorAll('[data-claim-form]').forEach(function (form) {
-    var input = form.querySelector('input[name="linkminerSlug"]');
-    var field = form.querySelector('[data-claim-field]');
-    var error = form.querySelector('[data-claim-error]');
-    if (!input || !field || !error) return;
-
-    function clearError() {
-      field.classList.remove('is-error');
-      input.removeAttribute('aria-invalid');
-      error.textContent = '';
-    }
-
-    input.addEventListener('input', function () {
-      var clean = normalizeClaim(input.value, false);
-      if (input.value !== clean) input.value = clean;
-      clearError();
-    });
-
-    form.addEventListener('submit', function (event) {
-      input.value = normalizeClaim(input.value, true);
-      var valid = /^[a-z0-9](?:[a-z0-9-]{1,58}[a-z0-9])$/.test(input.value);
-      if (!valid) {
-        event.preventDefault();
-        field.classList.add('is-error');
-        input.setAttribute('aria-invalid', 'true');
-        error.textContent = input.value.length < 3
-          ? 'Use pelo menos 3 caracteres para criar seu endereço.'
-          : 'Use apenas letras, números e hífens, sem hífen no final.';
-        input.focus();
-        return;
-      }
-
-      clearError();
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', 'begin_signup', { method: 'linkminer_claim', requested_slug: input.value });
-      }
-    });
-  });
-
   document.querySelectorAll('[data-linkminer-showcase]').forEach(function (showcase) {
     var stage = showcase.querySelector('.lm-showcase__stage');
     var slides = Array.prototype.slice.call(showcase.querySelectorAll('[data-showcase-slide]'));

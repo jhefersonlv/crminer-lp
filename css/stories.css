@@ -18,30 +18,6 @@
   transition: opacity 0.25s var(--ease, ease);
 }
 
-body.stories-lock button[aria-label="Abrir formulário de contato"],
-body.stories-lock button[aria-label*="Fale conosco"],
-body.stories-lock [title*="Fale conosco"],
-body.stories-lock iframe[src*="linkminer.app"],
-body.stories-lock [style*="2147483646"] {
-  display: none !important;
-}
-
-body.hero-in-view:not(.widget-offer-open) button[aria-label="Abrir formulário de contato"],
-body.hero-in-view:not(.widget-offer-open) button[aria-label*="Fale conosco"],
-body.hero-in-view:not(.widget-offer-open) [title*="Fale conosco"],
-body.hero-in-view:not(.widget-offer-open) iframe[src*="linkminer.app"],
-body.hero-in-view:not(.widget-offer-open) [style*="2147483646"] {
-  display: none !important;
-}
-
-body.how-in-view:not(.widget-offer-open) button[aria-label="Abrir formulário de contato"],
-body.how-in-view:not(.widget-offer-open) button[aria-label*="Fale conosco"],
-body.how-in-view:not(.widget-offer-open) [title*="Fale conosco"],
-body.how-in-view:not(.widget-offer-open) iframe[src*="linkminer.app"],
-body.how-in-view:not(.widget-offer-open) [style*="2147483646"] {
-  display: none !important;
-}
-
 .stories-overlay.is-open { display: flex; opacity: 1; }
 
 .stories-backdrop { position: absolute; inset: 0; }
