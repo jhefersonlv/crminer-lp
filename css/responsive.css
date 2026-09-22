@@ -441,23 +441,6 @@
     }
   }
 
-  /* Picareta touch: aparece apenas durante uma batida solicitada. */
-  .mining-cursor.is-touch-impact {
-    display: block !important;
-    opacity: 1;
-  }
-
-  .mining-cursor.is-touch-impact .mining-pickaxe {
-    animation: mining-touch-swing 720ms steps(5, end) 1;
-    will-change: transform;
-  }
-
-  @keyframes mining-touch-swing {
-    0%, 20% { transform: rotate(20deg); }
-    58% { transform: rotate(-30deg); }
-    70% { transform: rotate(-22deg); }
-    100% { transform: rotate(20deg); }
-  }
 }
 
 @media (max-width: 380px) {
@@ -482,9 +465,6 @@
     animation: none;
   }
 
-  .mining-cursor.is-touch-impact {
-    display: none !important;
-  }
 }
 
 /* Pricing desktop mais compacto, preservando a comparação lado a lado. */

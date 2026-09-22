@@ -1169,6 +1169,10 @@
 .client-logo img[src$="upwards.png"] { --client-logo-scale: 0.9; }
 .client-logo img[src$="farmais-logo.png"] { --client-logo-scale: 0.92; }
 .client-logo img[src$="marina-carneiro-logo.png"] { --client-logo-scale: 1.12; }
+.client-logo img[src$="panasonic-lumix.webp"] {
+  --client-logo-scale: 0.96;
+  mix-blend-mode: multiply;
+}
 
 .client-logo img:hover {
   opacity: 1;
