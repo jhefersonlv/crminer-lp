@@ -6,6 +6,11 @@
       "permanent": true
     },
     {
+      "source": "/precos.html",
+      "destination": "/precos",
+      "permanent": true
+    },
+    {
       "source": "/termos.html",
       "destination": "/termos",
       "permanent": true
@@ -30,6 +35,10 @@
     {
       "source": "/linkminer",
       "destination": "/linkminer.html"
+    },
+    {
+      "source": "/precos",
+      "destination": "/precos.html"
     },
     {
       "source": "/termos",
